@@ -69,8 +69,12 @@ public RedirectView login(@ModelAttribute("user") User loginUser, Model model, H
         if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
             // Save user ID in the session
             session.setAttribute("userId", user.getId());
-
+if(user.getUserType()==User.UserType.ADMIN){
             return new RedirectView("/home");
+}
+else{
+    return new RedirectView("/");//write to go dashboard when yo make it available
+}
         }
     }
 

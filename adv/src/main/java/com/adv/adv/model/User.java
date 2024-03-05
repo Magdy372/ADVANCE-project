@@ -2,8 +2,8 @@ package com.adv.adv.model;
 
 import jakarta.persistence.*;
 
-@Entity
-public class User {
+    @Entity
+    public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
@@ -12,11 +12,16 @@ public class User {
     private String email;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
-    
+    public enum UserType {
+        USER, ADMIN
+    }
     public User() {
     }
 
+    
     public User(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
@@ -24,6 +29,13 @@ public class User {
         this.password = password;
     }
 
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
     public long getId() {
         return this.id;
     }
