@@ -21,6 +21,8 @@ public class Product {
 
     private String photos;
  
+    private String type;
+
     public String getPhotos() {
         return photos;
     }
@@ -107,6 +109,16 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 
