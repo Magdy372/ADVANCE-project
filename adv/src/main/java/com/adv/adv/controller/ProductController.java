@@ -29,7 +29,7 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @GetMapping("")
+    @GetMapping({"","/"})
     public ModelAndView getAll() {
         ModelAndView mav =new ModelAndView("ProductsList.html");
         List<Product>products=this.productRepository.findAll();
@@ -115,6 +115,19 @@ private void keepExistingPhoto(Product product) {
 public RedirectView deleteProduct(@PathVariable("Id") int Id) {
     this.productRepository.deleteById(Id);
     return new RedirectView("/products"); // Redirect to the user list page after deleting
+}
+
+
+
+//product details
+@GetMapping("/product-details/{id}")
+public ModelAndView getproduct(@PathVariable("id")int ID) {
+    Product product = this.productRepository.findById(ID);
+    ModelAndView mav =new ModelAndView("Product-details.html");
+    mav.addObject("product", product);
+    mav.addObject("metals", metalRepository.findAll());
+    mav.addObject("categories", categoryRepository.findAll());
+    return mav;
 }
 
    
