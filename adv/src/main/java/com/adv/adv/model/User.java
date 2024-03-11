@@ -1,15 +1,20 @@
 package com.adv.adv.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
     @Entity
     public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-
+    @NotBlank(message = "UserName cannot be null or empty")
     private String username;
+    @NotBlank(message = "Email cannot be null or empty")
     private String email;
+    @NotBlank(message = "Password cannot be null or empty")
+    
     private String password;
 
     @Enumerated(EnumType.STRING)

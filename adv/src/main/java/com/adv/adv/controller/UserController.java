@@ -4,10 +4,12 @@ import com.adv.adv.model.User;
 import com.adv.adv.repository.userRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -30,11 +32,13 @@ public class UserController {
         return mav;
     }
 @PostMapping("/signup")
-public RedirectView saveUser(@ModelAttribute("user") User user, Model model) {
+public  ModelAndView saveUser(@Valid @ModelAttribute User user,BindingResult result) {
     // Check if the email already exists in the database
-    if (userRepository.existsByEmail(user.getEmail())) {
-        model.addAttribute("error", "Email already registered");
-        return new RedirectView("/signup-error"); // Redirect to a signup error page or handle as needed
+if (result.hasErrors()) {
+        ModelAndView mav = new ModelAndView("signup.html");
+        mav.addObject("user", user); // Add the user object to retain form values
+        mav.addObject("bindingResult", result); // Add the binding result
+        return mav; // Return the registration view with errors
     }
 
     // Hash the password before saving
@@ -45,7 +49,9 @@ public RedirectView saveUser(@ModelAttribute("user") User user, Model model) {
     userRepository.save(user);
 
     // Redirect to the login page after successful signup
-    return new RedirectView("/login");
+    ModelAndView mav = new ModelAndView("redirect:login");
+    mav.addObject("user", user); // Optionally, you can pass the user object to the success page
+    return mav;
 }
 
 
@@ -70,10 +76,10 @@ public RedirectView login(@ModelAttribute("user") User loginUser, Model model, H
             // Save user ID in the session
             session.setAttribute("userId", user.getId());
 if(user.getUserType()==User.UserType.ADMIN){
-            return new RedirectView("/home");
+            return new RedirectView("/home");//dashboard
 }
 else{
-    return new RedirectView("/");//write to go dashboard when yo make it available
+    return new RedirectView("/home");
 }
         }
     }
