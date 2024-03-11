@@ -17,6 +17,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 
 @RestController
 @RequestMapping("/")
@@ -84,7 +87,7 @@ public RedirectView login(@ModelAttribute("user") User loginUser, Model model, H
 
         if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
             // Save user ID in the session
-            session.setAttribute("userId", user.getId());
+            session.setAttribute("username", user.getUsername());
 if(user.getUserType()==User.UserType.ADMIN){
             return new RedirectView("/home");//dashboard
 }
@@ -98,5 +101,9 @@ else{
     model.addAttribute("error", "Invalid email or password");
     return new RedirectView("/login-error");
 }
+
+
+
+
 }
     
