@@ -3,6 +3,7 @@ package com.adv.adv.controller;
 import com.adv.adv.model.User;
 import com.adv.adv.repository.userRepository;
 
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -34,6 +35,15 @@ public class UserController {
 @PostMapping("/signup")
 public  ModelAndView saveUser(@Valid @ModelAttribute User user,BindingResult result) {
     // Check if the email already exists in the database
+    Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+    if (existingUser.isPresent()) {
+        result.rejectValue("email", "error.user", "Email is already in use");
+    }
+
+    if (!user.getPassword().equals(user.getConfirmPassword())) {
+      result.rejectValue("confirmPassword", "error.user", "Passwords do not match");
+  }
+
 if (result.hasErrors()) {
         ModelAndView mav = new ModelAndView("signup.html");
         mav.addObject("user", user); // Add the user object to retain form values
