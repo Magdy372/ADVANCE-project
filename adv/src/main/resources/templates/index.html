@@ -451,7 +451,8 @@
 <table>
     <tr th:each="product : ${newProducts}">
         <td>
-            <img th:src="@{${product.getPhotosImagePath()}}" style="width: 200px; height: auto;" /> 
+            
+			<a th:href="@{./products/product-details/{id}(id=${product.id})}"><img th:src="@{${product.getPhotosImagePath()}}" style="width: 200px; height: auto;" /> </a>
         </td>
         <td th:text="${product.name}"></td>
         <td th:text="${product.price}"></td>
