@@ -16,6 +16,10 @@
 		<!-- bootstrap v3.3.6 css -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
 		<!-- animate css -->
+		<link rel="stylesheet" href="/css/nav.css">
+		<link rel="stylesheet" href="/css/footer.css">
+
+
         <link rel="stylesheet" href="/css/animate.css">
 		<!-- jquery-ui.min css -->
         <link rel="stylesheet" href="/css/jquery-ui.min.css">
@@ -45,100 +49,31 @@
 
         <!-- Add your site or application content here -->
 		<!-- header-start -->
-		<header>
-			<div class="header-top-area ptb-10 hidden-xs header-top-area-4">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-3 col-md-4 col-sm-5">
-							<div class="header-top-right header-top-left-4">
-								<p>FREE SHIPPING ON ORDERS OVER Rs499</p>
+		
+        <section id="header">
+            <a href="#"><img src="/img/logo-4.png" class="logo"
+                    alt="Logo" width="145" height="50"></a>
+            <div class="container">
+                <div>
+                    <ul id="navbar">
+						<li> <div>
+							<input type='text' name='search_text' id='search_text' placeholder='Search...' />
 							</div>
-						</div>					
-						<div class="col-lg-9 col-md-8 col-sm-7 header-top-right-4">
-						
-							<div class="header-top-left">
-								<ul>
-                                <li class="click_menu"><a href="#">My Account <i class="fa fa-angle-down"></i></a>
-										<ul class="click_menu_show">
-											<li><a href="customer-login.html">Compare Products</a></li>
-											<li><a href="customer-login.html">My Account</a></li>
-											<li><a href="wishlist.html">My Wish List</a></li>
-											<li><a href="customer-login.html">Sign In</a></li>
-										</ul>
-									</li>
-									<li><a href="customer-account.html">Create an Account</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="header-bottom-area home-page-2 ptb-10">
-				<div class="container">
-					<div class="row">
+						</li>
+                        <li><a href="#">My Profile</a></li>
+                        <li><a href="#" class="active">Shop</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Cart</a></li>
+                        <li><a href="#">Logout</a></li>
+                        </div>
+                    </ul>
 
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-							<div class="menu-search-box scnd-fix">
-								<form action="#">
-									<input type="text" placeholder="Search here..."/>
-									<button><span class="lnr lnr-magnifier"></span></button>
-								</form>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<div class="logo logo2">
-								<a href="index.html"><img src="/img/logo-4.png" alt="" /></a>
-							</div>					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
-							<div class="header-bottom-right-4-inner">
-								<a href="#"><span class="lnr lnr-heart"></span></a>
-							</div>					
-							<div class="header-bottom-right header-bottom-right-4">
-								<div class="shop-cart shop-cart-4">									
-									<a href="#"><span class="lnr lnr-cart"></span></a>
-								</div>
-								<div class="shop-cart-hover shop-cart-hover-4 fix">
-									<ul>
-										<li>
-											<div class="cart-img">
-												<a href="#"><img src="/img/cart/1.jpg" alt="" /></a>
-											</div>
-											<div class="cart-content">
-												<h4><a href="#">1 x Faded...</a></h4>
-												<span><a href="#">S, Orange</a></span>
-												<span class="cart-price">Rs 16.84</span>
-											</div>
-											<div class="cart-del">
-												<i class="fa fa-times-circle"></i>
-											</div>											
-										</li>
-										<li>
-											<div class="cart-img">
-												<a href="#"><img src="/img/cart/1.jpg" alt="" /></a>
-											</div>
-											<div class="cart-content">
-												<h4><a href="#">1 x Faded...</a></h4>
-												<span><a href="#">S, Orange</a></span>
-												<span class="cart-price">Rs 16.84</span>
-											</div>
-											<div class="cart-del">
-												<i class="fa fa-times-circle"></i>
-											</div>											
-										</li>
-										<li class="total-price"><span> Total Rs 48.04 </span></li>
-										<li class="checkout-bg">
-											<a href="checkout.html">checkout <i class="fa fa-angle-right"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<!-- header-end -->
+                </div>
+
+            </div>
+
+        </section>
+	
 		<!-- mainmenu-area-start -->
 		<div class="mainmenu-area home-page-2 mainmenu-area-4" id="main_h">
 			<div class="container">
@@ -442,19 +377,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- mainmenu-area-end -->
-		<!-- page-title-wrapper-start -->
-		<div class="page-title-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="page-title">
-							<h3>Product Details</h3>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	
 		<!-- page-title-wrapper-end -->
 		<!-- all-hyperion-page-start -->
 		<div class="all-hyperion-page">
@@ -468,7 +391,7 @@
 									<div class="tab-content">
 										<div class="tab-pane active" id="view1">
 											
-											<a class="image-link" th:href="@{${product.getPhotosImagePath()}}"><img style="width:800px; height:800px " th:src="@{${product.getPhotosImagePath()}}" alt="Product Image"></a>
+											<a class="image-link" th:href="@{${product.getPhotosImagePath()}}"><img style="width:800px; height:500px " th:src="@{${product.getPhotosImagePath()}}" alt="Product Image"></a>
 											
 										</div>							
 										
@@ -920,112 +843,65 @@
 			</div>
 		</div>
 		<!-- contact-area-end -->
-		<!-- footer-area-start -->
-		<div class="footer-area footer-area-4 ptb-80">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 mar_b-30">
-						<div class="footer-wrapper">
-							<div class="footer-logo">
-								<a href="#"><img src="/img/logo-4.png" alt="" /></a>
-							</div>
-							<p>We are a team of designers and developers that create high quality Magento, Prestashop, Opencart themes and provide premium and  support to our products.</p>
-							<ul>
-								<li>
-									<span>Address : </span> Delhi india
-								</li>
-								<li>
-									<span>Phone: </span> 123445689
-								</li>
-								<li>
-									<span>Email:</span> <a href="#">admin@dsfbvbbdvgz.company</a>
-								</li>
-							</ul>
-							<ul class="footer-social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-flickr"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 hidden-sm col-xs-12 mar_b-30">
-						<div class="footer-wrapper">
-							<div class="footer-title">
-								<a href="#"><h3>useful links</h3></a>
-							</div>
-							<div class="footer-wrapper">
-								<ul class="usefull-link">
-									<li><a href="#">Contact us</a></li>
-									<li><a href="#">Site map</a></li>
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Specials</a></li>
-									<li><a href="#">My Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Custom service</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 hidden-md hidden-sm col-xs-12 mar_b-30">
-						<div class="footer-wrapper">
-							<div class="footer-title">
-								<a href="#"><h3>useful links</h3></a>
-							</div>
-							<div class="footer-wrapper">
-								<ul class="usefull-link">
-									<li><a href="#">Contact us</a></li>
-									<li><a href="#">Site map</a></li>
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Specials</a></li>
-									<li><a href="#">My Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Custom service</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-						<div class="footer-wrapper">
-							<div class="footer-title">
-								<a href="#"><h3>useful links</h3></a>
-							</div>
-							<div class="footer-wrapper">
-								<ul class="usefull-link">
-									<li><a href="#">Contact us</a></li>
-									<li><a href="#">Site map</a></li>
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Specials</a></li>
-									<li><a href="#">My Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Custom service</a></li>
-								</ul>
-							</div>
-						</div>
+	
+		<footer class="pageFooter">
+			<div class="col">
+				<img class="Logo " src="/img/logo-4.png" alt="" width="145" height="50">
+				<h4>Contact</h4>
+				<p><strong>Adress: </strong>Misr International University</p>
+				<p><strong>Phone: </strong>01000000000</p>
+				<p><strong>Hours: </strong>9 am - 12 am . Mon-Sat</p>
+				<div class="follow">
+					<h4>Follow us</h4>
+					<div class="icon">
+						<a href="https://www.facebook.com/"> <i class="fab fa-facebook-f"></i></a>
+						<a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
+						<a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- footer-area-end -->
-		<!-- .copyright-area-start -->
-		<div class="copyright-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mar_b-30">
-						<div class="copyright text-left">
-							<p>2016 @ All Rights Reserved - <a href="#"></a></p>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="copyright-img text-right">
-							<a href="#"><img src="/img/payment.png" alt="" /></a>
-						</div>
-					</div>
-				</div>
+			<div class="col">
+				<h4>About</h4>
+				<a href="/about">About us</a>
+				<a href="/">Home</a>
+				<a href="/privacyPolicy">Privacy policy</a>
+				<a href="/terms&condition">Terms & conditions</a>
+		
 			</div>
+		
+			<div class="col">
+				<h4>My Acoount</h4>
+				<a href="/rgestration">Sign in</a>
+				<a href="/cart">View cart</a>
+				<a href="/wishlist">My wishlist</a>
+				<a href="/api">Location</a>
+		
+			</div>
+		
+			<div class="col install">
+				<h4>Install app</h4>
+				<p>From App-Store or Google play</p>
+				<div class="row">
+					<img src="/img/appStore.png" width="130" height="40">
+					<img src="/img/googlePlay (2).png" width="130" height="40">
+				</div>
+				<p>Secured payment geteways</p>
+				<img src="/img/Payment.png" width="300" height="50">
+		
+		
+			</div>
+		
+		
+		</footer>
+		
+		
+		<div class="copyright">
+			<p>© 2024, AlHedia - E-Commerce</p>
 		</div>
-		<!-- .copyright-area-end -->
+		
+			
         
         
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
