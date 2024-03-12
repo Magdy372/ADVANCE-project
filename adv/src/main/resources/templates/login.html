@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Login Page</title>
-    <!-- Add your CSS and other head elements here -->
-</head>
-<body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="login-title">
-                <h3>Login</h3>
-                
-            </div>
-            <form th:action="@{/login}" method="post" th:object="${user}">
-                <div class="form-group login-page">
-                    <label for="exampleInputEmail1">Email <span>*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" th:name="email">
-                </div>
-                <div class="form-group login-page">
-                    <label for="exampleInputPassword1">Password <span>*</span></label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" th:name="password">
-                </div>
-                <button type="submit" class="btn btn-default login-btn">Sign In</button>
-            </form>
-            <a href="#" class="back">Forgot Your Password?</a>
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <div class="center">
+        <div style="text-align: center;">
+            <img src="/img/logo-4.png">
+          </div>
+                <form th:action="@{/login}" method="post" th:object="${user}">
+        <div class="txt_field">
+            <h3>Email</h3>
+            <input type="text" class="form-control" id="exampleInputEmail1" th:name="email">
         </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="login-title">
-                <h3>New Customers</h3>
-                <span>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</span>
-            </div>
-            <form th:action="@{/signup}" method="post">
-                <button type="submit" class="btn btn-default login-btn">Create an Account</button>
-            </form>
+        <div class="txt_field">
+            <h3>Password</h3>
+            <input type="password" class="form-control" id="exampleInputPassword1" th:name="password">
         </div>
+        <input type="submit" value="Login" />
+
+          </form>
+
+        <form th:action="@{/signup}" method="post">
+        <div class="signup_link">Not a member?  <a href"signup.html"><button type="submit" class="btn btn-default login-btn">Create an Account</button></a></div>
+    </form>
     </div>
-</div>
-
-<!-- Add your scripts and other body elements here -->
-
-</body>
+    
+  </body>
 </html>
+
+
