@@ -23,21 +23,19 @@ public class IndexController {
     public ModelAndView getNewProducts() {
         ModelAndView mav = new ModelAndView("index.html");
         
-        // Retrieve new products
-        List<Product> newProducts = this.productRepository.findByType("new");
-        // Retrieve featured products
-        List<Product> featuredProducts = this.productRepository.findByType("fea");
-        List<Product> SaleProducts = this.productRepository.findByType("sale");
+        List<Product> sortedByNewDates = this.productRepository.findAllByOrderByCreatedAtDesc();
+        List<Product> sortedByRatingDesc = this.productRepository.findAllByOrderByRatingDesc();
 
-        
-        // Add new products to the model
-        mav.addObject("newProducts", newProducts);
-        // Add featured products to the model
-        mav.addObject("featuredProducts", featuredProducts);
-        mav.addObject("saleProducts", SaleProducts);
+
+        mav.addObject("newProducts", sortedByNewDates);
+
+        mav.addObject("featuredProducts", sortedByRatingDesc);
+     
         
         return mav;
     }
+    
+  
     
     
     

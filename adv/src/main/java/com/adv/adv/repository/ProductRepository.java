@@ -10,10 +10,11 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product deleteById(int id);
     Product findById(int id);
-    List<Product> findByType(String type);
+    @Query("SELECT p FROM Product p ORDER BY p.rating DESC")
+    List<Product> findAllByOrderByRatingDesc();
+@Query("SELECT p FROM Product p ORDER BY p.created_at DESC")
+List<Product> findAllByOrderByCreatedAtDesc();
 
-    //  @Query(value = "SELECT p FROM Product p ORDER BY p.id DESC")
-    //  List<Product> findTop3ByOrderByCreatedDateDesc();
 
 
 }
