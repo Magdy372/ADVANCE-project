@@ -18,10 +18,10 @@ import com.adv.adv.repository.userRepository; // Adjust the import statement
 @Controller
 @RequestMapping("/adminPage")
 public class AdminController {
-
+  @Autowired
     private  userRepository userRepository;
 
-    @Autowired
+  
     public AdminController(userRepository userRepository) {
         this.userRepository = userRepository;
     }
