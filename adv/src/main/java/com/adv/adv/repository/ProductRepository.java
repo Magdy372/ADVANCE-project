@@ -10,11 +10,15 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product deleteById(int id);
     Product findById(int id);
+    //TOP RATING PPRODUCTS
     @Query("SELECT p FROM Product p ORDER BY p.rating DESC")
     List<Product> findAllByOrderByRatingDesc();
+    //NEW PRODUCTS
 @Query("SELECT p FROM Product p ORDER BY p.created_at DESC")
 List<Product> findAllByOrderByCreatedAtDesc();
-
+//COUNT
+@Query("SELECT COUNT(p) FROM Product p")
+int countProducts();
 
 
 }
