@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/css/myProfile.css" />
+    <link rel="stylesheet" href="/css/nav.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="/img/logo-4.png" class="logo"
+                alt="Logo" width="145" height="50"></a>
+        <div class="container">
+            <div>
+                <ul id="navbar">
+                    <li> <div>
+                        <input type='text' name='search_text' id='search_text' placeholder='Search...' />
+                        </div>
+                    </li>
+                    <li><a href="#" class="active">My Profile</a></li>
+                    <li><a href="#" >Shop</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Logout</a></li>
+                    </div>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+    <br>
+    <h2>Edit Your Profile</h2>
+    <div class="contain">
+    <form th:action="@{/myProfile}" method="post">
+        <div class="txt_field" >
+        <h3>New Email:</h3>
+        <input type="text" id="newEmail" name="newEmail"/>
+        </div>
+        
+
+        <div class="txt_field">
+        <h3>New Password:</h3>
+        <input type="password" id="newPassword" name="newPassword" minlength="8" required />
+        </div>
+       <button>submit</button>
+    <br>
+    </form>
+</div>
+</body>
+</html>
