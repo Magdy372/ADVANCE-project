@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/css/myProfile.css" />
+    <link rel="stylesheet" href="/css/nav.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="/css/footer.css">
+
+
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="/img/logo-4.png" class="logo"
+                alt="Logo" width="145" height="50"></a>
+        <div class="container">
+            <div>
+                <ul id="navbar">
+                    <li> <div>
+                        <input type='text' name='search_text' id='search_text' placeholder='Search...' />
+                        </div>
+                    </li>
+                    <li><a href="#" class="active">My Profile</a></li>
+                    <li><a href="#" >Shop</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Logout</a></li>
+                    </div>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+    <br>
+    <h2>Edit Your Profile</h2>
+    <div class="contain">
+    <form th:action="@{/myProfile}" method="post">
+        <div class="txt_field" >
+        <h3>New Email:</h3>
+        <input type="text" id="newEmail" name="newEmail"/>
+        </div>
+        
+
+        <div class="txt_field">
+        <h3>New Password:</h3>
+        <input type="password" id="newPassword" name="newPassword" minlength="8" required />
+        </div>
+       <button>Submit</button>
+       <button>Delete Account</button>
+    <br>
+    </form>
+</div>
+
+	<!-- contact-area-end -->		
+			<!-- footer-area-start -->
+<footer class="pageFooter">
+  <div class="col">
+    <img class="Logo " src="/img/logo-4.png" alt="" width="145" height="50">
+    <h4>Contact</h4>
+    <p><strong>Adress: </strong>Misr International University</p>
+    <p><strong>Phone: </strong>01000000000</p>
+    <p><strong>Hours: </strong>9 am - 12 am . Mon-Sat</p>
+    <div class="follow">
+      <h4>Follow us</h4>
+      <div class="icon">
+        <a href="https://www.facebook.com/"> <i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
+        <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <h4>About</h4>
+    <a href="/about">About us</a>
+    <a href="/">Home</a>
+    <a href="/privacyPolicy">Privacy policy</a>
+    <a href="/terms&condition">Terms & conditions</a>
+
+  </div>
+
+  <div class="col">
+    <h4>My Acoount</h4>
+    <a href="/rgestration">Sign in</a>
+    <a href="/cart">View cart</a>
+    <a href="/wishlist">My wishlist</a>
+    <a href="/api">Location</a>
+
+  </div>
+
+  <div class="col install">
+    <h4>Install app</h4>
+    <p>From App-Store or Google play</p>
+    <div class="row">
+      <img src="/img/appStore.png" width="130" height="40">
+      <img src="/img/googlePlay (2).png" width="130" height="40">
+    </div>
+    <p>Secured payment geteways</p>
+    <img src="/img/Payment.png" width="300" height="50">
+
+
+  </div>
+
+
+</footer>
+
+
+<div class="copyright">
+  <p>© 2024, AlHedia - E-Commerce</p>
+</div>
+
+  
+      
+</body>
+</html>

@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Pattern;
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "UserName cannot be null or empty")
+    @Pattern(regexp = "[a-zA-Z0-9]+", message = "UserName cannot contain special characters")
     private String username;
     @NotBlank(message = "Email cannot be null or empty")
     @Email(message = "Email must be valid")
@@ -19,7 +20,7 @@ import jakarta.validation.constraints.Pattern;
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$",
             message = "Password must be at least 8 characters long, contain at least one digit, one lowercase letter, one uppercase letter, one special character, and no whitespaces")
     private String password;
-
+    @NotBlank(message = "Confirm password cannot be null or empty")
     @Transient
     private String confirmPassword;
 
