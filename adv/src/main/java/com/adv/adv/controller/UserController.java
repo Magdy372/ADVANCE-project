@@ -89,7 +89,7 @@ public RedirectView login(@ModelAttribute("user") User loginUser, Model model, H
             // Save user ID in the session
             session.setAttribute("username", user.getUsername());
 if(user.getUserType()==User.UserType.ADMIN){
-            return new RedirectView("/home");//dashboard
+            return new RedirectView("/adminPage/addAdmin");//dashboard
 }
 else{
     return new RedirectView("/home");
