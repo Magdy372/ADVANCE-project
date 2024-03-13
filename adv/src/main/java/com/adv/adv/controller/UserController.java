@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 import java.util.Optional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 
@@ -78,8 +77,18 @@ if (result.hasErrors()) {
     
 
 
-    @PostMapping("/login")
-public RedirectView login(@ModelAttribute("user") User loginUser, Model model, HttpSession session) {
+@PostMapping("/login")
+public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+    
+    // Check if email and password are provided
+    if (loginUser.getEmail() == null || loginUser.getEmail().isEmpty() || 
+        loginUser.getPassword() == null || loginUser.getPassword().isEmpty()) {
+        mav.setViewName("login.html");
+        mav.addObject("error", "Email and password are required");
+        return mav;
+    }
+
     Optional<User> userOptional = userRepository.findByEmail(loginUser.getEmail());
 
     if (userOptional.isPresent()) {
@@ -88,19 +97,21 @@ public RedirectView login(@ModelAttribute("user") User loginUser, Model model, H
         if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
             // Save user ID in the session
             session.setAttribute("username", user.getUsername());
-if(user.getUserType()==User.UserType.ADMIN){
-            return new RedirectView("/home");//dashboard
-}
-else{
-    return new RedirectView("/home");
-}
+            if(user.getUserType()==User.UserType.ADMIN){
+                mav.setView(new RedirectView("/adminPage/addAdmin"));
+            } else {
+                mav.setView(new RedirectView("/home"));
+            }
+            return mav;
         }
     }
 
     // If login fails, redirect to login page with an error message
-    model.addAttribute("error", "Invalid email or password");
-    return new RedirectView("/login-error");
+    mav.setViewName("login.html");
+    mav.addObject("error", "Invalid email or password");
+    return mav;
 }
+
 
 
 
