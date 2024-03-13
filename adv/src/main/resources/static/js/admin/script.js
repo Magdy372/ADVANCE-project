@@ -102,3 +102,12 @@ $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id'
 $(document).ready(function() {
     $('#DataTables_Table_0').DataTable();
 });
+//categor page
+document.getElementById("addNewCategoryBtn").addEventListener("click", function(event) {
+    event.
+    preventDefault(); // Prevent default behavior of the anchor tag
+
+    // Toggle the visibility of the category input container
+    var categoryInputContainer = document.getElementById("categoryInputContainer");
+    categoryInputContainer.style.display = categoryInputContainer.style.display === "none" ? "block" : "none";
+});

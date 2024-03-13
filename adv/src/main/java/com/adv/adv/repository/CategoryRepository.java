@@ -7,6 +7,9 @@ import com.adv.adv.model.*;
 
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-  
-} 
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
+    Category deleteById(int id);
+
+
+     Category findById(int id);
+}

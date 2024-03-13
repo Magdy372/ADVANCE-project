@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+<title>Admin Dashboard</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg">
+
+<link rel="stylesheet" href="/css/admin/bootstrap.minn.css">
+<link rel="stylesheet" href="/css/admin/animatee.css">
+<link rel="stylesheet" href="/css/admin/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/css/admin/style-admin.css">
+</head>
+<body>
+    <div id="global-loader">
+    <div class="whirly-loader"> </div>
+    </div>
+    
+    <div class="main-wrapper">
+    
+    <div class="header">
+    
+    <div class="header-left active">
+    <a href="index.html" class="logo">
+    <img src="/img/logo-4.png" alt="">
+    </a>
+    <a href="index.html" class="logo-small">
+    <img src="/img/logo-small.png" alt="">
+    </a>
+    <a id="toggle_btn" href="#">
+    </a>
+    </div>
+    
+    <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+    <span class="bar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+    </span>
+    </a>
+    
+    <ul class="nav user-menu">
+    
+    <li class="nav-item">
+    <div class="top-nav-search">
+    <a href="#" class="responsive-search">
+    <i class="fa fa-search"></i>
+    </a>
+    <form action="#">
+    <div class="searchinputs">
+    <input type="text" placeholder="Search Here ...">
+    <div class="search-addon">
+    <span><img src="/img/icons/closes.svg" alt="img"></span>
+    </div>
+    </div>
+    <a class="btn" id="searchdiv"><img src="/img/icons/search.svg" alt="img"></a>
+    </form>
+    </div>
+    </li>
+    
+    
+<li class="nav-item dropdown has-arrow main-drop">
+    <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+        <i class='fas fa-user-circle' style='font-size:36px'></i>
+    </a>
+    <div class="dropdown-menu menu-drop-user">
+        <div class="profilename">
+            <div class="profileset">
+                <span class="user-img">Omar</span>
+             
+            </div>
+            <hr class="m-0">
+            <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
+            <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
+            <hr class="m-0">
+            <a class="dropdown-item logout pb-0" href="signin.html"><img src="/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+        </div>
+    </div>
+</li>
+
+    
+    
+    
+    <div class="dropdown mobile-user-menu">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+    <div class="dropdown-menu dropdown-menu-right">
+    <a class="dropdown-item" href="profile.html">My Profile</a>
+    <a class="dropdown-item" href="generalsettings.html">Settings</a>
+    <a class="dropdown-item" href="signin.html">Logout</a>
+    </div>
+    </div>
+    
+    </div>
+    
+    
+    <div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+    <ul>
+    <li>
+    <a href="/admin/dashboard" class="active"><img src="/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+    </li>
+    <li class="submenu">
+    <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="/admin/products" class="active">Product List</a></li>
+        <li><a href="/admin/products/create">Add Product</a></li>
+        <li><a href="/admin/categories">Category List</a></li>
+ 
+        
+        </ul>
+    </li>
+    <li class="submenu">
+        <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Orders</span> <span class="menu-arrow"></span></a>
+        <ul>
+            <li><a href="#" >Orders List</a></li>
+            <li><a href="#">Add Order</a></li>
+        </ul>
+        </li>
+    
+    <li class="submenu">
+    <a href="#"><img src="/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+    <ul>
+    <li><a href="newuser.html">New User </a></li>
+    <li><a href="userlists.html">Users List</a></li>
+    </ul>
+    </li>
+    <li class="submenu">
+    <a href="#"><img src="/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
+    <ul>
+    <li><a href="generalsettings.html">General Settings</a></li>
+    <li><a href="emailsettings.html">Email Settings</a></li>
+    <li><a href="paymentsettings.html">Payment Settings</a></li>
+  
+    </ul>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+<div class="page-wrapper">
+<div class="content">
+<div class="row">
+<div class="col-lg-3 col-sm-6 col-12">
+<div class="dash-widget">
+<div class="dash-widgetimg">
+<span><img src="/img/icons/dash1.svg" alt="img"></span>
+</div>
+<div class="dash-widgetcontent">
+<h5>$<span class="counters" data-count="307144.00">$307,144.00</span></h5>
+<h6>Total Purchase Due</h6>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12">
+<div class="dash-widget dash1">
+<div class="dash-widgetimg">
+<span><img src="/img/icons/dash2.svg" alt="img"></span>
+</div>
+<div class="dash-widgetcontent">
+<h5>$<span class="counters" data-count="4385.00">$4,385.00</span></h5>
+<h6>Total Sales Due</h6>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12">
+<div class="dash-widget dash2">
+<div class="dash-widgetimg">
+<span><img src="/img/icons/dash3.svg" alt="img"></span>
+</div>
+<div class="dash-widgetcontent">
+<h5>$<span class="counters" data-count="385656.50">385,656.50</span></h5>
+<h6>Total Sale Amount</h6>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12">
+<div class="dash-widget dash3">
+<div class="dash-widgetimg">
+<span><img src="/img/icons/dash4.svg" alt="img"></span>
+</div>
+<div class="dash-widgetcontent">
+<h5>$<span class="counters" data-count="40000.00">400.00</span></h5>
+<h6>Total Sale Amount</h6>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12 d-flex">
+<div class="dash-count">
+<div class="dash-counts">
+<h4>100</h4>
+<h5>Customers</h5>
+</div>
+<div class="dash-imgs">
+<i data-feather="user"></i>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12 d-flex">
+<div class="dash-count das1">
+<div class="dash-counts">
+<h4>100</h4>
+<h5>Suppliers</h5>
+</div>
+<div class="dash-imgs">
+<i data-feather="user-check"></i>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12 d-flex">
+<div class="dash-count das2">
+<div class="dash-counts">
+<h4>100</h4>
+<h5>Purchase Invoice</h5>
+</div>
+<div class="dash-imgs">
+<i data-feather="file-text"></i>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-sm-6 col-12 d-flex">
+<div class="dash-count das3">
+<div class="dash-counts">
+<h4>105</h4>
+<h5>Sales Invoice</h5>
+</div>
+<div class="dash-imgs">
+<i data-feather="file"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-12">
+        <div class="card flex-fill">
+            <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Last Added Users</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Added At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>101</td>
+                                <td>John Doe</td>
+                                <td>johndoe@example.com</td>
+                                <td>2024-03-12 10:30:00</td>
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>Jane Smith</td>
+                                <td>janesmith@example.com</td>
+                                <td>2024-03-11 15:45:00</td>
+                            </tr>
+                            <!-- Add more rows for other users as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="col-lg-6 col-sm-12 col-12 d-flex">
+<div class="card flex-fill">
+<div class="card-header pb-0 d-flex justify-content-between align-items-center">
+<h4 class="card-title mb-0">Recently Added Products</h4>
+<div class="dropdown">
+<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+<i class="fa fa-ellipsis-v"></i>
+</a>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<li>
+<a href="productlist.html" class="dropdown-item">Product List</a>
+</li>
+<li>
+<a href="addproduct.html" class="dropdown-item">Product Add</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="card-body">
+<div class="table-responsive dataview">
+    <table class="table datatable">
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th>Products</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over the list of products and generate table rows dynamically -->
+            <tr th:each="product, index : ${newProducts}">
+                <td th:text="${index.index + 1}">1</td>
+                <td class="productimgname">
+                    <a th:href="@{'/product-details/' + ${product.id}}" class="product-img">
+                        <img th:src="@{${product.getPhotosImagePath()}}" alt="product">
+                    </a>
+                    <a th:href="@{'/product-details/' + ${product.id}}" th:text="${product.name}">Apple Earpods</a>
+                </td>
+                <td th:text="${product.price}">$891.2</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card mb-0">
+<div class="card-body">
+    <h4 class="card-title">Latest Orders</h4>
+    <div class="table-responsive dataview">
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Shipped To</th>
+                    <th>Product Name</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>John Doe</td>
+                    <td>New York</td>
+                    <td>Orange</td>
+                    <td>2024-03-12 10:30:00</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Jane Smith</td>
+                    <td>Los Angeles</td>
+                    <td>Pineapple</td>
+                    <td>2024-03-11 15:45:00</td>
+                </tr>
+              
+                <tr>
+                    <td>103</td>
+                    <td>Michael Johnson</td>
+                    <td>Chicago</td>
+                    <td>Apple</td>
+                    <td>2024-03-10 09:15:00</td>
+                </tr>
+                <tr>
+                    <td>104</td>
+                    <td>Emily Brown</td>
+                    <td>Miami</td>
+                    <td>Banana</td>
+                    <td>2024-03-09 12:00:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script src="/js/admin/jquery-3.6.0.min.js"></script>
+<script src="/js/admin/feather.min.js"></script>
+<script src="/js/admin/jquery.slimscroll.min.js"></script>
+<script src="/js/admin/jquery.dataTables.min.js"></script>
+<script src="/js/admin/dataTables.bootstrap4.min.js"></script>
+<script src="/js/admin/bootstrap.bundle.min.js"></script>
+<script src="/js/admin/script.js"></script>
+<script src="/plugins/select2/js/select2.min.js"></script>
+<script src="/plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script src="/plugins/sweetalert/sweetalerts.min.js"></script>
+
+</body>
+</html>

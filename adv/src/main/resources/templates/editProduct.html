@@ -69,6 +69,25 @@
         
         
         
+<li class="nav-item dropdown has-arrow main-drop">
+    <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+        <i class='fas fa-user-circle' style='font-size:36px'></i>
+    </a>
+    <div class="dropdown-menu menu-drop-user">
+        <div class="profilename">
+            <div class="profileset">
+                <span class="user-img">Omar</span>
+             
+            </div>
+            <hr class="m-0">
+            <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
+            <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
+            <hr class="m-0">
+            <a class="dropdown-item logout pb-0" href="signin.html"><img src="/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+        </div>
+    </div>
+</li>
+
         
         
         <div class="dropdown mobile-user-menu">
@@ -88,23 +107,19 @@
         <div id="sidebar-menu" class="sidebar-menu">
         <ul>
         <li>
-        <a href="index.html"><img src="/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+        <a href="/admin/dashboard"><img src="/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
         </li>
         <li class="submenu">
         <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
         <ul>
-        <li><a href="productlist.html" >Product List</a></li>
-        <li><a href="addproduct.html" class="active">Add Product</a></li>
-        <li><a href="categorylist.html">Category List</a></li>
-        <li><a href="addcategory.html">Add Category</a></li>
-        <li><a href="subcategorylist.html">Sub Category List</a></li>
-        <li><a href="subaddcategory.html">Add Sub Category</a></li>
-        <li><a href="brandlist.html">Brand List</a></li>
-        <li><a href="addbrand.html">Add Brand</a></li>
-        <li><a href="importproduct.html">Import Products</a></li>
-        <li><a href="barcode.html">Print Barcode</a></li>
+            <li><a href="/admin/products" class="active">Product List</a></li>
+            <li><a href="/admin/products/create">Add Product</a></li>
+            <li><a href="/admin/categories">Category List</a></li>
+  
         </ul>
+
         </li>
+        
         
         <li class="submenu">
         <a href="#"><img src="/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
@@ -114,17 +129,21 @@
         </ul>
         </li>
         <li class="submenu">
+            <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Orders</span> <span class="menu-arrow"></span></a>
+            <ul>
+                <li><a href="#" >Orders List</a></li>
+                <li><a href="#">Add Order</a></li>
+            </ul>
+            </li>
+        <li class="submenu">
         <a href="#"><img src="/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
         <ul>
         <li><a href="generalsettings.html">General Settings</a></li>
         <li><a href="emailsettings.html">Email Settings</a></li>
-        <li><a href="paymentsettings.html">Payment Settings</a></li>
-        <li><a href="currencysettings.html">Currency Settings</a></li>
-        <li><a href="grouppermissions.html">Group Permissions</a></li>
-        <li><a href="taxrates.html">Tax Rates</a></li>
-        </ul>
+
         </li>
         </ul>
+       
         </div>
         </div>
         </div>

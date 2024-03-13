@@ -9,7 +9,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Dreams Pos admin template</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg">
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
 
 <link rel="stylesheet" href="/css/admin/bootstrap.minn.css">
 <link rel="stylesheet" href="/css/admin/animatee.css">
@@ -67,6 +67,7 @@
 </li>
 
 
+
 <li class="nav-item dropdown has-arrow main-drop">
     <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
         <i class='fas fa-user-circle' style='font-size:36px'></i>
@@ -110,12 +111,12 @@
 <li class="submenu">
 <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="/admin/products" class="active">Product List</a></li>
-<li><a href="/admin/products/create">Add Product</a></li>
-<li><a href="/admin/categories">Category List</a></li>
-
-
-</ul>
+    <li><a href="/admin/products" class="active">Product List</a></li>
+    <li><a href="/admin/products/create">Add Product</a></li>
+    <li><a href="/admin/categories">Category List</a></li>
+ 
+    
+    </ul>
 </li>
 
 <li class="submenu">
@@ -138,27 +139,44 @@
 <li><a href="generalsettings.html">General Settings</a></li>
 <li><a href="emailsettings.html">Email Settings</a></li>
 <li><a href="paymentsettings.html">Payment Settings</a></li>
-<li><a href="currencysettings.html">Currency Settings</a></li>
-<li><a href="grouppermissions.html">Group Permissions</a></li>
-<li><a href="taxrates.html">Tax Rates</a></li>
+
 </ul>
 </li>
 </ul>
 </div>
 </div>
 </div>
-
 <div class="page-wrapper">
-<div class="content">
-<div class="page-header">
-<div class="page-title">
-<h4>Product List</h4>
-<h6>Manage your products</h6>
-</div>
-<div class="page-btn">
-<a href="/products/create" class="btn btn-added"><img src="/img/icons/plus.svg" alt="img" class="me-1">Add New Product</a>
-</div>
-</div>
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Product List</h4>
+                <h6>Manage your products</h6>
+            </div>
+            <div class="page-btn">
+                <a href="/categories/create" id="addNewProductBtn" class="btn btn-added">
+                    <img src="/img/icons/plus.svg" alt="img" class="me-1">Add New Category
+                </a>
+            </div>
+        </div>
+        
+        <!-- Form for adding new category -->
+        <div id="newCategoryInput" style="display: none;">
+            <form th:action="@{/categories/create}" th:object="${category}" method="POST" enctype="multipart/form-data">
+                <input type="text" id="newCategoryName" th:field="*{name}" placeholder="Enter new category name" class="form-control">
+                <button class="btn btn-submit me-2" style="margin:3px;" type="submit">Create</button>
+                
+            </form>
+        </div>
+<script>
+    document.getElementById("addNewProductBtn").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("newCategoryInput").style.display = "block";
+    });
+</script>
+
+
+
 
 <div class="card">
 <div class="card-body">
@@ -257,54 +275,32 @@
 <span class="checkmarks"></span>
 </label>
 </th>
-<th>Product Name</th>
-<th>Category </th>
-<th>Matrieal </th>
-<th>Weight</th>
-<th>price</th>
-<th>Avaliabilty</th>
+<th>Category Name</th>
 <th>Created By</th>
 <th>Action</th>
 </tr>
 </thead>
 <tbody>
-    <tr th:each="product : ${products}">
-<td>
-<label class="checkboxs">
-<input type="checkbox">
-<span class="checkmarks"></span>
-</label>
-</td>
-<td class="productimgname">
-<a href="#" class="product-img">
-    <img th:src="@{${product.getPhotosImagePath()}}" alt ="prodict" /> 
-</a>
-<a href="#" th:text="${product.name}">Product Name</a>
-
-</td>
-
-<td th:text="${product.category.name}"></td>
-<td th:text="${product.metal.name}"></td>
-
-<td th:text="${product.weight}"></td>
-<td th:text="${product.price}"></td>
-<td th:text="${product.available ? 'In stock' : 'Out of stock'}"></td>
-
-<td>Admin</td>
-<td>
-<a class="me-3" href="product-details.html">
-<img src="/img/icons/eye.svg" alt="img">
-</a>
-<a class="me-3" href="editproduct.html">
-
-<a th:href="@{./products/edit/{id}(id=${product.id})}"><img src="/img/icons/edit.svg" alt="img"></a>
-</a>
-<a class="confirm-text" href="#">
-    <a th:href="@{./products/delete/{id}(id=${product.id})}"><img src="/img/icons/delete.svg" alt="img"></a>
-</a>
-</td>
-</tr>
-
+    <tr th:each="category : ${categories}">
+        <td>
+            <label class="checkboxs">
+                <input type="checkbox">
+                <span class="checkmarks"></span>
+            </label>
+        </td>
+        <td>
+            <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}">Category Name</a>
+        </td>
+        <td>Admin</td>
+        <td>
+         
+         
+                <a class="confirm-text" href="#">
+                    <a th:href="@{./categories/delete/{id}(id=${category.id})}"><img src="/img/icons/delete.svg" alt="img"></a>
+            </a>
+        </td>
+    </tr>
+    
 
 
 </tbody>
