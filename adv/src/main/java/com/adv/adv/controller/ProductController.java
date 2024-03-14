@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("admin/products")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired

@@ -22,7 +22,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("admin/categories")
+@RequestMapping("/categories")
 public class CaregoryController {
     @Autowired
      private CategoryRepository categoryrepository;
