@@ -19,7 +19,7 @@ public class IndexController {
     // }
     @Autowired
     private ProductRepository productRepository;
-    @GetMapping("/home")
+    @GetMapping("/")
     public ModelAndView getNewProducts() {
         ModelAndView mav = new ModelAndView("index.html");
         
