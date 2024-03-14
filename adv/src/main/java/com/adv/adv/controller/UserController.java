@@ -106,7 +106,7 @@ public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, H
             if(user.getUserType()==User.UserType.ADMIN){
                 mav.setView(new RedirectView("/adminPage/addAdmin"));
             } else {
-                mav.setView(new RedirectView("/home"));
+                mav.setView(new RedirectView("/"));
             }
             return mav;
         }
@@ -118,7 +118,11 @@ public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, H
     return mav;
 }
 
-
+@GetMapping("/MyProfile")
+public ModelAndView ShowProfile() {
+  ModelAndView mav = new ModelAndView("MyProfile.html");
+  return mav;
+}
 
 }
     
