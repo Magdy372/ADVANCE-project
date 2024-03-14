@@ -1,0 +1,87 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Live chat </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/nav.css">
+		    <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/chat.css">
+        <script src="/js/chat.js"></script>
+
+
+    </head>
+    <body>
+      <section id="header">
+        <a href="#"><img src="/img/logo-4.png" class="logo"
+                alt="Logo" width="145" height="50"></a>
+            <div>
+                <ul id="navbar">
+                    <li> <div>
+                        <input type='text' name='search_text' id='search_text' placeholder='Search...' />
+                        </div>
+                    </li>
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#" class="active">Shop</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Logout</a></li>
+                    </div>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+    <br>
+<section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i>Al-Hedia
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+  
+    <main class="msger-chat">
+      <div class="msg left-msg">  
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">Al-Hedia</div>
+            <div class="msg-info-time">12:45</div>
+          </div>
+  
+          <div class="msg-text">
+            Hi, welcome to Al-Hedia! How can i help you?
+          </div>
+        </div>
+      </div>
+  
+      <div class="msg right-msg">
+          
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">You</div>
+            <div class="msg-info-time">12:46</div>
+          </div>
+  
+          <div class="msg-text">
+            Text
+          </div>
+        </div>
+      </div>
+    </main>
+  
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" placeholder="Enter your message...">
+      <button type="submit" class="msger-send-btn">Send</button>
+    </form>
+  </section>
+
+  
+</body>
+</html>

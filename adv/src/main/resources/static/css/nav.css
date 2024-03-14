@@ -24,6 +24,7 @@
   float: right;
   position :relative;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
   
 }
 #navbar li a{
@@ -37,6 +38,10 @@
   
   
 }
+ul {
+  list-style-type: none;
+}
+
 #navbar li button{
   background-color: white;
   background: no-repeat;

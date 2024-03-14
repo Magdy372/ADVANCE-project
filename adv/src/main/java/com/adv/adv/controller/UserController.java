@@ -27,6 +27,12 @@ public class UserController {
     @Autowired
     private userRepository userRepository;
 
+    // @GetMapping("/chat")
+    // public String chat() {
+    //     return "chat.html";
+    // }
+
+
 @GetMapping("/signup")
     public  ModelAndView showsignuppage (){
         User newuser= new User();
@@ -111,8 +117,6 @@ public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, H
     mav.addObject("error", "Invalid email or password");
     return mav;
 }
-
-
 
 
 
