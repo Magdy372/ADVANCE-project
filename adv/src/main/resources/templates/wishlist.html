@@ -476,19 +476,12 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="product-remove"><a href="#">x</a></td>
-												<td class="product-thumbnail"><a href="#"><img src="img/wishlist/1.jpg" alt="" /></a></td>
-												<td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-												<td class="product-price"><span class="amount">$35.00</span></td>
-												<td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
-												<td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
-											</tr>
-											<tr>
-												<td class="product-remove"><a href="#">x</a></td>
-												<td class="product-thumbnail"><a href="#"><img src="img/wishlist/2.jpg" alt="" /></a></td>
-												<td class="product-name"><a href="#">Vestibulum dictum magna</a></td>
-												<td class="product-price"><span class="amount">$50.00</span></td>
+											<!-- Loop through wishlist items and generate table rows -->
+											<tr th:each="item : ${wishlistItems}">											
+												<td class="product-remove"><a th:href="@{'/wishlist/remove/' + ${item.id}}">x</a></td>
+												<td class="product-thumbnail"><a th:href="@{'products/product-details/' + ${item.products.id}}"><img th:src="@{${item.products.photosImagePath}}" alt="image" style="height: 100px ;width: 100px;"/></a></td>
+												<td class="product-name"><a th:href="@{'products/product-details/' + ${item.products.id}}" th:text="${item.products.name}"> </a></td>
+												<td class="product-price"><span class="amount" th:text="${item.products.price}"></span></td>
 												<td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
 												<td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
 											</tr>
@@ -510,6 +503,7 @@
 											</tr>
 										</tfoot>
 									</table>
+									
 								</div>	
 							</form>
 						</div>

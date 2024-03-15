@@ -96,20 +96,24 @@ public class WishlistController {
 
 
 
-    @DeleteMapping("/remove/{itemId}")
-    public void removeItem(@PathVariable int itemId) {
+    @GetMapping("/remove/{itemId}")
+    public ModelAndView removeItem(@PathVariable int itemId) {
         wishlistService.removeItem(itemId);
+        return new ModelAndView("redirect:/wishlist");
     }
+
 
     @GetMapping("/all")
     public List<Wishlist> getAllItems() {
         return wishlistService.getAllItems();
     }
 
+
     @GetMapping("/user/{userId}")
     public List<Wishlist> getItemsByUserId(@PathVariable int userId) {
         return wishlistService.getItemsByUserId(userId);
     }
+
 
     @GetMapping("/user")
     public List<Wishlist> getItemsByUser(HttpSession session) {
