@@ -66,17 +66,27 @@ public class WishlistController {
                                 BindingResult result,
                                 HttpSession session,
                                 @RequestParam("productId") int productId) {
+
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView("wishlist.html");
             // Add necessary model attributes if needed
             mav.addObject("bindingResult", result);
             return mav; // Return ModelAndView directly
         }
+
         Long userId = (Long) session.getAttribute("id");
         if (userId == null) {
             return new ModelAndView("redirect:/login");
         }
+
         
+        boolean itemExists = wishlistService.doesItemExistForUser(userId, productId);
+        if (itemExists) {
+            // If the item already exists, you can handle this situation as needed
+            // For example, redirect back to the wishlist with a message indicating that the item already exists
+            ModelAndView mav = new ModelAndView("redirect:/");
+            return mav;
+        }
 
         // Retrieve User and Product objects from their respective repositories
         User user = userRepository.findById((long) userId)

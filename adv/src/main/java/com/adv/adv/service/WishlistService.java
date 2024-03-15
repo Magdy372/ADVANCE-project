@@ -30,4 +30,8 @@ public class WishlistService {
     public List<Wishlist> getItemsByUserId(long userId) {
         return wishlistItemRepository.findByUserId(userId);
     }
+    public boolean doesItemExistForUser(Long userId, int productId) {
+        Wishlist wishlistItem = wishlistItemRepository.findByUserIdAndProductId(userId, productId);
+        return wishlistItem != null;
+    }
 }
