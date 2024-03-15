@@ -51,7 +51,7 @@
 						</li>
                         <li><a href="MyProfile">My Profile</a></li>
                         <li><a href="#" class="active">Shop</a></li>
-                        <li><a href="#">Wishlist</a></li>
+                        <li><a th:href="@{/wishlist}">Wishlist</a></li>
                         <li><a href="#">Cart</a></li>
                         <li><a href="#">Logout</a></li>
                         </div>
@@ -392,7 +392,7 @@
 						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
 					</span>
 					<h4 th:text="'EGP' + ${product.price}">Price</h4>
-					<a th:href="@{/wishlist/add(userId=${session.id}, productId=${product.id})}">
+					<a th:href="@{/wishlist/add(productId=${product.id})}">
 						Add to Wishlist
 					</a>
                 </button>

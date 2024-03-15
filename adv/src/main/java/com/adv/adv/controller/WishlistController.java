@@ -20,8 +20,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Null;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -43,12 +41,9 @@ public class WishlistController {
     @GetMapping({"/",""})
     public ModelAndView getItemsByUserId(HttpSession session) {
         // Retrieve user ID from the session
-        long userId =  (long) session.getAttribute("id");
-        
-        if (userId == 0) {
-            // Handle the case where user ID is not found in the session
-            // For example, you can return an empty list or throw an exception
-            // Here, we'll redirect the user to the login page
+       // long userId =  (long) session.getAttribute("id");
+        Long userId = (Long) session.getAttribute("id");
+        if (userId == null) {
             return new ModelAndView("redirect:/login");
         }
         
@@ -57,9 +52,6 @@ public class WishlistController {
         
         // Create a new ModelAndView object
         ModelAndView mav = new ModelAndView("wishlist.html");
-        
-        // Add the user ID as an attribute to the ModelAndView object
-        mav.addObject("sessionuserId", userId);
         
         // Add the wishlist items to the ModelAndView object
         mav.addObject("wishlistItems", wishlistItems);
@@ -70,16 +62,21 @@ public class WishlistController {
 
 
     @GetMapping("/add")
-    public ModelAndView addItem(@Valid @ModelAttribute("wishlistItem") Wishlist wishlistItem,
+    public ModelAndView addItem(@Valid @ModelAttribute("wishlist") Wishlist wishlistItem,
                                 BindingResult result,
-                                @RequestParam("userId") int userId,
+                                HttpSession session,
                                 @RequestParam("productId") int productId) {
         if (result.hasErrors()) {
-            ModelAndView mav = new ModelAndView("add-wishlist-item.html");
+            ModelAndView mav = new ModelAndView("wishlist.html");
             // Add necessary model attributes if needed
             mav.addObject("bindingResult", result);
             return mav; // Return ModelAndView directly
         }
+        Long userId = (Long) session.getAttribute("id");
+        if (userId == null) {
+            return new ModelAndView("redirect:/login");
+        }
+        
 
         // Retrieve User and Product objects from their respective repositories
         User user = userRepository.findById((long) userId)
