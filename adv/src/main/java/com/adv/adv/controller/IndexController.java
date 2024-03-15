@@ -23,7 +23,8 @@ public class IndexController {
     public ModelAndView getNewProducts() {
         ModelAndView mav = new ModelAndView("index.html");
         
-        List<Product> sortedByNewDates = this.productRepository.findAllByOrderByCreatedAtDesc();
+        List<Product> sortedByNewDates = this.productRepository.findTop3ByOrderByIdDesc();
+
         List<Product> sortedByRatingDesc = this.productRepository.findAllByOrderByRatingDesc();
 
 

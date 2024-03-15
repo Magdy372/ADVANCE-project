@@ -5,10 +5,11 @@ footer{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding-left: 30px;
   padding-right: 30px;
+  padding-top:30px;
 }
 .pageFooter{
   color:#878f88;
-  background-color: #f6f6f6;
+  background-color: #ffffff;
 }
 
 footer .col{

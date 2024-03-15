@@ -11,7 +11,6 @@
          Place favicon.ico in the root directory -->
 		<!-- google-font -->
 		<link rel="stylesheet" href="/css/nav.css">
-		<link rel="stylesheet" href="/css/footer.css">
 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
 
@@ -368,113 +367,67 @@
 				</div>
 			</div>
 		</div>
-		<!-- mainmenu-area-end -->
-		<!-- slider-area-start -->
-		
-		<!-- slider-area-end -->
-		<!-- service-area-start -->
-		
-		<!-- service-area-end -->
-		<div class="new-product-area hot-deal-area dotted-5 new-product-4 pt-80"  style="margin-top: -100px;">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12">
-						<div class="section-title section-title-4">
-							<h2>New Products</h2>
-</div>	
-<table>
-    <tr th:each="product : ${newProducts}">
-        <td>
-            
-			<a th:href="@{./products/product-details/{id}(id=${product.id})}"><img th:src="@{${product.getPhotosImagePath()}}" style="width: 200px; height: auto;" /> </a>
-        </td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.price}"></td>
-    </tr>
-</table>
+	</div>
+	<headerr>
+        <section class="hero-header">
+            <h1>Shop and explore our new collection </h1>
+            <h2>Hurry up!!!</h2>
+        </section>
+    </headerr>
+	<br>
+    <div class="h_products">
+        <h2>New Arrivals</h2>
+    </div><br>
+    <div class="Contain">
+        <div class="box" id="col1" th:each="product : ${newProducts}">
+            <a th:href="@{./products/product-details/{id}(id=${product.id})}">
+                <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
+					<img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
+				</a>
+				<a th:href="@{'product-details.html?details_id=' + ${product.id}}">
 
-						</div>
-					</div>
-				</div>
-			</div>
+                    <p th:text="${product.name}">Product Name</p>
+				</a>
+					<span th:each="star : ${#numbers.sequence(1, 5)}">
+						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
+					</span>
+					<h4 th:text="'EGP' + ${product.price}">Price</h4>
 
+                </button>
+            </a>
+        </div>
+	</div>
+</div>
+    <br>
+    <br>
+    <section id="banner" class="section-banner">
+    </section>
+    <br><br>
+    <div class="h_products">
+        <h2>Sale products</h2>
+    </div><br>
+    <div class="Contain">
+        <div class="box" id="col1" th:each="product : ${newProducts}">
+            <a th:href="@{./products/product-details/{id}(id=${product.id})}">
+                <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
+					<img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
+				</a>
+				<a th:href="@{'product-details.html?details_id=' + ${product.id}}">
 
+                    <p th:text="${product.name}">Product Name</p>
+				</a>
+					<span th:each="star : ${#numbers.sequence(1, 5)}">
+						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
+					</span>
+					<h4 th:text="'EGP' + ${product.price}">Price</h4>
 
-			<div class="new-product-area hot-deal-area dotted-5 new-product-4 ptb-50">
-				<div class="container">
-				  
-	
-					<div class="row">
-						<div class="producs">
-						<div class="col-lg-12">
-							<div class="section-title section-title-4 section_4">
-								<h2>featured products</h2>
-							</div>
-							<table>
-								<tr th:each="product : ${featuredProducts}">
-									<td>
-										<img th:src="@{${product.getPhotosImagePath()}}" style="width: 200px; height: auto;" /> 
-									</td>
-									<td th:text="${product.name}"></td>
-									<td th:text="${product.price}"></td>
-								</tr>
-							</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-						<div class="static-single-slider">
-							<div class="static-slider-img">
-								<img src="/img/banner.jpeg" alt="" style="width:100%"/>
-							</div>
-						</div>			
-					</div>
-				</div><br><br>
-
-				<div class="feature-preduct-area home-page-2 feature-product-4 dotted-5 new-product-4 hot-deal-area  pb-50">
-					<div class="container">
-						<div class="row">
-							<div class="section-title hot-deal-title sale-4 section-title-4">
-								<h2>sale products</h2>
-							</div>				
-							<table>
-    <tr th:each="product : ${saleProducts}">
-        <td>
-            <img th:src="@{${product.getPhotosImagePath()}}" style="width: 200px; height: auto;" /> 
-        </td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.price}"></td>
-    </tr>
-</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-
-			<div class="contact-area ptb-40">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mar_b-30">
-							<div class="contuct-info text-center">
-								<h4>Sign up for news & offers!</h4>
-								<p>You may safely unsubscribe at any time</p>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-8 col-sm-12 col-lg-offset-1 col-xs-12">
-							<div class="search-box">
-								<form action="#">
-									<input type="email" placeholder="Enter your email address"/>
-									<button><span class="lnr lnr-envelope"></span></button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- contact-area-end -->		
+                </button>
+            </a>
+        </div>
+	</div>
+	<br>
+	<br>
+	<br>
 			<!-- footer-area-start -->
 		
 			<footer class="pageFooter">
