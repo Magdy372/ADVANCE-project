@@ -392,7 +392,9 @@
 						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
 					</span>
 					<h4 th:text="'EGP' + ${product.price}">Price</h4>
-
+					<a th:href="@{/wishlist/add(userId=${session.id}, productId=${product.id})}">
+						Add to Wishlist
+					</a>
                 </button>
             </a>
         </div>

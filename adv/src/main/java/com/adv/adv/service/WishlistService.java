@@ -27,7 +27,7 @@ public class WishlistService {
         return wishlistItemRepository.findAll();
     }
 
-    public List<Wishlist> getItemsByUserId(int userId) {
+    public List<Wishlist> getItemsByUserId(long userId) {
         return wishlistItemRepository.findByUserId(userId);
     }
 }

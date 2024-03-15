@@ -102,7 +102,7 @@ public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, H
 
         if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
             // Save user ID in the session
-            session.setAttribute("username", user.getUsername());
+            session.setAttribute("id", user.getId());
             if(user.getUserType()==User.UserType.ADMIN){
                 mav.setView(new RedirectView("/adminPage/addAdmin"));
             } else {

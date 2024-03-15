@@ -17,8 +17,12 @@ import com.adv.adv.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -33,15 +37,39 @@ public class WishlistController {
     @Autowired
     private userRepository userRepository;
 
-    @GetMapping({"","/"})
-    public ModelAndView getAll() {
-        ModelAndView mav =new ModelAndView("wishlist.html");
-       // List<Product>products=this.productRepository.findAll();
-        //mav.addObject("products", products);
+
+
+
+    @GetMapping({"/",""})
+    public ModelAndView getItemsByUserId(HttpSession session) {
+        // Retrieve user ID from the session
+        long userId =  (long) session.getAttribute("id");
+        
+        if (userId == 0) {
+            // Handle the case where user ID is not found in the session
+            // For example, you can return an empty list or throw an exception
+            // Here, we'll redirect the user to the login page
+            return new ModelAndView("redirect:/login");
+        }
+        
+        // Use the retrieved user ID to get wishlist items
+        List<Wishlist> wishlistItems = wishlistService.getItemsByUserId(userId);
+        
+        // Create a new ModelAndView object
+        ModelAndView mav = new ModelAndView("wishlist.html");
+        
+        // Add the user ID as an attribute to the ModelAndView object
+        mav.addObject("sessionuserId", userId);
+        
+        // Add the wishlist items to the ModelAndView object
+        mav.addObject("wishlistItems", wishlistItems);
+        
         return mav;
     }
 
-    @PostMapping("/add")
+
+
+    @GetMapping("/add")
     public ModelAndView addItem(@Valid @ModelAttribute("wishlistItem") Wishlist wishlistItem,
                                 BindingResult result,
                                 @RequestParam("userId") int userId,
@@ -63,8 +91,10 @@ public class WishlistController {
         wishlistItem.setProduct(product);
 
         Wishlist savedItem = wishlistService.addItem(wishlistItem);
-        return new ModelAndView("redirect:/wishlist/all");
+        return new ModelAndView("redirect:/");
     }
+
+
 
     @DeleteMapping("/remove/{itemId}")
     public void removeItem(@PathVariable int itemId) {
@@ -80,4 +110,15 @@ public class WishlistController {
     public List<Wishlist> getItemsByUserId(@PathVariable int userId) {
         return wishlistService.getItemsByUserId(userId);
     }
+
+    @GetMapping("/user")
+    public List<Wishlist> getItemsByUser(HttpSession session) {
+        //return wishlistService.getItemsByUserId(userId);
+        long userId =  (long) session.getAttribute("id");
+        List<Wishlist> wishlistItems = wishlistService.getItemsByUserId(userId);
+        return wishlistItems;
+    }
+    
+
+    
 }
