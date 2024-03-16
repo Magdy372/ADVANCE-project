@@ -6,8 +6,6 @@ import com.adv.adv.repository.userRepository;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -133,10 +131,8 @@ public ModelAndView showProfile(HttpSession session) {
             User user = userOptional.get();
 
             // Pass the user's name and email to the view
-            mav.addObject("username", user.getUsername());
-            mav.addObject("email", user.getEmail());
-
-            // Set the view to MyProfile.html
+            mav.addObject("user", user);
+            
             mav.setViewName("MyProfile.html");
         } else {
             // If user not found, redirect to login page
@@ -152,28 +148,52 @@ public ModelAndView showProfile(HttpSession session) {
 
 
 @PostMapping("/MyProfile")
-public RedirectView updateProfile(@RequestParam("username") String username,
+public ModelAndView updateProfile( @ModelAttribute ("user") User user, BindingResult result,
+                                  @RequestParam("username") String username,
                                   @RequestParam("email") String email,
                                   HttpSession session) {
+    ModelAndView mav = new ModelAndView();
     Long userId = (Long) session.getAttribute("id");
+
+  
+
+    if (user.getEmail() == null || user.getEmail().isEmpty() || 
+    user.getUsername() == null || user.getUsername().isEmpty()) {
+    mav.setViewName("Myprofile.html");
+    mav.addObject("error", "Email and Username are required");
+    return mav;
+}
+  
 
     if (userId != null) {
         Optional<User> userOptional = userRepository.findById(userId);
-
         if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setUsername(username);
-            user.setEmail(email);
+            User EXuser = userOptional.get();
 
+
+            EXuser.setUsername(username);
+
+            Optional<User> emailOptional = userRepository.findByEmail(email);
+            if (emailOptional.isPresent() && emailOptional.get().getId() != userId) {
+                mav.setViewName("Myprofile.html");
+                mav.addObject("error", "The email is already taken.");
+                return mav;
+            }
+
+            EXuser.setEmail(email);
             // Exclude confirmPassword from validation during update
-            user.setConfirmPassword(user.getPassword());
-
-            userRepository.save(user); // Update the user's profile
+           EXuser.setPassword(EXuser.getPassword());
+           EXuser.setConfirmPassword(EXuser.getPassword());
+            
+            userRepository.save(EXuser); // Update the user's profile
         }
     }
 
-    // Redirect the user to the profile page or any other page as needed
-    return new RedirectView("/MyProfile");
+    ModelAndView modelAndView = new ModelAndView();
+    // Set the view name to redirect the user to the profile page
+    modelAndView.setViewName("redirect:/MyProfile");
+
+    return modelAndView;
 }
 
 
