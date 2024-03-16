@@ -1,0 +1,100 @@
+/* CSS styles for the wishlist area */
+.wishlist-area {
+    padding-top: 80px;
+    padding-bottom: 30px;
+    background-color: #f9f9f9; /* Change the background color as needed */
+}
+
+.wishlist-content {
+    background-color: #ffffff; /* Change the background color as needed */
+    border: 1px solid #dddddd; /* Change the border color as needed */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.wishlist-title h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+}
+
+.wishlist-table {
+    margin-top: 20px;
+}
+
+.wishlist-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wishlist-table th,
+.wishlist-table td {
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+}
+
+.product-thumbnail img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.product-remove a {
+    color: #ff0000;
+    text-decoration: none;
+}
+
+.product-remove a:hover {
+    text-decoration: underline;
+}
+
+.product-add-to-cart a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.product-add-to-cart a:hover {
+    text-decoration: none;
+}
+
+.wishlist-share ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.wishlist-share ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.wishlist-share ul li a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    text-indent: -9999px;
+}
+span.wishlist-in-stock{
+    color: #25a325;
+}
+
+/* Add background images for the social media icons here */
+.facebook {
+    background-image: url('facebook-icon.png');
+}
+
+.twitter {
+    background-image: url('twitter-icon.png');
+}
+
+.pinterest {
+    background-image: url('pinterest-icon.png');
+}
+
+.googleplus {
+    background-image: url('googleplus-icon.png');
+}
+
+.email {
+    background-image: url('email-icon.png');
+}
