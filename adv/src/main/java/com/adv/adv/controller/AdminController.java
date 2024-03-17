@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.adv.adv.model.User;
-import com.adv.adv.repository.userRepository; // Adjust the import statement
+import com.adv.adv.repository.userRepository; 
 
 @Controller
 @RequestMapping("/adminPage")

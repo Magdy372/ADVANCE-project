@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     //NEW PRODUCTS
     @Query("SELECT p FROM Product p ORDER BY p.created_at DESC")
     List<Product> findAllByOrderByCreatedAtDesc();
-
+    List<Product> findTop3ByOrderByRatingDesc(); 
 //COUNT
 @Query("SELECT COUNT(p) FROM Product p")
 int countProducts();

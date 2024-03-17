@@ -54,7 +54,7 @@
 							</div>
 						</li>
                         <li><a href="MyProfile">My Profile</a></li>
-                        <li><a href="#" class="active">Shop</a></li>
+                        <li><a href="/shop" class="active">Shop</a></li>
                         <li><a th:href="@{/wishlist}">Wishlist</a></li>
                         <li><a href="#">Cart</a></li>
                         <li><a href="#">Logout</a></li>
@@ -335,6 +335,9 @@
 							</div><br>
 							<div class="containerr">
 								<div class="row">
+									<div class="col-md-4 col-sm-6" th:if="${products.empty}">
+										<p>No products available for this type.</p>
+									</div>
 									<div class="col-md-4 col-sm-6" th:each="product : ${products}">
 										<div class="product-grid2">
 											<div class="product-image2">
@@ -358,12 +361,10 @@
 												<h3 class="title"><a th:href="@{'product-details.html?details_id=' + ${product.id}}" th:text="${product.name}">Product Name</a></h3>
 												<span class="price" th:text="'Egp ' + ${product.price}">Price</span>
 												<div class="rating">
-													<span th:each="star : ${#numbers.sequence(1, product.rating)}">
-														<i class="fa fa-star"></i>
-													</span>
-													<span th:each="star : ${#numbers.sequence(product.rating + 1, 5)}">
-														<i class="fa fa-star-o"></i>
-													</span>
+													
+													
+													<span th:each="star : ${#numbers.sequence(1, 5)}">
+														<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
 												</div>
 											</div>
 										</div>

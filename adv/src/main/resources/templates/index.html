@@ -50,7 +50,7 @@
 						</div>
 					</li>
 					<li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
-					<li><a href="little_H">Shop</a></li>
+					<li><a href="/shop">Shop</a></li>
 					<li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
 					<li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
 					<li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
@@ -153,7 +153,7 @@
 									<li><a href="/shop">Gold Bars</a>
 	
 									</li>
-									<li><a href="/ahop">Gold Coins</a>
+									<li><a href="/shop">Gold Coins</a>
 	
 									</li>
 	
@@ -385,37 +385,41 @@
         <h2>New Arrivals</h2>
     </div><br>
     <div class="Contain">
-        <div class="box" id="col1" th:each="product : ${newProducts}">
-            <a th:href="@{./products/product-details/{id}(id=${product.id})}">
-                <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
-					<img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
-				</a>
-				<a th:href="@{'product-details.html?details_id=' + ${product.id}}">
-
-                    <p th:text="${product.name}">Product Name</p>
-				</a>
-					<span th:each="star : ${#numbers.sequence(1, 5)}">
-						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
-					</span>
-					<h4 th:text="'EGP' + ${product.price}">Price</h4>
-					<a th:href="@{/wishlist/add(productId=${product.id})}">
-						Add to Wishlist
-					</a>
-                </button>
+    <div class="box" id="col1" th:if="${newProducts.empty}">
+        <p>No products available .</p>
+    </div>
+    
+    <div class="box" id="col1" th:each="product : ${newProducts}" th:if="${not newProducts.empty}">
+        <a th:href="@{./products/product-details/{id}(id=${product.id})}">
+            <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
+                <img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
             </a>
-        </div>
-	</div>
+            <a th:href="@{'product-details.html?details_id=' + ${product.id}}">
+                <p th:text="${product.name}">Product Name</p>
+            </a>
+            <span th:each="star : ${#numbers.sequence(1, 5)}">
+                <i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
+            </span>
+            <h4 th:text="'EGP' + ${product.price}">Price</h4>
+
+            <a th:href="@{/wishlist/add(productId=${product.id})}">
+                Add to Wishlist
+            </a>
+            </button>
+        </a>
+    </div>
 </div>
+
     <br>
     <br>
     <section id="banner" class="section-banner">
     </section>
     <br><br>
     <div class="h_products">
-        <h2>Sale products</h2>
+        <h2>Most Selling </h2>
     </div><br>
     <div class="Contain">
-        <div class="box" id="col1" th:each="product : ${newProducts}">
+        <div class="box" id="col1" th:each="product : ${featuredProducts}">
             <a th:href="@{./products/product-details/{id}(id=${product.id})}">
                 <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
 					<img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />

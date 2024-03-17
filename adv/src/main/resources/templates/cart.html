@@ -57,7 +57,7 @@
 						</div>
 					</li>
 					<li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
-					<li><a href="little_H">Shop</a></li>
+					<li><a href="/shop">Shop</a></li>
 					<li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
 					<li th:if="${session['id'] != null}"><a href="cart" class="active">Cart</a></li>
 					<li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
@@ -159,7 +159,7 @@
 									<li><a href="/shop">Gold Bars</a>
 	
 									</li>
-									<li><a href="/ahop">Gold Coins</a>
+									<li><a href="/shop">Gold Coins</a>
 	
 									</li>
 	

@@ -36,12 +36,12 @@ public class IndexController {
         
         List<Product> sortedByNewDates = this.productRepository.findTop3ByOrderByIdDesc();
 
-        List<Product> sortedByRatingDesc = this.productRepository.findAllByOrderByRatingDesc();
+        List<Product> featuredProducts = this.productRepository.findTop3ByOrderByRatingDesc();
       
 
         mav.addObject("newProducts", sortedByNewDates);
 
-        mav.addObject("featuredProducts", sortedByRatingDesc);
+        mav.addObject("featuredProducts", featuredProducts);
      
         
         return mav;
@@ -51,15 +51,8 @@ public class IndexController {
         ModelAndView mav = new ModelAndView("shop.html");
         
         List<Product> products = this.productRepository.findAll();
-
-  
-      
-
         mav.addObject("products", products);
 
-     
-     
-        
         return mav;
     }
 
