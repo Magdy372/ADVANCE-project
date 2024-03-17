@@ -1,0 +1,126 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;  }
+
+  /*Resize the wrap to see the search bar change!*/
+  .wrap{
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .product-card {
+    margin-top:30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  body h1{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #d8bb78;
+  }
+  .prod {
+    width: 33%;
+    float:left;
+    
+  }
+  
+  .product-tumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width:90%;
+    margin-left:25px;
+    background: #f0f0f0;
+  }
+  .product-tumb button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding: 20px;
+    background: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .product-tumb img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .product-details {
+    padding: 30px;
+    width:100%;
+  }
+  
+  .product-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 18px;
+  }
+  
+  .product-details h4  {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  
+  
+  .product-details p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #999;
+  }
+  
+  .product-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+  }
+  
+  .product-bottom-details div {
+    float: left;
+    width: 50%;
+  }
+  
+  .product-price {
+    font-size: 18px;
+    color: #d8bb78;
+    font-weight: 600;
+  }
+  
+  .product-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  .product-links {
+    text-align: right;
+  }
+  
+  .product-links a {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+  }

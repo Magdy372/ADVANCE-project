@@ -17,6 +17,10 @@ public class IndexController {
     // public String home() {
     //     return "index";
     // }
+     @GetMapping("/little_H")
+    public String Little_H() {
+        return "little_H";
+    }
     @Autowired
     private ProductRepository productRepository;
     @GetMapping("/")

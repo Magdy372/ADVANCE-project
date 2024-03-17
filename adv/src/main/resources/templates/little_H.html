@@ -33,7 +33,9 @@
 		<!-- font-awesome css -->
         <link rel="stylesheet" href="/css/font-awesome.min.css">
 		<!-- style css -->
-		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/collections.css">
+        <link rel="stylesheet" href="/css/style.css">
+
 		<!-- responsive css -->
         <link rel="stylesheet" href="/css/responsive.css" />
 		
@@ -51,7 +53,7 @@
 						</li>
 							
                         <li><a href="MyProfile">My Profile</a></li>
-                        <li><a href="little_H" class="active">Shop</a></li>
+                        <li><a href="#" class="active">Shop</a></li>
                         <li><a th:href="@{/wishlist}">Wishlist</a></li>
                         <li><a href="#">Cart</a></li>
                         <li><a href="#">Logout</a></li>
@@ -73,7 +75,7 @@
 						<div class="mainmenu hidden-xs">
 							<nav>
 								<ul>
-									<li><a href="little_H">Little H</a>
+									<li><a href="shop.php">Little H</a>
 										<div class="megamenu">
 											<span>
 												<a href="#" class="megatitle">Little H</a>
@@ -369,127 +371,227 @@
 			</div>
 		</div>
 	</div>
-	<headerr>
-        <section class="hero-header">
-            <h1>Shop and explore our new collection </h1>
-            <h2>Hurry up!!!</h2>
-        </section>
-    </headerr>
-	<br>
-    <div class="h_products">
-        <h2>New Arrivals</h2>
-    </div><br>
-    <div class="Contain">
-        <div class="box" id="col1" th:each="product : ${newProducts}">
-            <a th:href="@{./products/product-details/{id}(id=${product.id})}">
-                <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
-					<img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
-				</a>
-				<a th:href="@{'product-details.html?details_id=' + ${product.id}}">
-
-                    <p th:text="${product.name}">Product Name</p>
-				</a>
-					<span th:each="star : ${#numbers.sequence(1, 5)}">
-						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
-					</span>
-					<h4 th:text="'EGP' + ${product.price}">Price</h4>
-					<a th:href="@{/wishlist/add(productId=${product.id})}">
-						Add to Wishlist
-					</a>
+    <br>
+    <h1>Little H</h1>
+<div class="prod">
+    <div class="product-card">
+        <div class="product-tumb">
+            <form method="post" action="prod.php">
+                <input type="hidden" name="product_id" value="">
+                <button type="submit" name="add_to_description">
+                    <img src="/img/product/3.jpg">
                 </button>
-            </a>
+            </form>
         </div>
-	</div>
+        <div class="product-details">
+            <span class="product-catagory">Little H</span>
+            <h4>Necklace</h4>
+            <p>Gold Necklace</p>
+            <div class="product-bottom-details">
+                <div class="product-price">5000 LE</div>
+            
+
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
 </div>
-    <br>
-    <br>
-    <section id="banner" class="section-banner">
-    </section>
-    <br><br>
-    <div class="h_products">
-        <h2>Sale products</h2>
-    </div><br>
-    <div class="Contain">
-        <div class="box" id="col1" th:each="product : ${newProducts}">
-            <a th:href="@{./products/product-details/{id}(id=${product.id})}">
-                <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
-					<img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
-				</a>
-				<a th:href="@{'product-details.html?details_id=' + ${product.id}}">
-
-                    <p th:text="${product.name}">Product Name</p>
-				</a>
-					<span th:each="star : ${#numbers.sequence(1, 5)}">
-						<i th:class="${star le product.rating} ? 'fa fa-star' : 'fa fa-star-o'"></i>
-					</span>
-					<h4 th:text="'EGP' + ${product.price}">Price</h4>
-
+<div class="prod">
+    <div class="product-card">
+        <div class="product-tumb">
+            <form method="post" action="prod.php">
+                <input type="hidden" name="product_id" value="">
+                <button type="submit" name="add_to_description">
+                    <img src="/img/product/1.jpg">
                 </button>
-            </a>
+            </form>
         </div>
-	</div>
-	<br>
-	<br>
-	<br>
-			<!-- footer-area-start -->
-		
-			<footer class="pageFooter">
-				<div class="col">
-					<img class="Logo " src="/img/logo-4.png" alt="" width="145" height="50">
-					<h4>Contact</h4>
-					<p><strong>Adress: </strong>Misr International University</p>
-					<p><strong>Phone: </strong>01000000000</p>
-					<p><strong>Hours: </strong>9 am - 12 am . Mon-Sat</p>
-					<div class="follow">
-						<h4>Follow us</h4>
-						<div class="icon">
-							<a href="https://www.facebook.com/"> <i class="fab fa-facebook-f"></i></a>
-							<a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-							<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-							<a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
-							<a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<h4>About</h4>
-					<a href="/about">About us</a>
-					<a href="/">Home</a>
-					<a href="/privacyPolicy">Privacy policy</a>
-					<a href="/terms&condition">Terms & conditions</a>
-			
-				</div>
-			
-				<div class="col">
-					<h4>My Acoount</h4>
-					<a href="/rgestration">Sign in</a>
-					<a href="/cart">View cart</a>
-					<a href="/wishlist">My wishlist</a>
-					<a href="/api">Location</a>
-			
-				</div>
-			
-				<div class="col install">
-					<h4>Install app</h4>
-					<p>From App-Store or Google play</p>
-					<div class="row">
-						<img src="/img/appStore.png" width="130" height="40">
-						<img src="/img/googlePlay (2).png" width="130" height="40">
-					</div>
-					<p>Secured payment geteways</p>
-					<img src="/img/Payment.png" width="300" height="50">
-			
-			
-				</div>
-			
-			
-			</footer>
-			
-			
-			<div class="copyright">
-				<p>© 2024, AlHedia - E-Commerce</p>
-			</div>
-			
-				
-						</body>
-						</html>
+        <div class="product-details">
+            <span class="product-catagory">Little H</span>
+            <h4>Necklace</h4>
+            <p>Gold Necklace</p>
+            <div class="product-bottom-details">
+                <div class="product-price">5000 LE</div>
+            
+
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<div class="prod">
+    <div class="product-card">
+        <div class="product-tumb">
+            <form method="post" action="prod.php">
+                <input type="hidden" name="product_id" value="">
+                <button type="submit" name="add_to_description">
+                    <img src="/img/product/2.jpg">
+                </button>
+            </form>
+        </div>
+        <div class="product-details">
+            <span class="product-catagory">Little H</span>
+            <h4>Necklace</h4>
+            <p>Gold Necklace</p>
+            <div class="product-bottom-details">
+                <div class="product-price">5000 LE</div>
+            
+
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<div class="prod">
+    <div class="product-card">
+        <div class="product-tumb">
+            <form method="post" action="prod.php">
+                <input type="hidden" name="product_id" value="">
+                <button type="submit" name="add_to_description">
+                    <img src="/img/product/4.jpg">
+                </button>
+            </form>
+        </div>
+        <div class="product-details">
+            <span class="product-catagory">Little H</span>
+            <h4>Necklace</h4>
+            <p>Gold Necklace</p>
+            <div class="product-bottom-details">
+                <div class="product-price">5000 LE</div>
+            
+
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<div class="prod">
+    <div class="product-card">
+        <div class="product-tumb">
+            <form method="post" action="prod.php">
+                <input type="hidden" name="product_id" value="">
+                <button type="submit" name="add_to_description">
+                    <img src="/img/product/5.jpg">
+                </button>
+            </form>
+        </div>
+        <div class="product-details">
+            <span class="product-catagory">Little H</span>
+            <h4>Necklace</h4>
+            <p>Gold Necklace</p>
+            <div class="product-bottom-details">
+                <div class="product-price">5000 LE</div>
+            
+
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<div class="prod">
+    <div class="product-card">
+        <div class="product-tumb">
+            <form method="post" action="prod.php">
+                <input type="hidden" name="product_id" value="">
+                <button type="submit" name="add_to_description">
+                    <img src="/img/product/6.jpg">
+                </button>
+            </form>
+        </div>
+        <div class="product-details">
+            <span class="product-catagory">Little H</span>
+            <h4>Necklace</h4>
+            <p>Gold Necklace</p>
+            <div class="product-bottom-details">
+                <div class="product-price">5000 LE</div>
+            
+
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<footer class="pageFooter">
+    <div class="col">
+      <img class="Logo " src="/img/logo-4.png" alt="" width="145" height="50">
+      <h4>Contact</h4>
+      <p><strong>Adress: </strong>Misr International University</p>
+      <p><strong>Phone: </strong>01000000000</p>
+      <p><strong>Hours: </strong>9 am - 12 am . Mon-Sat</p>
+      <div class="follow">
+        <h4>Follow us</h4>
+        <div class="icon">
+          <a href="https://www.facebook.com/"> <i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
+          <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h4>About</h4>
+      <a href="/about">About us</a>
+      <a href="/">Home</a>
+      <a href="/privacyPolicy">Privacy policy</a>
+      <a href="/terms&condition">Terms & conditions</a>
+  
+    </div>
+  
+    <div class="col">
+      <h4>My Acoount</h4>
+      <a href="/rgestration">Sign in</a>
+      <a href="/cart">View cart</a>
+      <a href="/wishlist">My wishlist</a>
+      <a href="/api">Location</a>
+  
+    </div>
+  
+    <div class="col install">
+      <h4>Install app</h4>
+      <p>From App-Store or Google play</p>
+      <div class="row">
+        <img src="/img/appStore.png" width="130" height="40">
+        <img src="/img/googlePlay (2).png" width="130" height="40">
+      </div>
+      <p>Secured payment geteways</p>
+      <img src="/img/Payment.png" width="300" height="50">
+  
+  
+    </div>
+  
+  
+  </footer>
+  
+  
+  <div class="copyright">
+    <p>© 2024, AlHedia - E-Commerce</p>
+  </div>
+  
+    
+</body>
+</html>

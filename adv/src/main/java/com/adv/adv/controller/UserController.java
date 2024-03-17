@@ -177,6 +177,8 @@ public RedirectView updateProfile(@RequestParam("username") String username,
 }
 
 
+
+
 @PostMapping("/deleteAccount")
 public ModelAndView deleteAccount(HttpSession session) {
     Long userId = (Long) session.getAttribute("id");
