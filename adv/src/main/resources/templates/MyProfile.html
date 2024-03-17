@@ -21,7 +21,7 @@
           </div>
         </li>
         <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']} "class="active"></a></li>
-        <li><a href="little_H">Shop</a></li>
+        <li><a href="shop">Shop</a></li>
         <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
         <li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
         <li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
