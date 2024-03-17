@@ -61,6 +61,7 @@ if (result.hasErrors()) {
     // Hash the password before saving
     String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
     user.setPassword(hashedPassword);
+    user.setUserType(User.UserType.USER);
 
     // Save the user to the database
     userRepository.save(user);
