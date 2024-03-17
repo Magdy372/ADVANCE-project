@@ -130,7 +130,7 @@ public ModelAndView showProfile(HttpSession session) {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Pass the user's name and email to the view
+            // Pass the user's name and email and password to the view
             mav.addObject("user", user);
             
             mav.setViewName("MyProfile.html");
@@ -148,50 +148,37 @@ public ModelAndView showProfile(HttpSession session) {
 
 
 @PostMapping("/MyProfile")
-public ModelAndView updateProfile( @ModelAttribute ("user") User user, BindingResult result,
+public ModelAndView updateProfile(@Valid @ModelAttribute ("user") User user, BindingResult result,
                                   @RequestParam("username") String username,
                                   @RequestParam("email") String email,
+                                  @RequestParam("password") String password,
                                   HttpSession session) {
-    ModelAndView mav = new ModelAndView();
+    
     Long userId = (Long) session.getAttribute("id");
 
-  
-
-    if (user.getEmail() == null || user.getEmail().isEmpty() || 
-    user.getUsername() == null || user.getUsername().isEmpty()) {
-    mav.setViewName("Myprofile.html");
-    mav.addObject("error", "Email and Username are required");
-    return mav;
+if (result.hasErrors()) {
+  ModelAndView mav = new ModelAndView("MyProfile.html");
+  mav.addObject("user", user); // Add the user object to retain form values
+  mav.addObject("bindingResult", result); // Add the binding result
+  return mav; // Return the registration view with errors
 }
-  
 
     if (userId != null) {
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isPresent()) {
             User EXuser = userOptional.get();
-
-
             EXuser.setUsername(username);
-
-            Optional<User> emailOptional = userRepository.findByEmail(email);
-            if (emailOptional.isPresent() && emailOptional.get().getId() != userId) {
-                mav.setViewName("Myprofile.html");
-                mav.addObject("error", "The email is already taken.");
-                return mav;
-            }
-
             EXuser.setEmail(email);
-            // Exclude confirmPassword from validation during update
-           EXuser.setPassword(EXuser.getPassword());
-           EXuser.setConfirmPassword(EXuser.getPassword());
-            
+            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+            EXuser.setPassword(hashedPassword);
+            EXuser.setConfirmPassword(hashedPassword);
             userRepository.save(EXuser); // Update the user's profile
         }
     }
 
     ModelAndView modelAndView = new ModelAndView();
-    // Set the view name to redirect the user to the profile page
-    modelAndView.setViewName("redirect:/MyProfile");
+    // Set the view name to redirect the user to the home page
+    modelAndView.setViewName("redirect:/");
 
     return modelAndView;
 }
