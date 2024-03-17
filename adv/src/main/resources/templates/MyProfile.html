@@ -11,7 +11,6 @@
 
 </head>
 <body>
-  
   <section id="header">
     <a href="/"><img src="/img/logo-4.png" class="logo" alt="Logo" width="145" height="50"></a>
     <div>
@@ -21,11 +20,11 @@
             <input type='text' name='search_text' id='search_text' placeholder='Search...' />
           </div>
         </li>
-        <li><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
+        <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']} "class="active"></a></li>
         <li><a href="little_H">Shop</a></li>
-        <li><a th:href="@{/wishlist}">Wishlist</a></li>
-        <li><a href="cart">Cart</a></li>
-        <li><a href="chat">Contact</a></li>
+        <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
+        <li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
+        <li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
         <!-- Check if the user is authenticated -->
         <li th:if="${session['id'] == null}">
           <a href="login">Login</a>

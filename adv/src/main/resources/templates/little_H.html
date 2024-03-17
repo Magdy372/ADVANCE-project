@@ -43,7 +43,7 @@
     <body>
 	  
         
-        <section id="header">
+		<section id="header">
 			<a href="/"><img src="/img/logo-4.png" class="logo" alt="Logo" width="145" height="50"></a>
 			<div>
 				<ul id="navbar">
@@ -52,11 +52,11 @@
 							<input type='text' name='search_text' id='search_text' placeholder='Search...' />
 						</div>
 					</li>
-					<li><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
-					<li><a href="little_H">Shop</a></li>
-					<li><a th:href="@{/wishlist}">Wishlist</a></li>
-					<li><a href="cart">Cart</a></li>
-					<li><a href="chat">Contact</a></li>
+					<li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
+					<li><a href="little_H" class="active">Shop</a></li>
+					<li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
+					<li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
+					<li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
 					<!-- Check if the user is authenticated -->
 					<li th:if="${session['id'] == null}">
 						<a href="login">Login</a>
@@ -67,8 +67,6 @@
 				</ul>
 			</div>
 		</section>
-		
-	
 		<!-- header-end -->
 		<!-- mainmenu-area-start -->
 		<div class="mainmenu-area home-page-2 mainmenu-area-4" id="main_h">
@@ -78,7 +76,7 @@
 						<div class="mainmenu hidden-xs">
 							<nav>
 								<ul>
-									<li><a href="shop.php">Little H</a>
+									<li><a href="little_H">Little H</a>
 										<div class="megamenu">
 											<span>
 												<a href="#" class="megatitle">Little H</a>

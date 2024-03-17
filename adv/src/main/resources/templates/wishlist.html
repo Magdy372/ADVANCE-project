@@ -48,7 +48,7 @@
         <!-- Add your site or application content here -->
 		<!-- header-start -->
 		
-        <section id="header">
+		<section id="header">
 			<a href="/"><img src="/img/logo-4.png" class="logo" alt="Logo" width="145" height="50"></a>
 			<div>
 				<ul id="navbar">
@@ -57,11 +57,11 @@
 							<input type='text' name='search_text' id='search_text' placeholder='Search...' />
 						</div>
 					</li>
-					<li><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
+					<li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']}" ></a></li>
 					<li><a href="little_H">Shop</a></li>
-					<li><a th:href="@{/wishlist}">Wishlist</a></li>
-					<li><a href="cart">Cart</a></li>
-					<li><a href="chat">Contact</a></li>
+					<li th:if="${session['id'] != null}"><a th:href="@{/wishlist}" class="active">Wishlist</a></li>
+					<li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
+					<li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
 					<!-- Check if the user is authenticated -->
 					<li th:if="${session['id'] == null}">
 						<a href="login">Login</a>
@@ -82,10 +82,10 @@
 						<div class="mainmenu hidden-xs">
 							<nav>
 								<ul>
-									<li><a href="shop.php">Little H</a>
+									<li><a href="little_H">Little H</a>
 										<div class="megamenu">
 											<span>
-												<a href="shop.php" class="megatitle">Little H</a>
+												<a href="little_H" class="megatitle">Little H</a>
 												<a href="shop.php?category=1">Necklaces</a>
 												<a href="shop.php?category=2">Pendants</a>
 												<a href="shop.php?category=3">Rings</a>
