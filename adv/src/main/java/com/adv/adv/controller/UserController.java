@@ -6,8 +6,6 @@ import com.adv.adv.repository.userRepository;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -132,11 +130,9 @@ public ModelAndView showProfile(HttpSession session) {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Pass the user's name and email to the view
-            mav.addObject("username", user.getUsername());
-            mav.addObject("email", user.getEmail());
-
-            // Set the view to MyProfile.html
+            // Pass the user's name and email and password to the view
+            mav.addObject("user", user);
+            
             mav.setViewName("MyProfile.html");
         } else {
             // If user not found, redirect to login page
@@ -152,28 +148,39 @@ public ModelAndView showProfile(HttpSession session) {
 
 
 @PostMapping("/MyProfile")
-public RedirectView updateProfile(@RequestParam("username") String username,
+public ModelAndView updateProfile(@Valid @ModelAttribute ("user") User user, BindingResult result,
+                                  @RequestParam("username") String username,
                                   @RequestParam("email") String email,
+                                  @RequestParam("password") String password,
                                   HttpSession session) {
+    
     Long userId = (Long) session.getAttribute("id");
+
+if (result.hasErrors()) {
+  ModelAndView mav = new ModelAndView("MyProfile.html");
+  mav.addObject("user", user); // Add the user object to retain form values
+  mav.addObject("bindingResult", result); // Add the binding result
+  return mav; // Return the registration view with errors
+}
 
     if (userId != null) {
         Optional<User> userOptional = userRepository.findById(userId);
-
         if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setUsername(username);
-            user.setEmail(email);
-
-            // Exclude confirmPassword from validation during update
-            user.setConfirmPassword(user.getPassword());
-
-            userRepository.save(user); // Update the user's profile
+            User EXuser = userOptional.get();
+            EXuser.setUsername(username);
+            EXuser.setEmail(email);
+            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+            EXuser.setPassword(hashedPassword);
+            EXuser.setConfirmPassword(hashedPassword);
+            userRepository.save(EXuser); // Update the user's profile
         }
     }
 
-    // Redirect the user to the profile page or any other page as needed
-    return new RedirectView("/MyProfile");
+    ModelAndView modelAndView = new ModelAndView();
+    // Set the view name to redirect the user to the home page
+    modelAndView.setViewName("redirect:/");
+
+    return modelAndView;
 }
 
 
