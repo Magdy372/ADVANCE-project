@@ -204,6 +204,16 @@ public ModelAndView deleteAccount(HttpSession session) {
 }
 
 
+@GetMapping("/logout")
+public ModelAndView logout(HttpSession session) {
+    // Invalidate the session
+    session.invalidate();
+    // Redirect to the login page or any other desired page after logout
+    ModelAndView mv = new ModelAndView("index.html");
+
+        
+        return mv;
+}
 
 
 }
