@@ -47,29 +47,32 @@
 
         <!-- Add your site or application content here -->
 		<!-- header-start -->
-		<section id="header">
-            <a href="#"><img src="/img/logo-4.png" class="logo"
-                    alt="Logo" width="145" height="50"></a>
-                <div>
-                    <ul id="navbar">
-						<li> <div>
+	
+        <section id="header">
+			<a href="/"><img src="/img/logo-4.png" class="logo" alt="Logo" width="145" height="50"></a>
+			<div>
+				<ul id="navbar">
+					<li>
+						<div>
 							<input type='text' name='search_text' id='search_text' placeholder='Search...' />
-							</div>
-						</li>
-            <li><a href="MyProfile">My Profile</a></li>
-            <li><a href="little_H">Shop</a></li>
-            <li><a th:href="@{/wishlist}">Wishlist</a></li>
-            <li><a href="cart"class="active">Cart</a></li>
-            <li><a href="chat">Contact</a></li>
-            <li><a href="logout">Logout</a></li>
-                        </div>
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </section>
+						</div>
+					</li>
+					<li><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
+					<li><a href="little_H">Shop</a></li>
+					<li><a th:href="@{/wishlist}">Wishlist</a></li>
+					<li><a href="cart">Cart</a></li>
+					<li><a href="chat">Contact</a></li>
+					<!-- Check if the user is authenticated -->
+					<li th:if="${session['id'] == null}">
+						<a href="login">Login</a>
+					</li>
+					<li th:if="${session['id'] != null}">
+						<a href="logout">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+		
 		<!-- header-end -->
 		<!-- mainmenu-area-start -->
 		<div class="mainmenu-area home-page-2 mainmenu-area-4" id="main_h">

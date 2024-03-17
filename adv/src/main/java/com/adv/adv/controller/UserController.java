@@ -82,40 +82,44 @@ if (result.hasErrors()) {
     
 
 
-@PostMapping("/login")
-public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, HttpSession session) {
-    ModelAndView mav = new ModelAndView();
-    
-    // Check if email and password are provided
-    if (loginUser.getEmail() == null || loginUser.getEmail().isEmpty() || 
-        loginUser.getPassword() == null || loginUser.getPassword().isEmpty()) {
-        mav.setViewName("login.html");
-        mav.addObject("error", "Email and password are required");
-        return mav;
-    }
-
-    Optional<User> userOptional = userRepository.findByEmail(loginUser.getEmail());
-
-    if (userOptional.isPresent()) {
-        User user = userOptional.get();
-
-        if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
-            // Save user ID in the session
-            session.setAttribute("id", user.getId());
-            if(user.getUserType()==User.UserType.ADMIN){
-                mav.setView(new RedirectView("/admin/dashboard"));
-            } else {
-                mav.setView(new RedirectView("/"));
-            }
+    @PostMapping("/login")
+    public ModelAndView login(@ModelAttribute("user") User loginUser, Model model, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        
+        // Check if email and password are provided
+        if (loginUser.getEmail() == null || loginUser.getEmail().isEmpty() || 
+            loginUser.getPassword() == null || loginUser.getPassword().isEmpty()) {
+            mav.setViewName("login.html");
+            mav.addObject("error", "Email and password are required");
             return mav;
         }
+    
+        Optional<User> userOptional = userRepository.findByEmail(loginUser.getEmail());
+    
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+    
+            if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
+                // Save user ID in the session
+                session.setAttribute("id", user.getId());
+                session.setAttribute("username", user.getUsername());
+                // Pass user's name to the view
+                mav.addObject("username", user.getUsername());
+                if(user.getUserType()==User.UserType.ADMIN){
+                    mav.setView(new RedirectView("/admin/dashboard"));
+                } else {
+                    mav.setView(new RedirectView("/"));
+                }
+                return mav;
+            }
+        }
+    
+        // If login fails, redirect to login page with an error message
+        mav.setViewName("login.html");
+        mav.addObject("error", "Invalid email or password");
+        return mav;
     }
-
-    // If login fails, redirect to login page with an error message
-    mav.setViewName("login.html");
-    mav.addObject("error", "Invalid email or password");
-    return mav;
-}
+    
 @GetMapping("/MyProfile")
 public ModelAndView showProfile(HttpSession session) {
     ModelAndView mav = new ModelAndView();

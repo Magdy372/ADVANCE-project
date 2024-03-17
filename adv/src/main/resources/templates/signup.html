@@ -12,7 +12,7 @@
             <img src="/img/logo-4.png">
           </div>
           <form th:action="@{/signup}" method="post" th:object="${user}">
-        <div class="txt_field">
+           <div class="txt_field">
             <h3>Username</h3>
             <input type="text" class="form-control" id="exampleInputName1" th:name="username">
             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red;"></span>
