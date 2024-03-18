@@ -78,16 +78,24 @@ public ModelAndView showEditForm(@PathVariable("Id") int Id) {
     mav.addObject("categories", categoryRepository.findAll());
     return mav; 
 }
+
 @PostMapping("/edit/{Id}")
-public RedirectView editProduct(@ModelAttribute("product") Product product,
+public RedirectView editProduct(@ModelAttribute("product") Product product, BindingResult result,
                                 @RequestParam(value = "image", required = false) MultipartFile multipartFile) throws IOException {
+    if (result.hasErrors()) {
+       
+        return new RedirectView("/edit/{Id}");
+    }
+    
     if (multipartFile != null && !multipartFile.isEmpty()) {
         handleFileUpload(product, multipartFile);
     } else {
         keepExistingPhoto(product);
     }
+    
     return new RedirectView("/products");
 }
+
 
 private void handleFileUpload(Product product, MultipartFile multipartFile) throws IOException {
     String fileName = FilenameUtils.getName(multipartFile.getOriginalFilename());

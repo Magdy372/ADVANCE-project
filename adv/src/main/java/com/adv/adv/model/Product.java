@@ -21,14 +21,23 @@ public class Product {
 
     @NotBlank(message = "Name cannot be null or empty")
     private String name;
-
+   
     private String photos;
     private String description;
+    @Min(value = 0, message = "Price must be non-negative")
     private double price;
+    @Min(value = 0, message = "Weight must be non-negative")
     private int weight;
-      @Min(1)
-    @Max(5)
+    @Min(value = 1, message = "Rating must be at least 1")
+    @Max(value = 5, message = "Rating must be at most 5")
     private int rating;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "metal_id")
+    private Metal metal;
   
 
     private boolean available = true; 
@@ -43,13 +52,7 @@ public void setCreated_at(ZonedDateTime created_at) {
     this.created_at = created_at;
 }
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "metal_id")
-    private Metal metal;
+   
 
     public boolean isAvailable() {
         return available;
