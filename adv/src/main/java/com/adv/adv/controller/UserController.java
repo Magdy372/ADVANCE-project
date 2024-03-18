@@ -103,6 +103,7 @@ if (result.hasErrors()) {
             if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
                 // Save user ID in the session
                 session.setAttribute("id", user.getId());
+                session.setAttribute("userType", user.getUserType());
                 session.setAttribute("username", user.getUsername());
                 // Pass user's name to the view
                 mav.addObject("username", user.getUsername());
