@@ -111,3 +111,9 @@ document.getElementById("addNewCategoryBtn").addEventListener("click", function(
     var categoryInputContainer = document.getElementById("categoryInputContainer");
     categoryInputContainer.style.display = categoryInputContainer.style.display === "none" ? "block" : "none";
 });
+
+
+    document.getElementById("addNewProductBtn").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("newCategoryInput").style.display = "block";
+    });
