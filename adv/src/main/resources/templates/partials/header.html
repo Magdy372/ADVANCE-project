@@ -27,7 +27,7 @@
                     <li th:if="${session['id'] != null}"><a href="chat">Contact</a></li>
                     <!-- Check if the user is authenticated -->
                     <li th:if="${session['id'] == null}">
-                        <a href="login">Login</a>
+                      <a th:href="@{'/login'}">Login</a>
                     </li>
                     <li th:if="${session['id'] != null}">
                         <a th:href="@{'/logout'}">Logout</a>
