@@ -385,11 +385,11 @@
         <h2>New Arrivals</h2>
     </div><br>
     <div class="Contain">
-    <div class="box" id="col1" th:if="${newProducts.empty}">
+    <!-- <div class="box" id="col1" th:if="${newProducts.empty}">
         <p>No products available .</p>
-    </div>
+    </div> -->
     
-    <div class="box" id="col1" th:each="product : ${newProducts}" th:if="${not newProducts.empty}">
+    <div class="box" id="col1" th:each="product : ${newProducts}" >
         <a th:href="@{./products/product-details/{id}(id=${product.id})}">
             <button th:href="@{'product-details.html?details_id=' + ${product.id}}" type="button" class="b" >
                 <img th:src="@{${product.getPhotosImagePath()}}" class="first_img" alt="" />
