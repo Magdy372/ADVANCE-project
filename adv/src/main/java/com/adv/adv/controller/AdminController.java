@@ -53,9 +53,9 @@ public class AdminController {
     }
     @GetMapping("/userlists")
     public ModelAndView getAllUsers() {
-        List<User> users = userRepository.findByUserType(User.UserType.USER);
+        List<User> user = this.userRepository.findByUserType(User.UserType.USER);
         ModelAndView mav = new ModelAndView("userlists.html");
-        mav.addObject("users", users);
+        mav.addObject("user", user);
         return mav;
     }
 

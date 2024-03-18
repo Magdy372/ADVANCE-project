@@ -259,7 +259,7 @@
 </tr>
 </thead>
 <tbody>
-    <tr th:each="user : ${users}">
+    <tr th:each="user : ${user}">
         <td>
             <label class="checkboxs">
                 <input type="checkbox">
@@ -270,7 +270,7 @@
         <td th:text="${user.username}"></td>
         <td th:text="${user.email}"></td>
         <td>
-            <a class="confirm-text" th:href="@{'/adminPage/delete/' + ${user.id}}">
+            <a class="text" th:href="@{'/adminPage/delete/' + ${user.id}}">
                 <img src="/img/icons/delete.svg" alt="Delete">
             </a>
             

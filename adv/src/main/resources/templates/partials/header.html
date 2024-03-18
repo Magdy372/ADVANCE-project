@@ -20,7 +20,7 @@
                             <input type='text' name='search_text' id='search_text' placeholder='Search...' />
                         </div>
                     </li>
-                    <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="${session['username']}"></a></li>
+                    <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="MyProfile"></a></li>
                     <li><a href="/shop">Shop</a></li>
                     <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
                     <li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
