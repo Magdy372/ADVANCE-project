@@ -13,10 +13,7 @@ import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-<<<<<<< HEAD
-=======
 import jakarta.validation.constraints.NotNull;
->>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
 import jakarta.validation.constraints.Pattern;
 @Entity
 public class Product {
@@ -25,21 +22,13 @@ public class Product {
     private int id;
 
     @NotBlank(message = "Name cannot be null or empty")
-<<<<<<< HEAD
     @Pattern(regexp = "^[a-zA-Z\\s\\-_',.&()]+$", message = "Product name must contain only letters")
 
-=======
-    @Pattern(regexp = "^(?=.*[a-zA-Z])[a-zA-Z\\s]+$", message = "Name cannot contain special characters and should have at least one alphabet")
->>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
     private String name;
     private String photos;
-<<<<<<< HEAD
     
     @NotBlank(message = "Descrption  cannot be null or empty")
     @Pattern(regexp = "^[a-zA-Z\\s\\-_',.&()]+$", message = "Product description name must contain only letters")
-=======
-    @NotBlank(message = "Description cannot be null or empty")
->>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
     private String description;
     @Min(value = 0, message = "Price must be non-negative")
     @NotNull(message = "Price cannot be null or empty")

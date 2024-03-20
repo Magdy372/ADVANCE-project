@@ -79,7 +79,6 @@ public ModelAndView showEditForm(@PathVariable("Id") int Id) {
     return mav; 
 }
 
-<<<<<<< HEAD
 @PostMapping("/edit/{id}") 
 public ModelAndView editProduct(@ModelAttribute("product") @Valid Product product, BindingResult result,
                                 @RequestParam(value = "image") MultipartFile multipartFile) throws IOException {
@@ -89,49 +88,15 @@ public ModelAndView editProduct(@ModelAttribute("product") @Valid Product produc
     mav.addObject("metals", metalRepository.findAll());
     mav.addObject("categories", categoryRepository.findAll());
         return mav;
-=======
-
-
-@PostMapping("/edit/{Id}")
-public ModelAndView editProduct(@Valid @ModelAttribute("product") Product product, BindingResult result,
-                                @RequestParam(value = "image", required = false) MultipartFile multipartFile,
-                                @PathVariable("Id") Long id) throws IOException {
-    ModelAndView modelAndView = new ModelAndView();
-    
-    // Retrieve the existing product from the database
-    Product existingProduct = productRepository.getProductById(id); // Assume productService.getProductById() retrieves the product from the database
-    
-    // Assign existing values to the product object
-    product.setPhotos(existingProduct.getPhotos());
-    
-    if (result.hasErrors()) {
-        modelAndView.setViewName("editProduct.html"); // Specify the name of your edit product page
-        modelAndView.addObject("errors", result.getAllErrors());
-        modelAndView.addObject("metals", metalRepository.findAll());
-        modelAndView.addObject("categories", categoryRepository.findAll());
-        modelAndView.addObject("product", product); // Add the product object back to the model
-        return modelAndView;
->>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
     }
     if (multipartFile != null && !multipartFile.isEmpty()) {
         handleFileUpload(product, multipartFile);
     } else {
         keepExistingPhoto(product);
     }
-<<<<<<< HEAD
     return new ModelAndView("redirect:/products");
 }
 
-=======
-    
-    modelAndView.setViewName("redirect:/products"); // Redirect to the products page
-    return modelAndView;
-}
-
-
-
-
->>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
 private void handleFileUpload(Product product, MultipartFile multipartFile) throws IOException {
     String fileName = FilenameUtils.getName(multipartFile.getOriginalFilename());
     product.setPhotos(fileName);

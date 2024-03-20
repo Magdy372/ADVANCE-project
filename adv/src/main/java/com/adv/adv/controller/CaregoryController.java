@@ -1,6 +1,5 @@
 package com.adv.adv.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,24 +33,35 @@ public class CaregoryController {
         mav.addObject("categories", categories);
         return mav;
     }
+
  //delete
-    @GetMapping("/delete/{Id}")
-    @Transactional
-public RedirectView deleteCtaegory(@PathVariable("Id") int Id) {
-    this.categoryrepository.deleteById(Id);
-    return new RedirectView("/categories");
-}
+ @GetMapping("/delete/{Id}")
+ @Transactional
+ public RedirectView deleteCtaegory(@PathVariable("Id") int Id) {
+     this.categoryrepository.deleteById(Id);
+     return new RedirectView("/categories");
+ }
+
+
 @PostMapping("/create")
-public ModelAndView addCategory(@Valid @ModelAttribute("category") Category category, BindingResult result) throws IOException {
-    ModelAndView mav = new ModelAndView("CategoriesList.html"); 
+public ModelAndView addCategory(@Valid @ModelAttribute("category") Category categor, BindingResult result,
+                                @RequestParam("name") String name) {
+    ModelAndView modelAndView = new ModelAndView();
+    
     if (result.hasErrors()) {
-        List<Category> categories = this.categoryrepository.findAll();
-        mav.addObject("categories", categories);
-        return mav;
-    } else {
-        this.categoryrepository.save(category);
-        return new ModelAndView("redirect:/categories");
+        modelAndView.setViewName("CategoriesList.html");
+        modelAndView.addObject("categories", categoryrepository.findAll());
+        modelAndView.addObject("errors", result.getAllErrors());
+        return modelAndView;
     }
+
+    Category category = new Category();
+    category.setName(name);
+    this.categoryrepository.save(category);
+    
+    modelAndView.setViewName("redirect:/categories");
+    return modelAndView;
 }
+
 
 }
