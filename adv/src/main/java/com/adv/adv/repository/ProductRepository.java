@@ -11,6 +11,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product deleteById(int id);
     Product findById(int id);
+    Product getProductById(Long id);
     List<Product> findTop3ByOrderByIdDesc();
     List<Product> findAllByCategoryId(int categoryId);
     //TOP RATING PPRODUCTS

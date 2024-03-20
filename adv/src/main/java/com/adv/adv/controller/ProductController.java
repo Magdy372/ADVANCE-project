@@ -79,12 +79,27 @@ public ModelAndView showEditForm(@PathVariable("Id") int Id) {
     return mav; 
 }
 
+
+
 @PostMapping("/edit/{Id}")
-public RedirectView editProduct(@ModelAttribute("product") Product product, BindingResult result,
-                                @RequestParam(value = "image", required = false) MultipartFile multipartFile) throws IOException {
+public ModelAndView editProduct(@Valid @ModelAttribute("product") Product product, BindingResult result,
+                                @RequestParam(value = "image", required = false) MultipartFile multipartFile,
+                                @PathVariable("Id") Long id) throws IOException {
+    ModelAndView modelAndView = new ModelAndView();
+    
+    // Retrieve the existing product from the database
+    Product existingProduct = productRepository.getProductById(id); // Assume productService.getProductById() retrieves the product from the database
+    
+    // Assign existing values to the product object
+    product.setPhotos(existingProduct.getPhotos());
+    
     if (result.hasErrors()) {
-       
-        return new RedirectView("/edit/{Id}");
+        modelAndView.setViewName("editProduct.html"); // Specify the name of your edit product page
+        modelAndView.addObject("errors", result.getAllErrors());
+        modelAndView.addObject("metals", metalRepository.findAll());
+        modelAndView.addObject("categories", categoryRepository.findAll());
+        modelAndView.addObject("product", product); // Add the product object back to the model
+        return modelAndView;
     }
     
     if (multipartFile != null && !multipartFile.isEmpty()) {
@@ -93,8 +108,11 @@ public RedirectView editProduct(@ModelAttribute("product") Product product, Bind
         keepExistingPhoto(product);
     }
     
-    return new RedirectView("/products");
+    modelAndView.setViewName("redirect:/products"); // Redirect to the products page
+    return modelAndView;
 }
+
+
 
 
 private void handleFileUpload(Product product, MultipartFile multipartFile) throws IOException {
