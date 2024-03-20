@@ -13,6 +13,10 @@ import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+<<<<<<< HEAD
+=======
+import jakarta.validation.constraints.NotNull;
+>>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
 import jakarta.validation.constraints.Pattern;
 @Entity
 public class Product {
@@ -21,23 +25,37 @@ public class Product {
     private int id;
 
     @NotBlank(message = "Name cannot be null or empty")
+<<<<<<< HEAD
     @Pattern(regexp = "^[a-zA-Z\\s\\-_',.&()]+$", message = "Product name must contain only letters")
 
+=======
+    @Pattern(regexp = "^(?=.*[a-zA-Z])[a-zA-Z\\s]+$", message = "Name cannot contain special characters and should have at least one alphabet")
+>>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
     private String name;
     private String photos;
+<<<<<<< HEAD
     
     @NotBlank(message = "Descrption  cannot be null or empty")
     @Pattern(regexp = "^[a-zA-Z\\s\\-_',.&()]+$", message = "Product description name must contain only letters")
+=======
+    @NotBlank(message = "Description cannot be null or empty")
+>>>>>>> 9cf58e83346c55214ef6f7cb996e2a146970d377
     private String description;
     @Min(value = 0, message = "Price must be non-negative")
-    private double price;
+    @NotNull(message = "Price cannot be null or empty")
+    private Double price;
+
     @Min(value = 0, message = "Weight must be non-negative")
-    private int weight;
+    @NotNull(message = "Weight cannot be null or empty")
+    private Double weight;
+    
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    private int rating;
+    @NotNull(message = "Rating cannot be null or empty")
+    private Integer rating;
     @ManyToOne
     @JoinColumn(name = "category_id")
+    
     private Category category;
 
     @ManyToOne
@@ -67,14 +85,14 @@ public void setCreated_at(ZonedDateTime created_at) {
         this.available = available;
     }
 
-    public int getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
-    public  int getRating() {
+    public  Integer getRating() {
         return rating;
     }
     public String getPhotos() {
@@ -110,11 +128,11 @@ public void setCreated_at(ZonedDateTime created_at) {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -142,7 +160,7 @@ public void setCreated_at(ZonedDateTime created_at) {
         this.name = name;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
