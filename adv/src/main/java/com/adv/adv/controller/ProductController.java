@@ -54,7 +54,7 @@ public class ProductController {
             mav.addObject("metals", metalRepository.findAll());
             mav.addObject("categories", categoryRepository.findAll());
             mav.addObject("bindingResult", result);
-            return mav; // Return ModelAndView directly
+            return mav; 
         }
     
         String fileName = FilenameUtils.getName(multipartFile.getOriginalFilename());
@@ -79,23 +79,23 @@ public ModelAndView showEditForm(@PathVariable("Id") int Id) {
     return mav; 
 }
 
-@PostMapping("/edit/{Id}")
-public RedirectView editProduct(@ModelAttribute("product") Product product, BindingResult result,
-                                @RequestParam(value = "image", required = false) MultipartFile multipartFile) throws IOException {
+@PostMapping("/edit/{id}") 
+public ModelAndView editProduct(@ModelAttribute("product") @Valid Product product, BindingResult result,
+                                @RequestParam(value = "image") MultipartFile multipartFile) throws IOException {
     if (result.hasErrors()) {
-       
-        return new RedirectView("/edit/{Id}");
+        ModelAndView mav = new ModelAndView("editProduct.html");
+        mav.addObject("product", product);
+    mav.addObject("metals", metalRepository.findAll());
+    mav.addObject("categories", categoryRepository.findAll());
+        return mav;
     }
-    
     if (multipartFile != null && !multipartFile.isEmpty()) {
         handleFileUpload(product, multipartFile);
     } else {
         keepExistingPhoto(product);
     }
-    
-    return new RedirectView("/products");
+    return new ModelAndView("redirect:/products");
 }
-
 
 private void handleFileUpload(Product product, MultipartFile multipartFile) throws IOException {
     String fileName = FilenameUtils.getName(multipartFile.getOriginalFilename());

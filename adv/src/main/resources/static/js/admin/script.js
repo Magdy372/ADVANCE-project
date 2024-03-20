@@ -109,3 +109,28 @@ document.getElementById("addNewProductBtn").addEventListener("click", function(e
     var categoryInputContainer = document.getElementById("newCategoryInput");
     categoryInputContainer.style.display = categoryInputContainer.style.display === "none" ? "block" : "none";
 });
+function validateFileType() {
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    const inputElement = document.getElementById('image');
+    const fileName = inputElement.value.split('\\').pop(); 
+    const isValid = allowedExtensions.test(fileName);
+    const fileError = document.getElementById('fileError');
+    const previewText = document.getElementById('previewText');
+
+    if (!isValid) {
+        fileError.textContent = 'Please select a valid image file (jpg, jpeg, png, gif).';
+        previewText.textContent = 'No image selected';
+        inputElement.value = '';
+        return false;
+    } else {
+        fileError.textContent = '';
+        previewText.textContent = fileName; 
+    }
+
+   
+    updatePreview();
+}
+$(document).ready(function() {
+    validateFileType(); // Call the validateFileType function when the page loads
+});
+

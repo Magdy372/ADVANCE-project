@@ -142,7 +142,7 @@
             <li><a href="#">General Settings</a></li>
             <li><a href="#">Email Settings</a></li>
             <li><a href="#">Payment Settings</a></li>
-
+            
         </li>
         </ul>
        
@@ -185,31 +185,40 @@
                                         <div class="form-group">
                                             <label>Description:</label>
                                             <textarea th:field="*{description}" class="form-control"></textarea>
+                                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: red;"></span>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Price:</label>
                                                     <input type="number" th:field="*{price}" class="form-control">
+                                                    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red;"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Weight:</label>
                                                     <input type="number" th:field="*{weight}" class="form-control">
+                                                    <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color: red;"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Rating:</label>
                                                     <input type="number" th:field="*{rating}" class="form-control">
+                                                    <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" style="color: red;"></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Product Image</label>
                                             <div class="image-upload">
-                                                <input type="file" id="image" name="image" accept="image/*" multiple class="form-control-file">
+                                                <input type="file" id="image" name="image" accept="image/*" class="form-control-file"  onchange="validateFileType()">
+                                                <span id="fileError" style="color: red;"></span>
+                                                <div class="image-preview" id="imagePreview">
+                                                    <img src="" alt="Image Preview" class="preview-image" style="display: none;">
+                                                    <span id="previewText" class="preview-text">No image selected</span>
+                                                </div>
                                                 <div class="image-uploads">
                                                     <img src="/img/icons/upload.svg" alt="img">
                                                     <h4>Drag and drop a file to upload</h4>
@@ -219,19 +228,25 @@
                                         
                                             <div class="col-12">
                                                 <div class="product-list">
-                                                <ul class="row">
-                                                <li>
-                                                <div class="productviews">
-                                                <div class="productviewsimg">
-                                                    <img th:src="@{${product.getPhotosImagePath()}}" alt ="prodict" /> 
-                                                </div>
-                                                <div class="productviewscontent">
-                                                <div class="productviewsname">
-                                                    <h2 th:text="${product.getName()}"></h2>
-
-                                             
-                                                </div>
-                                                <a href="" class="hideset">x</a>
+                                                    <div class="product-list">
+                                                        <ul class="row">
+                                                            <li th:if="${not #fields.hasErrors()}">
+                                                                <div class="productviews">
+                                                                    <div class="productviewsimg">
+                                                                        <img th:src="@{${product.getPhotosImagePath()}}" alt="product" />
+                                                                    </div>
+                                                                    <div class="productviewscontent">
+                                                                        <div class="productviewsname">
+                                                                            <h2 th:text="${product.getName()}"></h2>
+                                                                        </div>
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    
+                                          
                                                 </div>
                                                 </div>
                                                 </li>

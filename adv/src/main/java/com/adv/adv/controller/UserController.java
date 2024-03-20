@@ -26,10 +26,7 @@ public class UserController {
     @Autowired
     private userRepository userRepository;
 
-    // @GetMapping("/chat")
-    // public String chat() {
-    //     return "chat.html";
-    // }
+ 
 
 
 @GetMapping("/signup")
@@ -53,12 +50,12 @@ public  ModelAndView saveUser(@Valid @ModelAttribute User user,BindingResult res
 
 if (result.hasErrors()) {
         ModelAndView mav = new ModelAndView("signup.html");
-        mav.addObject("user", user); // Add the user object to retain form values
-        mav.addObject("bindingResult", result); // Add the binding result
-        return mav; // Return the registration view with errors
+        mav.addObject("user", user);
+        mav.addObject("bindingResult", result); 
+        return mav; 
     }
 
-    // Hash the password before saving
+
     String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
     user.setPassword(hashedPassword);
     user.setUserType(User.UserType.USER);
@@ -101,11 +98,11 @@ if (result.hasErrors()) {
             User user = userOptional.get();
     
             if (BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
-                // Save user ID in the session
+                
                 session.setAttribute("id", user.getId());
                 session.setAttribute("userType", user.getUserType());
                 session.setAttribute("username", user.getUsername());
-                // Pass user's name to the view
+                
                 mav.addObject("username", user.getUsername());
                 if(user.getUserType()==User.UserType.ADMIN){
                     mav.setView(new RedirectView("/admin/dashboard"));
@@ -116,7 +113,7 @@ if (result.hasErrors()) {
             }
         }
     
-        // If login fails, redirect to login page with an error message
+      
         mav.setViewName("login.html");
         mav.addObject("error", "Invalid email or password");
         return mav;
@@ -126,26 +123,26 @@ if (result.hasErrors()) {
 public ModelAndView showProfile(HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
-    // Retrieve user ID from session
+
     Long userId = (Long) session.getAttribute("id");
 
     if (userId != null) {
-        // Retrieve user from the database using the ID
+       
         Optional<User> userOptional = userRepository.findById(userId);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Pass the user's name and email and password to the view
+            
             mav.addObject("user", user);
             
             mav.setViewName("MyProfile.html");
         } else {
-            // If user not found, redirect to login page
+           
             mav.setViewName("redirect:/login");
         }
     } else {
-        // If no user ID found in session, redirect to login page
+       
         mav.setViewName("redirect:/login");
     }
 
@@ -164,9 +161,9 @@ public ModelAndView updateProfile(@Valid @ModelAttribute ("user") User user, Bin
 
 if (result.hasErrors()) {
   ModelAndView mav = new ModelAndView("MyProfile.html");
-  mav.addObject("user", user); // Add the user object to retain form values
-  mav.addObject("bindingResult", result); // Add the binding result
-  return mav; // Return the registration view with errors
+  mav.addObject("user", user);
+  mav.addObject("bindingResult", result); 
+  return mav; 
 }
 
     if (userId != null) {
@@ -178,12 +175,12 @@ if (result.hasErrors()) {
             String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
             EXuser.setPassword(hashedPassword);
             EXuser.setConfirmPassword(hashedPassword);
-            userRepository.save(EXuser); // Update the user's profile
+            userRepository.save(EXuser); 
         }
     }
 
     ModelAndView modelAndView = new ModelAndView();
-    // Set the view name to redirect the user to the home page
+  
     modelAndView.setViewName("redirect:/");
 
     return modelAndView;
@@ -199,11 +196,11 @@ public ModelAndView deleteAccount(HttpSession session) {
 
     if (userId != null) {
         userRepository.deleteById(userId);
-        session.invalidate(); // Invalidate the session after deleting the account
-        mav.setViewName("redirect:/"); // Redirect to the login page
+        session.invalidate();
+        mav.setViewName("redirect:/");
     } else {
-        // Handle error scenario (e.g., user not found)
-        mav.setViewName("redirect:/"); // Redirect to the home page or any other page as needed
+     
+        mav.setViewName("redirect:/"); 
     }
 
     return mav;
@@ -212,9 +209,9 @@ public ModelAndView deleteAccount(HttpSession session) {
 
 @GetMapping("/logout")
 public ModelAndView logout(HttpSession session) {
-    // Invalidate the session
+   
     session.invalidate();
-    // Redirect to the login page or any other desired page after logout
+    
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:/");
 

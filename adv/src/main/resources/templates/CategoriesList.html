@@ -160,14 +160,18 @@
             </div>
         </div>
         
-        <!-- Form for adding new category -->
-        <div id="newCategoryInput" style="display: none;">
-            <form th:action="@{/categories/create}" th:object="${category}" method="POST" enctype="multipart/form-data">
-                <input type="text" id="newCategoryName" th:field="*{name}" placeholder="Enter new category name" class="form-control">
-                <button class="btn btn-submit me-2" style="margin:3px;" type="submit">Create</button>
-                
-            </form>
-        </div>
+       
+  <!-- Form for adding new category -->
+<form th:action="@{/categories/create}" th:object="${category}" method="POST" enctype="multipart/form-data">
+    <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
+        <label for="newCategoryName">Category Name:</label>
+        <input type="text" id="newCategoryName" th:field="*{name}" class="form-control" placeholder="Enter new category name">
+        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+    <button class="btn btn-submit me-2" style="margin:3px;" type="submit">Create</button>
+</form>
+
+
 
 
 
