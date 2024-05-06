@@ -138,5 +138,10 @@ public ModelAndView getproduct(@PathVariable("id")int ID) {
     return mav;
 }
 
+
+@GetMapping("/search")
+public List<Product> searchProducts(@RequestParam("name") String name) {
+    return productRepository.findByNameContaining(name);
+}
    
 }
