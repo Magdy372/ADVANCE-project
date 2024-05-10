@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#searchInput').on('input', function() {
         var query = $(this).val();
-        if (query.length >= 1) {
+        if (query.length >= 2) {
             $.ajax({
                 url: '/products/search?name=' + query,
                 type: 'GET',
@@ -18,16 +18,12 @@ $(document).ready(function() {
             $('#searchResults').empty(); // Clear the search results if input is empty
         }
     });
-
-
-
-
-
+    
     function displayResults(products) {
         var resultList = $('#searchResults');
         resultList.empty();
         products.forEach(function(product) {
-            var listItem = $('<li><img src="' + product.photosImagePath + '" alt="' + product.name + '"> ' + product.name + '</li>');
+            var listItem = $('<li><img src="/uploads/' + product.id + '/' + product.photos + '" alt="' + product.name + '"> ' + product.name + '</li>');
             listItem.click(function() {
                 // Open product details in a new page
                 window.open('products/product-details/' + product.id, '_blank');
@@ -36,4 +32,3 @@ $(document).ready(function() {
         });
     }
 });
-
