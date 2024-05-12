@@ -101,9 +101,15 @@
     <div class="sidebar-inner slimscroll">
     <div id="sidebar-menu" class="sidebar-menu">
     <ul>
+ 
     <li>
     <a href="/admin/dashboard" class="active"><img src="/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
     </li>
+    <li>
+
+        <a th:href="@{/chatting}"> <img src="/img/icons/mail.svg" alt="img"><span>Chat</span></a>
+    </li>
+
     <li class="submenu">
     <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
     <ul>
@@ -129,6 +135,11 @@
     <li><a href="/adminPage/userlists">Users List</a></li>
     </ul>
     </li>
+
+
+  
+
+
     <li class="submenu">
     <a href="#"><img src="/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
     <ul>
@@ -141,10 +152,12 @@
   
     </ul>
     </li>
+    
     </ul>
     </div>
     </div>
     </div>
+    
 <div class="page-wrapper">
 <div class="content">
 <div class="row">
