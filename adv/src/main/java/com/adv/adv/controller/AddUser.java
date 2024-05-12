@@ -1,10 +1,8 @@
 package com.adv.adv.controller;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import com.adv.adv.model.User;
@@ -12,7 +10,6 @@ import com.adv.adv.repository.userRepository;
 
 import jakarta.validation.Valid;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController

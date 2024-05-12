@@ -63,7 +63,7 @@
             <li><a href="/shop">Shop</a></li>
             <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
             <li th:if="${session['id'] != null}"><a th:href="@{/cart}">Cart</a></li>
-            <li th:if="${session['id'] != null}"><a th:href="@{/chat}">Contact</a></li>
+            <li th:if="${session['id'] != null}"><a th:href="@{/chatting}">Contact</a></li>
             <!-- Check if the user is authenticated -->
             <li th:if="${session['id'] == null}">
                 <a th:href="@{'/login'}">Login</a>
