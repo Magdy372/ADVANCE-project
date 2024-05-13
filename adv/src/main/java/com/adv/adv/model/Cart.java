@@ -15,7 +15,6 @@ public class Cart {
     private Long id;
     private double sub_total;
     private int quantity;
-    private double totalPrice; // Add this field
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -48,13 +47,7 @@ public class Cart {
     public void setId(Long id) {
         this.id = id;
     }
-    public double getTotalPrice() {
-        return this.totalPrice;
-    }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     public double getSub_total() {
         return this.sub_total;
