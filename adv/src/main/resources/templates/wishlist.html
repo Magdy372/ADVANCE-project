@@ -388,7 +388,6 @@
 												<th class="product-name"><span class="nobr">Product Name</span></th>
 												<th class="product-price"><span class="nobr"> Unit Price </span></th>
 												<th class="product-stock-stauts"><span class="nobr"> Stock Status </span></th>
-												<th class="product-add-to-cart"><span class="nobr">add-to-cart </span></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -399,7 +398,7 @@
 												<td class="product-name"><a th:href="@{'products/product-details/' + ${item.products.id}}" th:text="${item.products.name}"> </a></td>
 												<td class="product-price"><span class="amount" th:text="${item.products.price}"></span></td>
 												<td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
-												<td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
+												
 											</tr>
 										</tbody>
 										<tfoot>

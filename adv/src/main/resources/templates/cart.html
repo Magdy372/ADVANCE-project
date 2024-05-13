@@ -399,43 +399,58 @@
 						<div class="wishlist-content">
 							<form action="#">
 								<div class="wishlist-title">
-									<h2>My wishlist</h2>
+									<h2>My Cart</h2>
 								</div>
 								<div class="wishlist-table table-responsive">
 									<table>
-										<thead>
-											<tr>
-												<th class="product-remove"><span class="nobr">Remove</span></th>
-												<th class="product-thumbnail">Image</th>
-												<th class="product-name"><span class="nobr">Product Name</span></th>
-												<th class="product-price"><span class="nobr"> Unit Price </span></th>
-												<th class="product-stock-stauts"><span class="nobr"> Add to wishlist</span></th>
-												<th class="product-add-to-cart"><span class="nobr"> Total </span></th>
-											</tr>
-										</thead>
+							
 										<tbody>
-											<!-- Loop through wishlist items and generate table rows -->
-											<tr th:each="item : ${wishlistItems}">											
-												<td class="product-remove"><a th:href="@{'/wishlist/remove/' + ${item.id}}">x</a></td>
-												<td class="product-thumbnail"><a th:href="@{'products/product-details/' + ${item.products.id}}"><img th:src="@{${item.products.photosImagePath}}" alt="image" style="height: 100px ;width: 100px;"/></a></td>
-												<td class="product-name"><a th:href="@{'products/product-details/' + ${item.products.id}}" th:text="${item.products.name}"> </a></td>
-												<td class="product-price"><span class="amount" th:text="${item.products.price}"></span></td>
-												<td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
-												<td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
-											</tr>
-										</tbody>
-										<tfoot>
-											
-										</tfoot>
-									</table>
-									
-								</div>	
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+											<!-- Loop through cart items and generate table rows -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="woocommerce-cart-form">
+                <form action="#" method="post">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="product-remove">Remove</th>
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="item : ${cartItems}">
+                                    <td class="product-remove"><a th:href="@{'/cart/remove/' + ${item.id}}">x</a></td>
+                                    <td class="product-thumbnail"><a th:href="@{'products/product-details/' + ${item.product.id}}"><img th:src="@{${item.product.photosImagePath}}" alt="image" style="height: 100px; width: 100px;"/></a></td>
+                                    <td class="product-name"><a th:href="@{'products/product-details/' + ${item.product.id}}" th:text="${item.product.name}"></a></td>
+                                    <td class="product-price"><span class="amount" th:text="${item.product.price}"></span></td>
+                                    <td class="product-quantity"><span class="amount" th:text="${item.quantity}"></span></td>
+                                    <td class="product-subtotal"><span class="amount" th:text="${item.sub_total}"></span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+								<tr>
+									<td colspan="5" style="text-align: right;">Total Price:</td>
+									<td><span th:text="${totalPrice}"></span></td>
+								</tr>
+								
+                            </tfoot>
+                        </table>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+			
 		</div>
+		
 		<!-- wishlist-area end -->
 		
 		<!-- footer-area-start -->
