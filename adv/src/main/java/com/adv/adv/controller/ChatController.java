@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/") // Added request mapping for "/chat"
-public class chatController { // Renamed to follow Java naming conventions
+public class ChatController { // Renamed to follow Java naming conventions
     @GetMapping("/chatting")
     public String chatting(Model model, HttpSession session) {
         // Retrieve username from session if available, otherwise set default
