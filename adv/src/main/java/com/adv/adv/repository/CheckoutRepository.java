@@ -1,7 +1,13 @@
 package com.adv.adv.repository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.adv.adv.model.Checkout;
 
-public interface CheckoutRepository extends JpaRepository<Checkout,Long>{
+import com.adv.adv.model.Checkout;
+import com.adv.adv.model.User;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CheckoutRepository extends JpaRepository<Checkout, Integer> {
+
 
 }

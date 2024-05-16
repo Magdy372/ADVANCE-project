@@ -21,6 +21,10 @@ public class Cart {
     private Product product;
 
     @ManyToOne
+    @JoinColumn(name = "checkout_id")
+    private Checkout checkout;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     
@@ -87,6 +91,15 @@ public class Cart {
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
+
+    public Checkout getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(Checkout checkout) {
+        this.checkout = checkout;
+    }
+
 
 
 }
