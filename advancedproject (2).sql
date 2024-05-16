@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 11:57 AM
+-- Generation Time: May 17, 2024 at 12:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,19 +32,25 @@ CREATE TABLE `cart` (
   `user_id` bigint(20) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `quantity` int(11) NOT NULL,
-  `sub_total` double NOT NULL
+  `sub_total` double NOT NULL,
+  `checkout_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `sub_total`) VALUES
-(5, NULL, NULL, 2, 0),
-(6, NULL, NULL, 5, 0),
-(11, 108, 19, 1, 59000),
-(12, 108, 10, 2, 24000),
-(13, 108, 10, 2, 24000);
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `sub_total`, `checkout_id`) VALUES
+(23, 112, 19, 1, 59000, NULL),
+(24, 112, 18, 3, 96000, NULL),
+(25, 113, 19, 2, 118000, 16),
+(26, 113, 18, 4, 128000, 16),
+(27, 114, 19, 3, 177000, 17),
+(28, 114, 11, 4, 112000, 17),
+(29, 115, 12, 5, 95000, 19),
+(30, 115, 10, 2, 24000, 19),
+(31, 116, 19, 5, 295000, 20),
+(32, 116, 11, 7, 196000, 20);
 
 -- --------------------------------------------------------
 
@@ -88,10 +94,24 @@ INSERT INTO `category` (`id`, `name`) VALUES
 
 CREATE TABLE `checkout` (
   `id` bigint(20) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `cart_id` int(11) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL
+  `address` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `sub_total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `checkout`
+--
+
+INSERT INTO `checkout` (`id`, `address`, `user_id`, `sub_total`) VALUES
+(12, 'n', 112, 0),
+(14, 'yyyy', 112, 0),
+(15, 'aaaaaaaa', 113, 0),
+(16, 'edfrgtb', 113, 0),
+(17, 'hellooooo', 114, 0),
+(18, 'final inshallah', 115, 0),
+(19, 'qqqqqqqqqq', 115, 119000),
+(20, 'testyyyyy', 116, 491000);
 
 -- --------------------------------------------------------
 
@@ -176,7 +196,7 @@ CREATE TABLE `spring_session` (
 --
 
 INSERT INTO `spring_session` (`PRIMARY_ID`, `SESSION_ID`, `CREATION_TIME`, `LAST_ACCESS_TIME`, `MAX_INACTIVE_INTERVAL`, `EXPIRY_TIME`, `PRINCIPAL_NAME`) VALUES
-('59cee929-bde3-4c44-9ea9-bdc7c94c5aef', '5c6af598-1dcf-454d-8fb2-addd6bef13b8', 1715766841048, 1715766933696, 1800, 1715768733696, NULL);
+('1696ec74-516a-49c9-88e9-2ec07dc67c00', 'aa55eef5-23bf-456b-96b5-a23ea1cf8d93', 1715898537525, 1715899777516, 1800, 1715901577516, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,9 +215,9 @@ CREATE TABLE `spring_session_attributes` (
 --
 
 INSERT INTO `spring_session_attributes` (`SESSION_PRIMARY_ID`, `ATTRIBUTE_NAME`, `ATTRIBUTE_BYTES`) VALUES
-('59cee929-bde3-4c44-9ea9-bdc7c94c5aef', 'id', 0xaced00057372000e6a6176612e6c616e672e4c6f6e673b8be490cc8f23df0200014a000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000000000006c),
-('59cee929-bde3-4c44-9ea9-bdc7c94c5aef', 'username', 0xaced000574000b52616e614d6f68616d6564),
-('59cee929-bde3-4c44-9ea9-bdc7c94c5aef', 'userType', 0xaced00057e72001f636f6d2e6164762e6164762e6d6f64656c2e5573657224557365725479706500000000000000001200007872000e6a6176612e6c616e672e456e756d0000000000000000120000787074000455534552);
+('1696ec74-516a-49c9-88e9-2ec07dc67c00', 'id', 0xaced00057372000e6a6176612e6c616e672e4c6f6e673b8be490cc8f23df0200014a000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000000000000065),
+('1696ec74-516a-49c9-88e9-2ec07dc67c00', 'username', 0xaced000574000561646d696e),
+('1696ec74-516a-49c9-88e9-2ec07dc67c00', 'userType', 0xaced00057e72001f636f6d2e6164762e6164762e6d6f64656c2e5573657224557365725479706500000000000000001200007872000e6a6176612e6c616e672e456e756d0000000000000000120000787074000541444d494e);
 
 -- --------------------------------------------------------
 
@@ -223,7 +243,15 @@ INSERT INTO `user` (`id`, `email`, `password`, `user_type`, `username`) VALUES
 (101, 'admin@gmail.com', '$2a$12$SddaHSPiLRSTySNteWcCT.9hpbkYv/CUnlP0pYwbL4IGNB0gNtEc.', 'ADMIN', 'admin'),
 (106, 'r@email.com', '$2a$12$8erHtg9Lw5/EdsJMkFxntuiFaiHItzk5cPUo8Jw80/eROfofHvSHi', 'USER', 'rana'),
 (107, 'ranoon@email.com', '$2a$12$kLusQWRw.tk.RproYcAwquG4WqDfWI65xT/Udl2gysceDpKh/EN4e', 'USER', 'ranoon'),
-(108, 'rm@email.com', '$2a$12$noCq15PF31rIwEscHB/y7eeoLNzzCBCdkmhuGArOlk7JOKu0FMFcW', 'USER', 'RanaMohamed');
+(108, 'rm@email.com', '$2a$12$noCq15PF31rIwEscHB/y7eeoLNzzCBCdkmhuGArOlk7JOKu0FMFcW', 'USER', 'RanaMohamed'),
+(109, 'khara@email.com', '$2a$12$oVCdQPIhQfuQqG11ODud2.6qeD9paw8EUZB0qvtPe6lBDbDR/5via', 'USER', 'khara'),
+(110, 'k@email.com', '$2a$12$R.js7pwPBzyEmjBk49p/f.ncln6FYZW3Lu2GkGxNS4X.xcPEezkMG', 'USER', 'k'),
+(111, 'yarab@email.com', '$2a$12$iTJr062XxBYjrQPoh9Y02eD18XtbRtU78g26CHg902nVmU7pXu7cu', 'USER', 'yarab'),
+(112, 'rina@email.com', '$2a$12$fBj2fMniJzpNPs/OyL6H.O.v2bmSuu6dvj9URoXXi5djwtXgHRNc6', 'USER', 'rina'),
+(113, 'n@email.com', '$2a$12$XIzcvhPOrPxLZu2XoW4e7.bRjwn0xNWr.zkXqqlWxW926Hah024Vi', 'USER', 'n'),
+(114, 'nadafa@email.com', '$2a$12$Zwwfm7CKZwySMeZQxwvQm.E5StC5BGz4UCAbXfGiRhJO/pU2nzOA2', 'USER', 'nadafa'),
+(115, 'final@email.com', '$2a$12$XxhvvrrmHvXhZu5wF3ca0.BcGr.nv2egfBOI0zqge1zlUcOOcarOe', 'USER', 'final'),
+(116, 'test@email.com', '$2a$12$clkw80OSVoOTGkwieEU4euSqb7N8IdiCWt5JjuuOJ9X/.JKTpflTa', 'USER', 'test');
 
 -- --------------------------------------------------------
 
@@ -256,7 +284,8 @@ INSERT INTO `wishlist` (`id`, `product_id`, `user_id`) VALUES
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK3d704slv66tw6x5hmbm6p2x3u` (`product_id`),
-  ADD KEY `FKl70asp4l4w0jmbm1tqyofho4o` (`user_id`);
+  ADD KEY `FKl70asp4l4w0jmbm1tqyofho4o` (`user_id`),
+  ADD KEY `FKemwc8mvjsedm4sripo47xratj` (`checkout_id`);
 
 --
 -- Indexes for table `category`
@@ -269,8 +298,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `checkout`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKqnhui1ehqjc5m5p6slxjthw4e` (`product_id`),
-  ADD KEY `FKiw839lhgcn33nwk20rl9bqnon` (`cart_id`);
+  ADD KEY `FK2t04bbekmv496a8dkcmqsknrr` (`user_id`);
 
 --
 -- Indexes for table `metal`
@@ -323,7 +351,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -335,7 +363,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `checkout`
 --
 ALTER TABLE `checkout`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `metal`
@@ -353,7 +381,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
@@ -370,14 +398,14 @@ ALTER TABLE `wishlist`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `FK3d704slv66tw6x5hmbm6p2x3u` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FKemwc8mvjsedm4sripo47xratj` FOREIGN KEY (`checkout_id`) REFERENCES `checkout` (`id`),
   ADD CONSTRAINT `FKl70asp4l4w0jmbm1tqyofho4o` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `checkout`
 --
 ALTER TABLE `checkout`
-  ADD CONSTRAINT `FKiw839lhgcn33nwk20rl9bqnon` FOREIGN KEY (`cart_id`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `FKqnhui1ehqjc5m5p6slxjthw4e` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `FK2t04bbekmv496a8dkcmqsknrr` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `product`
