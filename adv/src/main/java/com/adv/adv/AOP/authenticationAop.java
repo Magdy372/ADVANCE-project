@@ -17,7 +17,7 @@ public class authenticationAop {
     @Autowired
     private HttpSession httpsession;
 
-    @Around("execution(* com.adv.adv.controller.AdminController.*(..))")
+    @Around("execution(* com.adv.adv.controller.AdminController.*(..))||execution(* com.adv.adv.controller.DashBoardControllel.*(..))")
     public Object authentication(ProceedingJoinPoint joinPoint) throws Throwable {
         Object userTypeObj = httpsession.getAttribute("userType");
         if (userTypeObj == null || !(userTypeObj instanceof User.UserType)) {
@@ -33,4 +33,6 @@ public class authenticationAop {
         // Proceed with method execution if authenticated as admin
         return joinPoint.proceed();
     }
+
+    
 }
