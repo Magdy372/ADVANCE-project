@@ -1,4 +1,4 @@
-package com.adv.adv.AOP;
+package com.adv.adv.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -17,7 +17,7 @@ public class authenticationAop {
     @Autowired
     private HttpSession httpsession;
 
-    @Around("execution(* com.adv.adv.controller.AdminController.*(..))||execution(* com.adv.adv.controller.DashBoardControllel.*(..))")
+    @Around("execution(* com.adv.adv.controller.AdminController.*(..))||execution(* com.adv.adv.controller.DashBoardControllel.*(..))||execution(* com.adv.adv.controller.ProductController.*(..))")
     public Object authentication(ProceedingJoinPoint joinPoint) throws Throwable {
         Object userTypeObj = httpsession.getAttribute("userType");
         if (userTypeObj == null || !(userTypeObj instanceof User.UserType)) {
