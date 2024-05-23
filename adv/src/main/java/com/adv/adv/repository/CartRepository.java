@@ -10,7 +10,7 @@ import com.adv.adv.model.Cart;
 @Repository
 public interface CartRepository extends JpaRepository<Cart,Integer>{
     Cart deleteById(int itemId);
-    Cart findById(int id);
+    <Optional>Cart findById(Long cartId);
     List<Cart> findByUserId(long userId);
     Cart findByUserIdAndProductId(Long userId, int productId);
     
