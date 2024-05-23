@@ -47,10 +47,15 @@ public class CartController {
         }
 
         List<Cart> cartItems = cartService.getItemsByUserId(userId);
-        double totalPrice = cartService.calculateTotalPrice(cartItems);
         ModelAndView mav = new ModelAndView("cart.html");
-        mav.addObject("cartItems", cartItems);
-        mav.addObject("totalPrice", totalPrice);
+
+        if (cartItems.isEmpty()) {
+            mav.addObject("message", "Your cart is empty");
+        } else {
+            double totalPrice = cartService.calculateTotalPrice(cartItems);
+            mav.addObject("cartItems", cartItems);
+            mav.addObject("totalPrice", totalPrice);
+        }
 
         return mav;
     }
