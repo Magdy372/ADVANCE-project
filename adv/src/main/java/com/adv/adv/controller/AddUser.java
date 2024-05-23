@@ -17,7 +17,7 @@ import java.util.List;
 public class AddUser {
 
     @Autowired
-    private userRepository userRepository;
+    public userRepository userRepository;
 
     @GetMapping({"","/"})
     public ModelAndView getAllUsers() {
