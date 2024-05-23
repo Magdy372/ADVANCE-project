@@ -6,19 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adv.adv.model.Cart;
+import com.adv.adv.model.Product;
+import com.adv.adv.model.User;
 import com.adv.adv.repository.CartRepository;
+
 @Service
 public class CartService {
-     @Autowired
+    @Autowired
     private CartRepository cartItemRepository;
 
-    @SuppressWarnings("null")
     public Cart addItem(Cart item) {
         cartItemRepository.save(item);
         return item; 
     }
 
-     public void removeItem(int itemId) {
+    public void removeItem(int itemId) {
         cartItemRepository.deleteById(itemId);
     }
 
@@ -29,6 +31,15 @@ public class CartService {
     public List<Cart> getItemsByUserId(long userId) {
         return cartItemRepository.findByUserId(userId);
     }
+
+    public Cart getCartItemByUserAndProduct(User user, Product product) {
+        return cartItemRepository.findByUserAndProduct(user, product);
+    }
+
+    public void updateCartItem(Cart cartItem) {
+        cartItemRepository.save(cartItem);
+    }
+
     public boolean doesItemExistForUser(Long userId, int productId) {
         Cart cartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
         return cartItem != null;
@@ -42,4 +53,3 @@ public class CartService {
         return totalPrice;
     }
 }
-

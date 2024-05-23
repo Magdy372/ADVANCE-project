@@ -25,7 +25,7 @@ public class authenticationAop {
     public Object authentication(ProceedingJoinPoint joinPoint) throws Throwable {
         Object userTypeObj = httpsession.getAttribute("userType");
         if (userTypeObj == null || !(userTypeObj instanceof User.UserType)) {
-            return new ModelAndView("/index");
+          return new ModelAndView("redirect:/");
         }
         User.UserType userType = (User.UserType) userTypeObj;
 

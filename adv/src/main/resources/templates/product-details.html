@@ -231,7 +231,7 @@
 											<h4 th:text="${product.price}"></h4>
 										<div class="quick-add-to-cart">
 											<form th:action="@{/cart/add(productId=${product.id})}" method="post">
-												<input type="number" name="quantity" id="quantity" placeholder="Enter quantity">
+												<input type="number" name="quantity" id="quantity" placeholder="Enter quantity" value="1" min="1">
 											<br>
 											<br>
 												<a th:href="@{/cart/add(productId=${product.id})}">	<input class="btn btn-lg btn-success" type="submit" value="Add to Cart"></a>

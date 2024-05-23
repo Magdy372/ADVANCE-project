@@ -26,42 +26,30 @@ import com.adv.adv.model.User;
 import com.adv.adv.repository.CartRepository;
 import com.adv.adv.repository.ProductRepository;
 
-
-
-
-
 @RestController
 @RequestMapping("/cart")
 public class CartController {
 
-  @Autowired
-  private CartService cartService;
+    @Autowired
+    private CartService cartService;
 
-  @Autowired
-  private ProductRepository productRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-  @Autowired
-  private userRepository userRepository;
+    @Autowired
+    private userRepository userRepository;
 
-
-  @GetMapping({"/",""})
+    @GetMapping({ "/", "" })
     public ModelAndView getItemsByUserId(HttpSession session) {
-        // Retrieve user ID from the session
-       // long userId =  (long) session.getAttribute("id");
         Long userId = (Long) session.getAttribute("id");
         if (userId == null) {
             return new ModelAndView("redirect:/login");
         }
-        
-        // Use the retrieved user ID to get cart items
+
         List<Cart> cartItems = cartService.getItemsByUserId(userId);
-         // Calculate total price
         double totalPrice = cartService.calculateTotalPrice(cartItems);
-        // Create a new ModelAndView object
         ModelAndView mav = new ModelAndView("cart.html");
-        
-        // Add the cart items to the ModelAndView object
-        mav.addObject("cartItems",cartItems);
+        mav.addObject("cartItems", cartItems);
         mav.addObject("totalPrice", totalPrice);
 
         return mav;
@@ -69,82 +57,78 @@ public class CartController {
 
     @GetMapping("/add")
     public ModelAndView addItem(@Valid @ModelAttribute("cart") Cart cartItem,
-                            BindingResult result,
-                            HttpSession session,
-                            @RequestParam("productId") int productId) {
+                                BindingResult result,
+                                HttpSession session,
+                                @RequestParam("productId") int productId) {
 
-    if (result.hasErrors()) {
-        ModelAndView mav = new ModelAndView("cart.html");
-        // Add necessary model attributes if needed
-        mav.addObject("bindingResult", result);
-        return mav; // Return ModelAndView directly
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("cart.html");
+            mav.addObject("bindingResult", result);
+            return mav;
+        }
+
+        Long userId = (Long) session.getAttribute("id");
+        if (userId == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        Product product = productRepository.findById(productId);
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        Cart existingCartItem = cartService.getCartItemByUserAndProduct(user, product);
+
+        if (existingCartItem != null) {
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+            existingCartItem.setSub_total(existingCartItem.getQuantity() * product.getPrice());
+            cartService.updateCartItem(existingCartItem);
+        } else {
+            cartItem.setUser(user);
+            cartItem.setProduct(product);
+            cartItem.setQuantity(1);
+            cartItem.setSub_total(product.getPrice());
+            cartService.addItem(cartItem);
+        }
+
+        return new ModelAndView("redirect:/");
     }
 
-    Long userId = (Long) session.getAttribute("id");
-    if (userId == null) {
-        return new ModelAndView("redirect:/login");
+    @PostMapping("/add")
+    public ModelAndView addQuantity(@Valid @ModelAttribute("cart") Cart cartItem,
+                                    BindingResult result,
+                                    HttpSession session, @RequestParam("productId") int productId,
+                                    @RequestParam("quantity") int quantity) {
+
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("cart.html");
+            mav.addObject("bindingResult", result);
+            return mav;
+        }
+
+        Long userId = (Long) session.getAttribute("id");
+        if (userId == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        Product product = productRepository.findById(productId);
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        Cart existingCartItem = cartService.getCartItemByUserAndProduct(user, product);
+
+        if (existingCartItem != null) {
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
+            existingCartItem.setSub_total(existingCartItem.getQuantity() * product.getPrice());
+            cartService.updateCartItem(existingCartItem);
+        } else {
+            cartItem.setUser(user);
+            cartItem.setProduct(product);
+            cartItem.setQuantity(quantity);
+            cartItem.setSub_total(product.getPrice() * quantity);
+            cartService.addItem(cartItem);
+        }
+
+        return new ModelAndView("redirect:/");
     }
-    
-    // Retrieve the product by its ID
-    Product product = productRepository.findById(productId);
-    User user = userRepository.findById((long) userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
-    // Create a new cart item
-    // Set the User and Product for the cart item
-    cartItem.setUser(user);
-    cartItem.setProduct(product);
-    cartItem.setProductPrice(1);
-    
-    // Calculate sub-total based on product price and quantity
-    // double subTotal = product.getPrice() * quantity;
-    // cartItem.setSub_total(subTotal);
-    
-
-    // Add the cart item
-    Cart savedItem = cartService.addItem(cartItem);
-    
-    return new ModelAndView("redirect:/");
-}
-
-@PostMapping("/add")
-public ModelAndView addQuantity(@Valid @ModelAttribute("cart") Cart cartItem,
-                        BindingResult result,
-                        HttpSession session, @RequestParam("productId") int productId,
-                        @RequestParam("quantity") int quantity) {
-
-if (result.hasErrors()) {
-    ModelAndView mav = new ModelAndView("cart.html");
-    // Add necessary model attributes if needed
-    mav.addObject("bindingResult", result);
-    return mav; // Return ModelAndView directly
-}
-
-Long userId = (Long) session.getAttribute("id");
-if (userId == null) {
-    return new ModelAndView("redirect:/login");
-}
-
-// Retrieve the product by its ID
-Product product = productRepository.findById(productId);
-User user = userRepository.findById((long) userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
-
-// Create a new cart item
-// Set the User and Product for the cart item
-cartItem.setUser(user);
-cartItem.setProduct(product);
-cartItem.setProductPrice(1);
-
-// Calculate sub-total based on product price and quantity
-double subTotal = product.getPrice() * quantity;
-cartItem.setSub_total(subTotal);
-cartItem.setQuantity(cartItem.getQuantity());
-
-
-Cart savedItem = cartService.addItem(cartItem);
-
-return new ModelAndView("redirect:/");
-}
-    
     @GetMapping("/remove/{itemId}")
     public ModelAndView removeItem(@PathVariable int itemId) {
         cartService.removeItem(itemId);
@@ -163,11 +147,7 @@ return new ModelAndView("redirect:/");
 
     @GetMapping("/user")
     public List<Cart> getItemsByUser(HttpSession session) {
-        //return cartService.getItemsByUserId(userId);
-        long userId =  (long) session.getAttribute("id");
-        List<Cart> cartItems = cartService.getItemsByUserId(userId);
-        return cartItems;
+        long userId = (long) session.getAttribute("id");
+        return cartService.getItemsByUserId(userId);
     }
-    
-
 }
