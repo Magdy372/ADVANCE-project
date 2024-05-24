@@ -1,4 +1,4 @@
-package com.adv.adv.testing;
+package com.adv.adv.test;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
