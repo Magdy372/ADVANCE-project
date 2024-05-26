@@ -26,9 +26,6 @@ public class UserController {
     @Autowired
     private userRepository userRepository;
 
- 
-
-
 @GetMapping("/signup")
     public  ModelAndView showsignuppage (){
         User newuser= new User();

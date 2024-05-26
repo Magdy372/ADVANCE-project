@@ -16,6 +16,18 @@ import jakarta.validation.constraints.Pattern;
     @NotBlank(message = "Email cannot be null or empty")
     @Email(message = "Email must be valid")
     private String email;
+    @NotBlank(message = "Address can not be empty")
+    private String address;
+    @NotBlank(message = "Phone can not be empty")
+    private String phone;
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
     @NotBlank(message = "Password cannot be null or empty")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$",
             message = "Password must be at least 8 characters long, contain at least one digit, one lowercase letter, one uppercase letter, one special character, and no whitespaces")
@@ -23,6 +35,16 @@ import jakarta.validation.constraints.Pattern;
   //  @NotBlank(message = "Confirm password cannot be null or empty")
     @Transient
     private String confirmPassword;
+
+
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
@@ -34,11 +56,13 @@ import jakarta.validation.constraints.Pattern;
     }
 
     
-    public User(long id, String username, String email, String password) {
+    public User(long id, String username, String email, String password, String address, String phone) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.address=address;
+        this.phone=phone;
     }
 
     public UserType getUserType() {

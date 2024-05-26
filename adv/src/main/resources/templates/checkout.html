@@ -4,7 +4,7 @@
     <title>Checkout</title>
 </head>
 <body>
-    <form th:action="@{/checkout/purchase}" th:object="${checkout}" method="post">
+    <form th:action="@{/checkout}" th:object="${checkout}" method="post">
         <input type="hidden" th:field="*{id}"/>
 
         <label for="address">Address:</label>
