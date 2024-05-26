@@ -18,6 +18,9 @@
 		<!-- animate css -->
 		<link rel="stylesheet" href="/css/nav.css">
 		<link rel="stylesheet" href="/css/footer.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<script src="/js/productSearch.js"></script> <!-- Include the JavaScript file here -->
 
 
         <link rel="stylesheet" href="/css/animate.css">
@@ -55,10 +58,7 @@
                     alt="Logo" width="145" height="50"></a>
                 <div>
                     <ul id="navbar">
-						<li> <div>
-							<input type='text' name='search_text' id='search_text' placeholder='Search...' />
-							</div>
-						</li>
+					
             <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="MyProfile"></a></li>
             <li><a href="/shop">Shop</a></li>
             <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
@@ -78,7 +78,10 @@
             </div>
 
         </section>
-		
+		<input type="text" id="searchInput" placeholder="Search ....">
+
+		<ul id="searchResults"></ul>
+
 		<!-- header-end -->
 		<!-- mainmenu-area-start -->
 		<div class="mainmenu-area home-page-2 mainmenu-area-4" id="main_h">

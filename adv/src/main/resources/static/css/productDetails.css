@@ -7,6 +7,40 @@ body {
     font-size: 15px;
     line-height: 1.42857;
 }
+#searchInput {
+	padding: 10px;
+	width: 100%; /* Set width to 100% */
+	border: none;
+	outline: none;
+  }
+  /* Styles for the search results list */
+  #searchResults {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #ccc;
+	border-top: none;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styles for each search result item */
+  #searchResults li {
+	padding: 10px;
+	cursor: pointer;
+  }
+  #searchResults li img {
+	width: 50px; /* Adjust image width as needed */
+	height: 50px; /* Adjust image height as needed */
+	margin-right: 10px;
+	border-radius: 5px;
+  }
+  
+  /* Hover effect for search result items */
+  #searchResults li:hover {
+	background-color: #f0f0f0;
+  }
+  
 .floatleft {float:left}
 .floatright {float:right}
 .alignleft {float:left;margin-right:15px;margin-bottom: 15px}

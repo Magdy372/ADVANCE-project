@@ -32,6 +32,9 @@
 		<!--linearicons css -->
         <link rel="stylesheet" href="/css/linearicons-icon-font.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<script src="/js/productSearch.js"></script> <!-- Include the JavaScript file here -->
 
 		<!-- font-awesome css -->
         <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -49,10 +52,7 @@
                     alt="Logo" width="145" height="50"></a>
                 <div>
                     <ul id="navbar">
-						<li> <div>
-							<input type='text' name='search_text' id='search_text' placeholder='Search...' />
-							</div>
-						</li>
+						
             <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="MyProfile"></a></li>
             <li><a href="shop" class="active">Shop</a></li>
             <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
@@ -72,7 +72,10 @@
             </div>
 
         </section>
-	
+		<input type="text" id="searchInput" placeholder="Search ....">
+
+		<ul id="searchResults"></ul>
+
 	
 		<!-- header-end -->
 		<!-- mainmenu-area-start -->
