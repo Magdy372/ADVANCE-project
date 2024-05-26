@@ -18,7 +18,9 @@ import jakarta.validation.constraints.Pattern;
     private String email;
     @NotBlank(message = "Address can not be empty")
     private String address;
+
     @NotBlank(message = "Phone can not be empty")
+    @Pattern(regexp = "^\\d{11}$", message = "Phone number must be exactly 11 digits")
     private String phone;
 
     public String getPhone() {
