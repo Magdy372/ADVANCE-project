@@ -52,4 +52,8 @@ public class CartService {
         }
         return totalPrice;
     }
+
+    public void clearCart(Long userId) {
+      cartItemRepository.deleteByUserId(userId);
+  }
 }
