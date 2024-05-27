@@ -68,24 +68,20 @@
 
 
 <li class="nav-item dropdown has-arrow main-drop">
-    <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
-        <i class='fas fa-user-circle' style='font-size:36px'></i>
-    </a>
-    <div class="dropdown-menu menu-drop-user">
-        <div class="profilename">
-            <div class="profileset">
-                <span class="user-img">Omar</span>
-             
-            </div>
-            <hr class="m-0">
-            <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
-            <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
-            <hr class="m-0">
-            <a class="dropdown-item logout pb-0" href="signin.html"><img src="/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
-        </div>
-    </div>
+  <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+      <i class='fas fa-user-circle' style='font-size:36px'></i>
+  </a>
+  <div class="dropdown-menu menu-drop-user">
+      <div class="profilename">
+          <div class="profileset">
+            <span class="user-img" th:text="${session[username]}">User Name</span>
+           
+          </div>
+          <a class="dropdown-item logout pb-0" th:href="@{'/logout'}">
+            <img src="/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+      </div>
+  </div>
 </li>
-
 
 
 <div class="dropdown mobile-user-menu">
@@ -125,8 +121,8 @@
 <li class="submenu">
   <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Orders</span> <span class="menu-arrow"></span></a>
   <ul>
-      <li><a href="#" >Orders List</a></li>
-      <li><a href="#">Add Order</a></li>
+      <li><a href="/admin/OrderDetails" >Orders List</a></li>
+      
   </ul>
   </li>
 
