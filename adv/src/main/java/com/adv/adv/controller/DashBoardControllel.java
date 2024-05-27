@@ -60,13 +60,19 @@ public class DashBoardControllel {
         return mav;
     }
 
-    @GetMapping("/logout")
-    public ModelAndView logout(HttpSession session) {
-        session.invalidate();
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("redirect:/");
+  
+    
+  @GetMapping("/logout")
+public ModelAndView logout(HttpSession session) {
+   
+    session.invalidate();
+    
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:/");
+
+        
         return mv;
-    }
+}
     
     @GetMapping("/OrderDetails")
     public ModelAndView getOrderDetails() {
