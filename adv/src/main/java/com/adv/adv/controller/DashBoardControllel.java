@@ -80,7 +80,7 @@ public ModelAndView logout(HttpSession session) {
     @Transactional
     public RedirectView deleteOrder(@PathVariable("id") Long id) {
     orderRepository.deleteById(id);
-    return new RedirectView("/");
+    return new RedirectView("/admin/OrderDetails");
 }
     
 }
