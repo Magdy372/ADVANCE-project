@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +34,10 @@ public class DashBoardControllel {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private  userRepository userRepository;
- 
-
-    //   @Autowired
-    // private OrderService orderService;
-       @Autowired
+    private userRepository userRepository;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
     private OrderRepository orderRepository;
 
     @GetMapping("/dashboard")
@@ -47,40 +46,50 @@ public class DashBoardControllel {
         
         List<Product> sortedByNewDates = this.productRepository.findAllByOrderByCreatedAtDesc();
         List<User> users = this.userRepository.findAll();
+        List<Order> orders = this.orderRepository.findAll();
+        int userCount = countUsers(); 
+        int orderCount = countOrders(); 
 
         mav.addObject("newProducts", sortedByNewDates);
         mav.addObject("users", users);
-     
+        mav.addObject("userCount", userCount); 
+        mav.addObject("orders", orders);
+        mav.addObject("orderCount", orderCount); 
+
         
         return mav;
     }
 
-  
-    
-  @GetMapping("/logout")
-public ModelAndView logout(HttpSession session) {
-   
-    session.invalidate();
-    
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:/");
-
-        
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        session.invalidate();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/");
         return mv;
-}
+    }
     
     @GetMapping("/OrderDetails")
     public ModelAndView getOrderDetails() {
-    ModelAndView mav = new ModelAndView("OrderDetails.html");
-    List<Order> orders = this.orderRepository.findAll();
-    mav.addObject("orders", orders);
-    return mav;
-}
+        ModelAndView mav = new ModelAndView("OrderDetails.html");
+        List<Order> orders = this.orderRepository.findAll();
+        mav.addObject("orders", orders);
+        return mav;
+    }
+    
     @GetMapping("/orders/delete/{id}")
     @Transactional
     public RedirectView deleteOrder(@PathVariable("id") Long id) {
-    orderRepository.deleteById(id);
-    return new RedirectView("/admin/OrderDetails");
-}
+        orderRepository.deleteById(id);
+        return new RedirectView("/admin/OrderDetails");
+    }
     
+    private int countUsers() {
+        String sql = "SELECT COUNT(*) FROM user";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    public int countOrders() {
+        String sql = "SELECT COUNT(*) FROM orders";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
 }

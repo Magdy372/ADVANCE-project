@@ -158,93 +158,31 @@
 <div class="content">
 <div class="row">
 <div class="col-lg-3 col-sm-6 col-12">
-<div class="dash-widget">
-<div class="dash-widgetimg">
-<span><img src="/img/icons/dash1.svg" alt="img"></span>
 </div>
-<div class="dash-widgetcontent">
-<h5>$<span class="counters" data-count="307144.00">$307,144.00</span></h5>
-<h6>Total Purchase Due</h6>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="dash-widget dash1">
-<div class="dash-widgetimg">
-<span><img src="/img/icons/dash2.svg" alt="img"></span>
-</div>
-<div class="dash-widgetcontent">
-<h5>$<span class="counters" data-count="4385.00">$4,385.00</span></h5>
-<h6>Total Sales Due</h6>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="dash-widget dash2">
-<div class="dash-widgetimg">
-<span><img src="/img/icons/dash3.svg" alt="img"></span>
-</div>
-<div class="dash-widgetcontent">
-<h5>$<span class="counters" data-count="385656.50">385,656.50</span></h5>
-<h6>Total Sale Amount</h6>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="dash-widget dash3">
-<div class="dash-widgetimg">
-<span><img src="/img/icons/dash4.svg" alt="img"></span>
-</div>
-<div class="dash-widgetcontent">
-<h5>$<span class="counters" data-count="40000.00">400.00</span></h5>
-<h6>Total Sale Amount</h6>
-</div>
-</div>
-</div>
+
 <div class="col-lg-3 col-sm-6 col-12 d-flex">
-<div class="dash-count">
-<div class="dash-counts">
-<h4>100</h4>
-<h5>Customers</h5>
-</div>
-<div class="dash-imgs">
-<i data-feather="user"></i>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12 d-flex">
-<div class="dash-count das1">
-<div class="dash-counts">
-<h4>100</h4>
-<h5>Suppliers</h5>
-</div>
-<div class="dash-imgs">
-<i data-feather="user-check"></i>
-</div>
-</div>
+    <div class="dash-count das1">
+        <div class="dash-counts">
+            <h4 th:text="${userCount}"></h4>
+            <h5>Customers</h5>
+        </div>
+        <div class="dash-imgs">
+            <i data-feather="user-check"></i>
+        </div>
+    </div>
 </div>
 <div class="col-lg-3 col-sm-6 col-12 d-flex">
 <div class="dash-count das2">
 <div class="dash-counts">
-<h4>100</h4>
-<h5>Purchase Invoice</h5>
+    <h4 th:text="${orderCount}"></h4>
+    <h5>Orders</h5>
 </div>
 <div class="dash-imgs">
 <i data-feather="file-text"></i>
 </div>
 </div>
 </div>
-<div class="col-lg-3 col-sm-6 col-12 d-flex">
-<div class="dash-count das3">
-<div class="dash-counts">
-<h4>105</h4>
-<h5>Sales Invoice</h5>
-</div>
-<div class="dash-imgs">
-<i data-feather="file"></i>
-</div>
-</div>
-</div>
+
 </div>
 <div class="row">
     <div class="col-lg-6 col-sm-12 col-12">
@@ -332,48 +270,53 @@
 <div class="card-body">
     <h4 class="card-title">Latest Orders</h4>
     <div class="table-responsive dataview">
-        <table class="table datatable">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Customer Name</th>
-                    <th>Shipped To</th>
-                    <th>Product Name</th>
-                    <th>Created At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>101</td>
-                    <td>John Doe</td>
-                    <td>New York</td>
-                    <td>Orange</td>
-                    <td>2024-03-12 10:30:00</td>
-                </tr>
-                <tr>
-                    <td>102</td>
-                    <td>Jane Smith</td>
-                    <td>Los Angeles</td>
-                    <td>Pineapple</td>
-                    <td>2024-03-11 15:45:00</td>
-                </tr>
-              
-                <tr>
-                    <td>103</td>
-                    <td>Michael Johnson</td>
-                    <td>Chicago</td>
-                    <td>Apple</td>
-                    <td>2024-03-10 09:15:00</td>
-                </tr>
-                <tr>
-                    <td>104</td>
-                    <td>Emily Brown</td>
-                    <td>Miami</td>
-                    <td>Banana</td>
-                    <td>2024-03-09 12:00:00</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order id</th>
+                        <th>User</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Order Date</th>
+                        <th>Product name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over the list of orders and generate table rows dynamically -->
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}">Order ID</td>
+                        <td th:text="${order.user.username}">User</td>
+                        <td th:text="${order.user.phone}">Phone</td>
+                        <td th:text="${order.user.address}">Address</td>
+                        <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">Order Date</td>
+                        <td>
+                            <ul>
+                                <!-- Iterate over the order details and display product names -->
+                                <li th:each="detail : ${order.orderDetails}" th:text="${detail.product.name}">Product Name</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <!-- Iterate over the order details and display quantities -->
+                                <li th:each="detail : ${order.orderDetails}" th:text="${detail.quantity}">Quantity</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <!-- Iterate over the order details and display prices -->
+                                <li th:each="detail : ${order.orderDetails}" th:text="${detail.price}">Price</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+            
     </div>
     
 </div>
