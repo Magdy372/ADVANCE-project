@@ -131,7 +131,7 @@ public RedirectView deleteProduct(@PathVariable("Id") int Id) {
 @GetMapping("/product-details/{id}")
 public ModelAndView getproduct(@PathVariable("id")int ID) {
     Product product = this.productRepository.findById(ID);
-    ModelAndView mav =new ModelAndView("Product-details.html");
+    ModelAndView mav =new ModelAndView("product-details.html");
     mav.addObject("product", product);
     mav.addObject("metals", metalRepository.findAll());
     mav.addObject("categories", categoryRepository.findAll());

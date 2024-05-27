@@ -55,12 +55,15 @@
 						
             <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}" th:text="MyProfile"></a></li>
             <li><a href="shop" class="active">Shop</a></li>
-            <li th:if="${session['id'] != null}"><a th:href="@{/wishlist}">Wishlist</a></li>
-            <li th:if="${session['id'] != null}"><a href="cart">Cart</a></li>
-            <li th:if="${session['id'] != null}"><a href="chatting" >Contact</a></li>
+            <li th:if="${session['userType']?.toString() == 'USER'}"><a th:href="@{/wishlist}">Wishlist</a></li>
+            <li th:if="${session['userType']?.toString() == 'USER'}"><a href="cart">Cart</a></li>
+            <li th:if="${session['userType']?.toString() == 'USER'}"><a href="chatting" >Contact</a></li>
             <!-- Check if the user is authenticated -->
             <li th:if="${session['id'] == null}">
               <a th:href="@{'/login'}">Login</a>
+            </li>
+            <li th:if="${session['userType']?.toString() == 'ADMIN'}">
+              <a th:href="@{'/admin/dashboard'}">Dashboard</a>
             </li>
             <li th:if="${session['id'] != null}">
               <a th:href="@{'/logout'}">Logout</a>
