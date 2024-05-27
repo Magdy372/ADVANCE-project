@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>Order details</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg">
+<link rel="stylesheet" href="/css/admin/bootstrap.minn.css">
+<link rel="stylesheet" href="/css/admin/animatee.css">
+<link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/css/admin/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/css/admin/style-admin.css">
+</head>
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"> </div>
+        </div>
+        
+        <div class="main-wrapper">
+        
+        <div class="header">
+        
+        <div class="header-left active">
+        <a href="/" class="logo">
+        <img src="/img/logo-4.png" alt="">
+        </a>
+        <a href="/" class="logo-small">
+        <img src="/img/logo-small.png" alt="">
+        </a>
+        <a id="toggle_btn" href="#">
+        </a>
+        </div>
+        
+        <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+        <span class="bar-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+        </span>
+        </a>
+        
+        <ul class="nav user-menu">
+        
+        <li class="nav-item">
+        <div class="top-nav-search">
+        <a href="#" class="responsive-search">
+        <i class="fa fa-search"></i>
+        </a>
+        <form action="#">
+        <div class="searchinputs">
+        <input type="text" placeholder="Search Here ...">
+        <div class="search-addon">
+        <span><img src="/img/icons/closes.svg" alt="img"></span>
+        </div>
+        </div>
+        <a class="btn" id="searchdiv"><img src="/img/icons/search.svg" alt="img"></a>
+        </form>
+        </div>
+        </li>
+        
+        
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+                <i class='fas fa-user-circle' style='font-size:36px'></i>
+            </a>
+            <div class="dropdown-menu menu-drop-user">
+                <div class="profilename">
+                    <div class="profileset">
+                        <span class="user-img">Omar</span>
+                     
+                    </div>
+                    <hr class="m-0">
+                    <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
+                    <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
+                    <hr class="m-0">
+                    <a class="dropdown-item logout pb-0" href="signin.html"><img src="/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                </div>
+            </div>
+        </li>
+        
+        
+        
+        <div class="dropdown mobile-user-menu">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+        <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="profile.html">My Profile</a>
+        <a class="dropdown-item" href="generalsettings.html">Settings</a>
+        <a class="dropdown-item" href="signin.html">Logout</a>
+        </div>
+        </div>
+        
+        </div>
+        
+        
+        <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+        <ul>
+        <li>
+        <a href="/admin/dashboard"><img src="/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+        </li>
+        <li>
+        
+            <a th:href="@{/chatting}"> <img src="/img/icons/mail.svg" alt="img"><span>Chat</span></a>
+        </li>
+        <li class="submenu">
+        <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
+        <ul>
+        <li><a href="/products" >Product List</a></li>
+        <li><a href="/products/create">Add Product</a></li>
+        <li><a href="/categories">Category List</a></li>
+        
+        
+        </ul>
+        </li>
+        
+        <li class="submenu">
+          <a href="#"><img src="/img/icons/product.svg" alt="img"><span> Orders</span> <span class="menu-arrow"></span></a>
+          <ul>
+              <li><a href="#" >Orders List</a></li>
+              <li><a href="#">Add Order</a></li>
+          </ul>
+          </li>
+        
+        <li class="submenu">
+        <a href="#"><img src="/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+        <ul>
+        
+        <li><a href="/adminPage/userlists" class="active">Users List</a></li>
+        </ul>
+        </li>
+        <li class="submenu">
+        <a href="#"><img src="/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
+        <ul>
+            <li><a href="#">General Settings</a></li>
+            <li><a href="#">Email Settings</a></li>
+            <li><a href="#">Payment Settings</a></li>
+            <li th:if="${session['id'] != null}">
+                <a th:href="@{'/logout'}">Logout</a>
+            </li>
+        </ul>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        
+        <div class="page-wrapper">
+        <div class="content">
+        <div class="page-header">
+        <div class="page-title">
+        <h4>Order details</h4>
+        <h6>Manage the orders</h6>
+        </div>
+        
+        </div>
+        
+        <div class="card">
+        <div class="card-body">
+        <div class="table-top">
+        <div class="search-set">
+        <div class="search-path">
+        <a class="btn btn-filter" id="filter_search">
+        <img src="/img/icons/filter.svg" alt="img">
+        <span><img src="/img/icons/closes.svg" alt="img"></span>
+        </a>
+        </div>
+        <div class="search-input">
+        <a class="btn btn-searchset"><img src="/img/icons/search-white.svg" alt="img"></a>
+        </div>
+        </div>
+        <div class="wordset">
+        <ul>
+        <li>
+        <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="/img/icons/pdf.svg" alt="img"></a>
+        </li>
+        <li>
+        <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="/img/icons/excel.svg" alt="img"></a>
+        </li>
+        <li>
+        <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="/img/icons/printer.svg" alt="img"></a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        
+        <div class="card mb-0" id="filter_inputs">
+        <div class="card-body pb-0">
+        <div class="row">
+        <div class="col-lg-12 col-sm-12">
+        <div class="row">
+        <div class="col-lg col-sm-6 col-12">
+        <div class="form-group">
+        <select class="select">
+        <option>Choose Product</option>
+        <option>Macbook pro</option>
+        <option>Orange</option>
+        </select>
+        </div>
+        </div>
+        <div class="col-lg col-sm-6 col-12">
+        <div class="form-group">
+        <select class="select">
+        <option>Choose Category</option>
+        <option>Computers</option>
+        <option>Fruits</option>
+        </select>
+        </div>
+        </div>
+        <div class="col-lg col-sm-6 col-12">
+        <div class="form-group">
+        <select class="select">
+        <option>Choose Sub Category</option>
+        <option>Computer</option>
+        </select>
+        </div>
+        </div>
+        <div class="col-lg col-sm-6 col-12">
+        <div class="form-group">
+        <select class="select">
+        <option>Brand</option>
+        <option>N/D</option>
+        </select>
+        </div>
+        </div>
+        <div class="col-lg col-sm-6 col-12 ">
+        <div class="form-group">
+        <select class="select">
+        <option>Price</option>
+        <option>150.00</option>
+        </select>
+        </div>
+        </div>
+        <div class="col-lg-1 col-sm-6 col-12">
+        <div class="form-group">
+        <a class="btn btn-filters ms-auto"><img src="/img/icons/search-whites.svg" alt="img"></a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table datanew">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="checkboxs">
+                                <input type="checkbox" id="select-all">
+                                <span class="checkmarks"></span>
+                            </label>
+                        </th>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td>
+                            <label class="checkboxs">
+                                <input type="checkbox">
+                                <span class="checkmarks"></span>
+                            </label>
+                        </td>
+                        <td th:text="${order.id}">Order ID</td>
+                        <td th:text="${order.user.username}">User</td>
+                        <td th:text="${order.user.phone}">Phone</td>
+                        <td th:text="${order.user.address}">Address</td>
+                        <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">Order Date</td>
+                        <td>
+                            <ul>
+                                <li th:each="detail : ${order.orderDetails}" th:text="${detail.product.name}">Product Name</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li th:each="detail : ${order.orderDetails}" th:text="${detail.quantity}">Quantity</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li th:each="detail : ${order.orderDetails}" th:text="${detail.price}">Price</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a class="text" th:href="@{'/admin/orders/delete/' + ${order.id}}">
+                                <img src="/img/icons/delete.svg" alt="Delete">
+                            </a>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+<script src="/js/admin/jquery-3.6.0.min.js"></script>
+<script src="/js/admin/feather.min.js"></script>
+<script src="/js/admin/jquery.slimscroll.min.js"></script>
+<script src="/js/admin/jquery.dataTables.min.js"></script>
+<script src="/js/admin/dataTables.bootstrap4.min.js"></script>
+<script src="/js/admin/bootstrap.bundle.min.js"></script>
+<script src="/js/admin/script.js"></script>
+<script src="/plugins/select2/js/select2.min.js"></script>
+<script src="/plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script src="/plugins/sweetalert/sweetalerts.min.js"></script>
+</body>
+
+
+</html>

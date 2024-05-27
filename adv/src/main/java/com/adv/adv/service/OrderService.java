@@ -47,5 +47,17 @@ public class OrderService {
 
         return order;
     }
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public void deleteOrder(Long orderId) {
+        // Check if order exists
+        if (!orderRepository.existsById(orderId)) {
+            throw new IllegalArgumentException("Order not found with ID: " + orderId);
+        }
+        // Delete the order
+        orderRepository.deleteById(orderId);
+    }
 }
 
