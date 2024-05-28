@@ -2,7 +2,7 @@ package com.adv.adv.controller;
 
 import com.adv.adv.model.User;
 import com.adv.adv.repository.userRepository;
-
+import com.adv.adv.validation.ValidationGroups;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -37,7 +38,7 @@ public class UserController {
         return mav;
     }
 @PostMapping("/signup")
-public  ModelAndView saveUser(@Valid @ModelAttribute User user,BindingResult result) {
+public  ModelAndView saveUser(@Validated({ValidationGroups.CreateProfile.class, ValidationGroups.UpdateProfile.class}) @ModelAttribute User user,BindingResult result) {
     // Check if the email already exists in the database
     Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
     if (existingUser.isPresent()) {
@@ -151,7 +152,7 @@ public ModelAndView showProfile(HttpSession session) {
 
 
 @PostMapping("/MyProfile")
-public ModelAndView updateProfile(@Valid @ModelAttribute ("user") User user, BindingResult result,
+public ModelAndView updateProfile(@Validated(ValidationGroups.UpdateProfile.class) @ModelAttribute ("user") User user, BindingResult result,
                                   @RequestParam("username") String username,
                                   @RequestParam("email") String email,
                                   @RequestParam("password") String password,

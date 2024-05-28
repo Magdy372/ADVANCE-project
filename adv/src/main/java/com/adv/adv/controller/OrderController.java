@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.adv.adv.model.Order;
 import com.adv.adv.model.User;
 import com.adv.adv.repository.OrderRepository;
 import com.adv.adv.repository.userRepository;
 import com.adv.adv.service.OrderService;
+import com.adv.adv.repository.OrderRepository;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -27,9 +26,6 @@ public class OrderController {
     @Autowired
     private userRepository userRepository;
 
-    @Autowired
-    private OrderRepository orderRepository;
-
     @PostMapping("/create")
     public String  createOrder(HttpSession session) {
         Long userId = (Long) session.getAttribute("id");
@@ -41,8 +37,15 @@ public class OrderController {
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
         orderService.createOrder(user);
-        return "redirect:/"; 
+        return "redirect:/"; //order history of user
 
+    }
+
+      @GetMapping("/orders/delete/{id}")
+    @Transactional
+    public RedirectView deleteOrder(@PathVariable("id") Long id) {
+        orderRepository.deleteById(id);
+        return new RedirectView("/admin/OrderDetails");
     }
     @GetMapping("/history")
     public ModelAndView getOrderHistory(HttpSession session) {
@@ -57,7 +60,7 @@ public class OrderController {
     }
     @GetMapping("/orders/delete/{id}")
     @Transactional
-    public RedirectView deleteOrder(@PathVariable("id") Long id) {
+    public RedirectView deleteOrderr(@PathVariable("id") Long id) {
         orderRepository.deleteById(id);
         return new RedirectView("/");
     }

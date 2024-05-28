@@ -131,7 +131,7 @@ public class ProductControllerTest {
         ModelAndView result = productController.getproduct(1);
 
         // Assert
-        assertEquals("Product-details.html", result.getViewName());
+        assertEquals("product-details.html", result.getViewName());
         assertTrue(result.getModel().containsKey("product"));
         assertTrue(result.getModel().containsKey("metals"));
         assertTrue(result.getModel().containsKey("categories"));
