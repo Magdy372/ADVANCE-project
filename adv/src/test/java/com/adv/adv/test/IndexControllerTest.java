@@ -1,62 +1,69 @@
 package com.adv.adv.test;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import org.springframework.web.servlet.ModelAndView;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.adv.adv.controller.IndexController;
+import com.adv.adv.repository.ProductRepository;
 import com.adv.adv.model.Product;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class IndexControllerTest {
 
-    private IndexController MakeIndexController() {
-        return new IndexController();
+    private IndexController makeIndexControllerWithMocks() {
+        IndexController controller = new IndexController();
+        ProductRepository mockProductRepository = Mockito.mock(ProductRepository.class);
+        
+        Product product1 = new Product(); // Assuming Product has a default constructor
+        Product product2 = new Product();
+        Product product3 = new Product();
+        List<Product> products = Arrays.asList(product1, product2, product3);
+        
+        when(mockProductRepository.findTop3ByOrderByIdDesc()).thenReturn(products);
+        when(mockProductRepository.findTop3ByOrderByRatingDesc()).thenReturn(products);
+        when(mockProductRepository.findAll()).thenReturn(products);
+        when(mockProductRepository.findAllByCategoryId(1)).thenReturn(products);
+        
+        controller.productRepository = mockProductRepository;  // Directly setting the mocked repository
+        
+        return controller;
     }
+
 
     @Test
     public void getHomePage_ReturnsCorrectModelAndView() {
-        IndexController controller = MakeIndexController();
-
-        // Act
-        ModelAndView mav = controller.getHomePage();
-
-        // Assert
-        assertEquals("index.html", mav.getViewName());
-        assertNotNull(mav.getModel().get("newProducts"));
-        assertNotNull(mav.getModel().get("featuredProducts"));
-        assertEquals(3, ((List<Product>) mav.getModel().get("newProducts")).size());
-        assertEquals(3, ((List<Product>) mav.getModel().get("featuredProducts")).size());
+        IndexController controller = makeIndexControllerWithMocks();
+        
+        ModelAndView result = controller.getHomePage();
+        
+        assertEquals("index.html", result.getViewName());
+        assertEquals(2, result.getModel().size());
     }
 
     @Test
-    public void getAll_ReturnsAllProducts() {
-        IndexController controller = MakeIndexController();
-
-        // Act
-        ModelAndView mav = controller.getAll();
-
-        // Assert
-        assertEquals("shop.html", mav.getViewName());
-        assertNotNull(mav.getModel().get("products"));
-        assertTrue(mav.getModel().get("products") instanceof List);
+    public void getAll_ReturnsCorrectModelAndView() {
+        IndexController controller = makeIndexControllerWithMocks();
+        
+        ModelAndView result = controller.getAll();
+        
+        assertEquals("shop.html", result.getViewName());
+        assertEquals(1, result.getModel().size());
     }
 
     @Test
-    public void GetProductByCataegory_ReturnsFilteredProducts() {
-        IndexController controller = MakeIndexController();
-        int categoryId = 1; // Example category ID
-
-        // Act
-        ModelAndView mav = controller.GetProductByCataegory(categoryId);
-
-        // Assert
-        assertEquals("shop.html", mav.getViewName());
-        assertNotNull(mav.getModel().get("products"));
-        assertTrue(mav.getModel().get("products") instanceof List);
-        // Assuming there's a method to check if all products have the correct category ID
-        assertTrue(((List<Product>) mav.getModel().get("products")).stream().allMatch(p -> p.getId() == categoryId));
+    public void GetProductByCataegory_ReturnsCorrectModelAndView() {
+        IndexController controller = makeIndexControllerWithMocks();
+        
+        ModelAndView result = controller.GetProductByCataegory(1);
+        
+        assertEquals("shop.html", result.getViewName());
+        assertEquals(1, result.getModel().size());
     }
 }

@@ -23,13 +23,13 @@ import java.util.List;
 @RequestMapping("/wishlist")
 public class WishlistController {
     @Autowired
-    private WishlistService wishlistService;
+    public WishlistService wishlistService;
 
     @Autowired
-    private ProductRepository productRepository;
+    public ProductRepository productRepository;
 
     @Autowired
-    private userRepository userRepository;
+    public userRepository userRepository;
 
     @GetMapping({"/",""})
     public ModelAndView getItemsByUserId(HttpSession session) {

@@ -31,7 +31,7 @@ import com.adv.adv.repository.ProductRepository;
 public class CartController {
 
     @Autowired
-    private CartService cartService;
+    public CartService cartService;
 
     @Autowired
     private ProductRepository productRepository;

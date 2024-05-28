@@ -24,7 +24,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/categories")
 public class CaregoryController {
     @Autowired
-     private CategoryRepository categoryrepository;
+    public CategoryRepository categoryrepository;
+   
      @GetMapping({"","/"})
     public ModelAndView getAll() {
         ModelAndView mav =new ModelAndView("CategoriesList.html");

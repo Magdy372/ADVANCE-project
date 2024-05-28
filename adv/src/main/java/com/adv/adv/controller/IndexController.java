@@ -28,7 +28,7 @@ public class IndexController {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private ProductRepository productRepository;
+    public ProductRepository productRepository;
     @GetMapping("/")
     public ModelAndView getHomePage() {
         ModelAndView mav = new ModelAndView("index.html");
