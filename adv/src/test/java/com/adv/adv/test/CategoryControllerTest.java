@@ -28,9 +28,9 @@ public class CategoryControllerTest {
         CategoryRepository mockRepository = mock(CategoryRepository.class);
         CaregoryController controller = makeCategoryController(mockRepository);
         Category category1 = new Category();
-        category1.setName("Electronics");
+        category1.setName("ring");
         Category category2 = new Category();
-        category2.setName("Books");
+        category2.setName("bracelet");
         List<Category> categories = Arrays.asList(category1, category2);
         when(mockRepository.findAll()).thenReturn(categories);
 
@@ -57,10 +57,10 @@ public class CategoryControllerTest {
         CategoryRepository mockRepository = mock(CategoryRepository.class);
         CaregoryController controller = makeCategoryController(mockRepository);
         Category category = new Category();
-        category.setName("Gardening");
+        category.setName("ring");
         when(mockRepository.save(category)).thenReturn(category);
 
-        ModelAndView result = controller.addCategory(category, new BindingResultStub(), "Gardening");
+        ModelAndView result = controller.addCategory(category, new BindingResultStub(), "ring");
 
         assertEquals("redirect:/categories", result.getViewName());
     }
