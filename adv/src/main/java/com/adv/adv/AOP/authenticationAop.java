@@ -14,19 +14,20 @@ import jakarta.servlet.http.HttpSession;
 @Component
 @Aspect
 public class authenticationAop {
-    @Autowired
-    private HttpSession httpsession;
 
-    @Around("(execution(* com.adv.adv.controller.AdminController.*(..)) || " +
+    @Autowired
+    private HttpSession httpSession;
+
+    @Around("execution(* com.adv.adv.controller.AdminController.*(..)) || " +
             "execution(* com.adv.adv.controller.DashBoardControllel.*(..)) || " +
-            "execution(* com.adv.adv.controller.ProductController.*(..))) && " +
+            "execution(* com.adv.adv.controller.ProductController.*(..)) && " +
             "!execution(* com.adv.adv.controller.ProductController.getproduct(..)) && " +
-            "!execution(* com.adv.adv.controller.ProductController.searchProducts(..))"+
-            "!execution(* com.adv.adv.controller.CaregoryController(..)) && ")
+            "!execution(* com.adv.adv.controller.ProductController.searchProducts(..)) || " +
+            "execution(* com.adv.adv.controller.CaregoryController.*(..))")
     public Object authentication(ProceedingJoinPoint joinPoint) throws Throwable {
-        Object userTypeObj = httpsession.getAttribute("userType");
+        Object userTypeObj = httpSession.getAttribute("userType");
         if (userTypeObj == null || !(userTypeObj instanceof User.UserType)) {
-          return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/");
         }
         User.UserType userType = (User.UserType) userTypeObj;
 
