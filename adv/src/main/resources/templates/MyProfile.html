@@ -22,7 +22,7 @@
         <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}"  th:text="MyProfile" class="active"></a></li>
         <li><a href="shop">Shop</a></li>
         <li th:if="${session['userType']?.toString() == 'USER'}"><a th:href="@{/wishlist}">Wishlist</a></li>
-        <li th:if="${session['userType']?.toString() == 'USER'}"><a href="cart">Cart</a></li>
+        <li th:if="${session['userType']?.toString() == 'USER'}"><a href="/cart">Cart</a></li>
         <li th:if="${session['userType']?.toString() == 'USER'}"><a href="chatting">Contact</a></li>
         <!-- Check if the user is authenticated -->
         <li th:if="${session['id'] == null}">
@@ -37,12 +37,11 @@
       </ul>
     </div>
   </section>
-  <input type="text" id="searchInput" placeholder="Search ....">
+	<input type="text" id="searchInput" placeholder="Search ....">
 
 		<ul id="searchResults"></ul>
-
     <br>
-    <h2>Edit Your Profile</h2>
+    <h1>Edit Your Profile</h1>
     <div class="contain">
       <!-- Display user's name and email -->
       <div>
@@ -71,8 +70,9 @@
         
           <button type="submit">Submit</button>
       </form>
-  
-       <!-- Form for account deletion -->
+      <a th:href="@{/orders/history}">
+        <button>View my orders history</button>
+    </a>       <!-- Form for account deletion -->
        <form th:action="@{/deleteAccount}" method="post" id="deleteForm">
         <button type="button" onclick="confirmDelete()">Delete Account</button>
     </form>

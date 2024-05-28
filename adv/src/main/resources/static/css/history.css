@@ -1,0 +1,75 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+#searchInput {
+    padding: 10px;
+    width: 100%; /* Set width to 100% */
+    border: none;
+    outline: none;
+  }
+  /* Styles for the search results list */
+  #searchResults {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styles for each search result item */
+  #searchResults li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  #searchResults li img {
+    width: 50px; /* Adjust image width as needed */
+    height: 50px; /* Adjust image height as needed */
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Hover effect for search result items */
+  #searchResults li:hover {
+    background-color: #f0f0f0;
+  }
+  
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color:#d8bb78;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #d8bb78;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.product-image {
+    max-width: 50px;
+    height: auto;
+    border-radius: 5px;
+}

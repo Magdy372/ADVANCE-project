@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order History</title>
+    <link rel="stylesheet" href="/css/history.css">
+    <link rel="stylesheet" href="/css/myProfile.css" />
+    <link rel="stylesheet" href="/css/nav.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="/js/productSearch.js"></script> <!-- Include the JavaScript file here -->
+</head>
+<body>
+    <section id="header">
+        <a href="/"><img src="/img/logo-4.png" class="logo" alt="Logo" width="145" height="50"></a>
+        <div>
+          <ul id="navbar">
+          
+            <li th:if="${session['id'] != null}"><a th:href="@{/MyProfile}"  th:text="MyProfile" class="active"></a></li>
+            <li><a href="shop">Shop</a></li>
+            <li th:if="${session['userType']?.toString() == 'USER'}"><a th:href="@{/wishlist}">Wishlist</a></li>
+            <li th:if="${session['userType']?.toString() == 'USER'}"><a href="/cart">Cart</a></li>
+            <li th:if="${session['userType']?.toString() == 'USER'}"><a href="chatting">Contact</a></li>
+            <!-- Check if the user is authenticated -->
+            <li th:if="${session['id'] == null}">
+              <a th:href="@{'/login'}">Login</a>
+            </li>
+            <li th:if="${session['userType']?.toString() == 'ADMIN'}">
+              <a th:href="@{'/admin/dashboard'}">Dashboard</a>
+            </li>
+            <li th:if="${session['id'] != null}">
+              <a th:href="@{'/logout'}">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <input type="text" id="searchInput" placeholder="Search ....">
+    
+            <ul id="searchResults"></ul>
+    
+        <br>
+    <h1>Order History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th> <!-- Action column remains as the last column -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}">Order ID</td>
+                <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}">Order Date</td>
+                <td>
+                    <ul>
+                        <li th:each="detail : ${order.orderDetails}" th:text="${detail.product.name}">Product Name</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="detail : ${order.orderDetails}" th:text="${detail.quantity}">Quantity</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="detail : ${order.orderDetails}" th:text="${detail.price}">Price</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul> <!-- Action link encapsulated within a list structure -->
+                        <li>
+                            <a class="text" th:href="@{'/orders/orders/delete/' + ${order.id}}">
+                                <img src="/img/icons/delete.svg" alt="Delete">
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
