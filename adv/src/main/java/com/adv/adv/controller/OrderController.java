@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.adv.adv.model.Order;
 import com.adv.adv.model.User;
@@ -25,6 +27,9 @@ public class OrderController {
 
     @Autowired
     private userRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @PostMapping("/create")
     public String  createOrder(HttpSession session) {
@@ -58,10 +63,10 @@ public class OrderController {
         mav.addObject("orders", orders);
         return mav;
     }
-    @GetMapping("/orders/delete/{id}")
-    @Transactional
-    public RedirectView deleteOrderr(@PathVariable("id") Long id) {
-        orderRepository.deleteById(id);
-        return new RedirectView("/");
-    }
+    // @GetMapping("/orders/delete/{id}")
+    // @Transactional
+    // public RedirectView deleteOrderr(@PathVariable("id") Long id) {
+    //     orderRepository.deleteById(id);
+    //     return new RedirectView("/");
+    // }
 }
