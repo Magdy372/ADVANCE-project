@@ -69,12 +69,7 @@ public class DashBoardControllel {
         return mav;
     }
     
-    @GetMapping("/orders/delete/{id}")
-    @Transactional
-    public RedirectView deleteOrder(@PathVariable("id") Long id) {
-        orderRepository.deleteById(id);
-        return new RedirectView("/admin/OrderDetails");
-    }
+  
     
     private int countUsers() {
         String sql = "SELECT COUNT(*) FROM user";

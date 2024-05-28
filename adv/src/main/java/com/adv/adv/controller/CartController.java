@@ -60,42 +60,42 @@ public class CartController {
         return mav;
     }
 
-    @GetMapping("/add")
-    public ModelAndView addItem(@Valid @ModelAttribute("cart") Cart cartItem,
-                                BindingResult result,
-                                HttpSession session,
-                                @RequestParam("productId") int productId) {
+    // @GetMapping("/add")
+    // public ModelAndView addItem(@Valid @ModelAttribute("cart") Cart cartItem,
+    //                             BindingResult result,
+    //                             HttpSession session,
+    //                             @RequestParam("productId") int productId) {
 
-        if (result.hasErrors()) {
-            ModelAndView mav = new ModelAndView("cart.html");
-            mav.addObject("bindingResult", result);
-            return mav;
-        }
+    //     if (result.hasErrors()) {
+    //         ModelAndView mav = new ModelAndView("cart.html");
+    //         mav.addObject("bindingResult", result);
+    //         return mav;
+    //     }
 
-        Long userId = (Long) session.getAttribute("id");
-        if (userId == null) {
-            return new ModelAndView("redirect:/login");
-        }
+    //     Long userId = (Long) session.getAttribute("id");
+    //     if (userId == null) {
+    //         return new ModelAndView("redirect:/login");
+    //     }
 
-        Product product = productRepository.findById(productId);
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+    //     Product product = productRepository.findById(productId);
+    //     User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
-        Cart existingCartItem = cartService.getCartItemByUserAndProduct(user, product);
+    //     Cart existingCartItem = cartService.getCartItemByUserAndProduct(user, product);
 
-        if (existingCartItem != null) {
-            existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
-            existingCartItem.setSub_total(existingCartItem.getQuantity() * product.getPrice());
-            cartService.updateCartItem(existingCartItem);
-        } else {
-            cartItem.setUser(user);
-            cartItem.setProduct(product);
-            cartItem.setQuantity(1);
-            cartItem.setSub_total(product.getPrice());
-            cartService.addItem(cartItem);
-        }
+    //     if (existingCartItem != null) {
+    //         existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+    //         existingCartItem.setSub_total(existingCartItem.getQuantity() * product.getPrice());
+    //         cartService.updateCartItem(existingCartItem);
+    //     } else {
+    //         cartItem.setUser(user);
+    //         cartItem.setProduct(product);
+    //         cartItem.setQuantity(1);
+    //         cartItem.setSub_total(product.getPrice());
+    //         cartService.addItem(cartItem);
+    //     }
 
-        return new ModelAndView("redirect:/");
-    }
+    //     return new ModelAndView("redirect:/");
+    // }
 
     @PostMapping("/add")
     public ModelAndView addQuantity(@Valid @ModelAttribute("cart") Cart cartItem,
@@ -131,7 +131,7 @@ public class CartController {
             cartService.addItem(cartItem);
         }
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/cart");
     }
 
     @GetMapping("/remove/{itemId}")
