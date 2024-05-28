@@ -136,15 +136,7 @@
   
 
 
-    <li class="submenu">
-    <a href="#"><img src="/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
-    <ul>
-    <li><a href="#">General Settings</a></li>
-    <li><a href="#">Email Settings</a></li>
-    <li><a href="#">Payment Settings</a></li>
-    <li th:if="${session['id'] != null}">
-        <a th:href="@{'/logout'}">Logout</a>
-    </li>
+    
   
     </ul>
     </li>
@@ -250,10 +242,10 @@
             <tr th:each="product, index : ${newProducts}">
                 <td th:text="${index.index + 1}">1</td>
                 <td class="productimgname">
-                    <a th:href="@{'/product-details/' + ${product.id}}" class="product-img">
+                    <a href="#" class="product-img">
                         <img th:src="@{${product.getPhotosImagePath()}}" alt="product">
                     </a>
-                    <a th:href="@{'/product-details/' + ${product.id}}" th:text="${product.name}">Apple Earpods</a>
+                    <a href="#" th:text="${product.name}">Apple Earpods</a>
                 </td>
                 <td th:text="${product.price}">$891.2</td>
             </tr>
