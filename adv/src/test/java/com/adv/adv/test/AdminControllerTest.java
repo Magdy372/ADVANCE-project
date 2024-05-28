@@ -39,7 +39,7 @@ public class AdminControllerTest {
         AdminController controller = makeAdminController(mockUserRepository);
         User user = new User();
         user.setUsername("testUser");
-        user.setPassword("password123");
+        user.setPassword("Password123");
 
         // Act
         RedirectView redirectView = controller.addAdmin(user);
