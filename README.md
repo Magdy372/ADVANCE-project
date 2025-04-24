@@ -42,7 +42,7 @@ The project follows a standard Spring Boot application structure:
 *User authentication page with email and password fields.*
 
 ### Product Catalog
-![Product Catalog](adv\screenshots/shop.jpeg)  
+![Product Catalog](screenshots/shop.jpeg)
 *Product browsing with filters for category, color, and material.*
 
 
