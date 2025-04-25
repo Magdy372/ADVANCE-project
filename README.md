@@ -1,4 +1,3 @@
-# ADVANCE Project
 
 ## Overview
  a Spring Boot e-commerce application for jewelry and precious metals. The application provides a complete shopping experience with user authentication, product browsing, wishlist management, and order processing.
