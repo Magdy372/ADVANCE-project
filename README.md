@@ -34,15 +34,15 @@ The project follows a standard Spring Boot application structure:
 ## Screenshots
 
 ### Homepage
-![Homepage](adv\screenshots\home.jpeg)  
+![Homepage](adv/screenshots/home.jpeg)  
 *Showcases new arrivals and featured products with a clean, modern design.*
 
 ### Login Page
-![Login Page](adv\screenshots/login.jpeg)  
+![Login Page](adv/screenshots/login.jpeg)  
 *User authentication page with email and password fields.*
 
 ### Product Catalog
-![Product Catalog](screenshots/shop.jpeg)
+![Product Catalog](adv/screenshots/shop.png)  
 *Product browsing with filters for category, color, and material.*
 
 
